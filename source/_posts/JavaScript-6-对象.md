@@ -67,3 +67,55 @@ function inherit(p){
         3. 如果对象o的可扩展属性（extensible attribute）为false 并且o中没有属性p，则也不能添加属性p。
 
 ## 删除属性
+
+    delete 运算符可以删除对象的属性.但只是断开属性和宿主对象的联系,不会操作属性中的属性（即，如果这个属性是一个对象，并不会对这个对象有操作）
+
+    delete 运算符只能删除自有属性，不能删除继承属性
+
+    delete 表达式删除成功或者没有副作用时，返回true 无意义的删除也返回true
+
+    delete 也不能删除可配置属性为false的对象 某些内置对象的属性是不可配置的，通过变量声明和和函数创建的全局对象的属性（比如通过 var a = 1;delete this.a ;返回false）严格模式下报错
+
+## 检测属性
+
+判断某个属性是否存在某个对象中可以使用：in运算符、hasOwnProperty()和propetyIsEnumerable() 方法来完成,或者通过属性查询
+
+    in运算符左侧是属性名(必须是字符串,否则会被当成一个变量)，右侧是对象.如果对象的自有属性或者继承属性中包含此属性则返回true
+
+    hasOwnProperty()方法用来检测给定的名字是否是对象的自有属性，如果是继承属性返回false
+
+    propeIsEnumerable()方法是hasOwnProperty()的升级版本，只有是自有属性，且这个属性的可枚举性（enumerable attribute）为true 才会返回true
+
+    !== 符号有种情况不能使用，当属性存在但值为undefined和不存在的属性可以使用 in运算符
+
+
+## 枚举属性
+    1. for/in 循环遍历 只能遍历可枚举的属性
+    2. Object.keys(); 返回一个对象中属性名称组成的数组 （自有，且可枚举的属性）
+    3. Object.getOwnPropetyNames();返回所有自有属性名称包括不可枚举的
+
+
+## 属性getter和setter
+
+    es5中属性值可以是一或者两个方法代替;这两个方法是getter和setter，这两个方法定义的叫存取器属性
+
+    程序查询存取器属性时，即调用getter方法时返回就是表达式的值 
+
+    程序要赋值的时候就是将赋给的值当做参数传入setter方法
+
+    存取器属性不具有可写性（writable attribute）如果属性同时具有getter和setter则是一个读写属性，如果只有setter属性则读取时候返回undefined
+
+ 定义存取器属性 例子：
+    ```
+
+    var o = {
+        //普通的数据属性
+        data_prop:value,
+        
+        //存取器属性,成对出现 属性名称一样的
+        get accessor_prop(){},
+        set accessor_prop(){}
+
+    }
+
+    ```
