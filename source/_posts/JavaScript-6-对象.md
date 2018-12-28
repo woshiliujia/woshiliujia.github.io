@@ -2,6 +2,7 @@
 title: JavaScript-6.对象
 date: 2018-12-26 22:31:57
 tags: JavaScript
+categories: JavaScript
 ---
 
 ## 创建对象
@@ -197,7 +198,7 @@ Object.definePrototypeOf(o,'x',{
 ```
 
 
-更更暴力的方式 冻结（freeze）
+更更暴力的方式 冻结（freeze）
 
 ```
 
@@ -218,8 +219,8 @@ JSON.stringify();对象转字符串，传入对象
 JSON.parse();字符串转对象，传入字符串
 ```
 
-## 对象方法
-    1.toString() 
+##对象方法
+    1.toString()
         此方法没有参数，返回一个调用这个方法的字符串，
         在需要将字符串转换成对象时候都需要调用
         不过默认的toString()方法返回的是[object Object] 一般都会自定义类，重写
