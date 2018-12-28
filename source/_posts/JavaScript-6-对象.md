@@ -210,3 +210,25 @@ Object.definePrototypeOf(o,'x',{
 ```
 
 ## 序列化对象
+对象序列化是指将对象的状态转换为字符串,也可以将字符串还原成对象
+方法
+```
+JSON.stringify();对象转字符串，传入对象
+
+JSON.parse();字符串转对象，传入字符串
+```
+
+## 对象方法
+    1.toString() 
+        此方法没有参数，返回一个调用这个方法的字符串，
+        在需要将字符串转换成对象时候都需要调用
+        不过默认的toString()方法返回的是[object Object] 一般都会自定义类，重写
+
+    2.toLocalString()
+        此方法返回一个表示这个对象的本地化字符串,跟上面差不多
+
+    3. toJSON()
+        JSON.stringify() 会调用此方法
+
+    4.valueOf()
+        ...
