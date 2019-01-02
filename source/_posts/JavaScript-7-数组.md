@@ -5,7 +5,7 @@ tags: JavaScript
 categories: JavaScript
 ---
 
-## 数组读写
+## 数组读写
 数组是对象的特殊形式,只是将对象的属性变成索引并省略了
     
     var o = {}
