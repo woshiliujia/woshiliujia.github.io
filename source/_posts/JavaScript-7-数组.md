@@ -96,4 +96,66 @@ PS:map方法需要返回值。返回数组具有相同的数组长度
 3.Array.filter()方法;// 根据filter字面意思是过滤，返回值原数组的一个子集
 传递的参数是用来判断的只返回true or false 用来确定是否过滤这个元素
 例：var a = [1,2,3,4,5];var b = a.filter(item=>{return item>3});b:[4,5]
+
+4.Array.every()/some()方法; //对数组中所有元素执行判断返回true or false
+every()方法是所有元素调用判断方法后都返回true则这个数组方法返回true
+    如果every()第一个元素返回了false，则后面就不会继续遍历了
+some()方法是有一个返回true则这个数组方法返回true
+    如果第一个元素返回true，则后面就不会遍历了
+
+5.Array.reduce()/reduceRight();//对数组元素进行整合生成一个值
+
+6.Array.indexOf()/lastIndexOf();//搜索数组中是否含有给定值的元素
+如果有返回索引，没有返回-1;
+其中lastIndexOf是从尾至头搜索的
+例：var a = [1,2,3];a.indexOf(1);//返回0;
+该方法也可以有第二个参数，可以指定数组中的一个索引，表示从当前位置开始搜索
+如果搜索的值在索引之前，也会返回-1
+第二个参数也可以是负数，表示相对末尾的偏移量
+
+因为此方法找到第一个满足条件就会返回索引，不会继续搜索,下面方法可以找到所有的
+例：找出数组中所有某个相同元素的索引
+ function getAllEle(arr,x){//arr要搜索的数组，x为要搜索的元素
+    var result = [];//存入找到的索引
+    var pos = 0;//从第0个位置开始搜索
+    var len = arr.length;//传入数组长度
+    for(var i = 0;i<len;i++){//使用for循环，并未使用书上的while循环
+        pos = arr.indexOf(x,pos);//开始从第0个位置搜索
+        if(pos == -1) break; //没有找到结束循环
+        result.push(pos);//找到一个放入到结果数组中
+        pos = pos+1;//自增1，从下个开始继续搜索
+    }
+    return result; //返回结果;
+ }
+
+PS:字符串也有此方法，和此功能类似
 ```
+
+## 数组类型
+ECMAScript 5中提供了Array.isArray()函数来判断对象是否为数组
+例：Array.isArray({})//返回false
+
+## 类数组对象
+类数组对象，间接调用数组方法（Function.call）
+```
+var a = {"0":"a","1":"b","2":"c",length:3};//必须要有length属性，不然无法调用
+Array.prototype.join.call(a,'+');
+//这里不能直接使用a.join()因为a并没有继承自Array.prototype a上面根本就没有这个方法
+ps:这里并未搞懂call方法，下一章会有解释
+
+因为ECMAScript 5中将这些方法直接定义在了Array构造函数中，所以可以直接这样写
+Array.join(a,'+');//可能不是所有浏览器都支持
+
+兼容写法
+Array.join = Array.join()||function(a,sep){//a表示传入类数组对象，sep表示分隔符
+    return Array.prototype.join(a,sep);
+}
+...
+```
+
+## 作为数组的字符串
+通用的数组方法可以作用于字符串上
+例：s = 'JavaScript';
+    Array.prototype.join.call(s,' ');//生成新字符串以空格隔开
+
+##### PS:字符串是不可变的值，因此当做数组看待时他们是只读的,因此修改数组的方法是无效的，并且出错时候没有提示；
