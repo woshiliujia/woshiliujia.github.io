@@ -100,4 +100,11 @@ var o = new Object();
 var o = new Object;
 //以上代码是等价的
 ```
-构造函数调用创建的新的空对象，这个对象继承自构造函数的prototype属性
+构造函数调用创建的新的空对象，这个对象继承自构造函数的prototype属性 。构造函数试图初始化这个新创建的对象，并将这个对象作为调用的上下文，即“this”指向这个新创建的对象
+```
+var o = new Object;
+o.m = function(){
+    console.log(this === o);
+}
+new o().m();//输出是false
+```
