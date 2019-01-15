@@ -105,7 +105,7 @@ var o = new Object;
 o.m = function(){
     console.log(this === o);
 }
-new o().m();//输出是false; this指向这个新创建的对象
+new o.m();//输出是false; this指向这个新创建的对象
 ```
 PS:构造函数通常没有不使用return关键字，他们通常初始化新对象，执行完毕时显示返回这个对象
 即：
@@ -200,3 +200,75 @@ easycopy({a:a,b:b});//省略开始和结束位置，因为有默认值
 (function(){}());//匿名函数内部定义的变量不会影响到外部
 ```
 ## 闭包
+闭包：函数对象可以通过作用域链关联起来，函数内部的变量都可以保存在函数作用域内，这种特性成为闭包。
+#### PS:函数定义时候的作用域链，在执行时候依然有效
+```
+var a = 0;//定义全局变量
+function o(){//定义o函数
+    var a = 1;//定义局部变量
+    function f(){定义一个函数并返回这个局部变量
+        return a;
+    }
+    return f;//这个函数返回上面的函数
+}
+o()();//输出1，因为函数作用域链是函数创建的时候产生的，f()定义在o的作用域内部，a一定是局部变量，并被作用域链一直保存下来，所以输出的依然是o中的a;
+```
+防止共享变量，因为会共享其他闭包
+```
+function a(){//定义函数
+    var b = [];//定义数组存储函数
+    for(var i = 0;i<10;i++){//循环10次创建10个闭包函数
+        b[i] = function(){return i};
+    }
+    //变量i在循环结束时候已经是10了
+    return b;
+}
+var b = a();
+b[5]();//因为b[5]这个函数访问a()里面的变量i全部是10 所以b[5]()返回10
+```
+注意：this是JavaScript的关键字不是变量，所有在嵌套函数内部需要调用外部的this值需要将this保存至一个变量中，如var self = this;
+arguments也是一样的道理 var outarguments = arguments;
+
+## 函数属性、方法和构造函数
+JavaScript中函数是值，对其使用typeof运算符返回‘function’，函数也是特殊的对象，拥有属性和方法。
+### length属性
+arguments.length表示函数所传入的实参个数
+函数本身的length属性表示函数其他传入的实参数量。
+例：当传入的实参和定义的形参不等的时候抛出错误
+```
+function check(arg){
+    var a = arg.length;//定义的实参数量
+    var b = arg.callee.length;
+    //arguments.callee表示正在执行的函数arguments.callee.length表示传入的实参个数
+    if(a!==b){
+        throw Error('传入参数不对等')
+    }
+}
+function test(x,y,z){
+    check(arguments);//传入arguments到check函数中
+}
+test(1,2);//报错。传入参数不够三个
+```
+### prototype属性
+函数也是对象，所以函数也有原型属性，每一个函数也都包含不同的原型对象。
+将函数用作构造函数的时候，新创建的对象会从原型对象上继承属性。
+
+### call()方法和apply()方法
+通俗理解法：我要过一条河，你家有一个梯子能够搭在河上过去，现在我不想自己去造梯子太麻烦了，所有我找你家借这个梯子，但我不认识你家call()和apply()认识，我就找他俩去问你借。
+
+书面话：call()和apply()方法第一个参数是调用函数的母对象，即被调用对象。
+例：
+```
+var a = {"0":"a","1":"b","2":"c",length:3}
+Array.prototype.join.call(a,'+');
+//a对象并没有join方法，所以需要一座桥梁来让a可以使用join方法,也就是用数组方法去调用对象a以前一直反着理解，不知道咋理解正确
+```
+例：想要以o对象的方法来调用函数f()
+```
+f.call(o)
+f.apply(o)
+//以上方法等价
+o.m = f;//f方法存储为o对象的方法
+o.m();//执行这个o对象的新方法
+delete o.m;//执行完再删除，就跟借完梯子送回去一个道理
+```

@@ -142,9 +142,12 @@ var a = {"0":"a","1":"b","2":"c",length:3};//必须要有length属性，不然�
 Array.prototype.join.call(a,'+');
 //这里不能直接使用a.join()因为a并没有继承自Array.prototype a上面根本就没有这个方法
 ps:这里并未搞懂call方法，下一章会有解释
+---看完了下一章，回过头解释下
+call()方法里面第一个参数是要调用别人方法的对象，后面跟的参数是别的对象方法所需要的参数
 
 因为ECMAScript 5中将这些方法直接定义在了Array构造函数中，所以可以直接这样写
 Array.join(a,'+');//可能不是所有浏览器都支持
+
 
 兼容写法
 Array.join = Array.join()||function(a,sep){//a表示传入类数组对象，sep表示分隔符
