@@ -1,4 +1,4 @@
---
+---
 title: JavaScript-8.函数.md
 date: 2019-01-08 16:05:13
 tags: JavaScript
@@ -253,32 +253,116 @@ test(1,2);//报错。传入参数不够三个
 函数也是对象，所以函数也有原型属性，每一个函数也都包含不同的原型对象。
 将函数用作构造函数的时候，新创建的对象会从原型对象上继承属性。
 
-### call()方法和apply()方法
+### call( )方法和apply( )方法
 通俗理解法：我要过一条河，你家有一个梯子能够搭在河上过去，现在我不想自己去造梯子太麻烦了，所有我找你家借这个梯子，但我不认识你家call()和apply()认识，我就找他俩去问你借。
 
-书面话：call()和apply()方法第一个参数是调用函数的母对象，即被调用对象。
+书面话：call()和apply()方法第一个参数是调用函数的母对象，就跟对象的方法一样第一个参数是对象。有那么点绕
 例：
 ```
 var a = {"0":"a","1":"b","2":"c",length:3}
 Array.prototype.join.call(a,'+');
-//a对象并没有join方法，所以需要一座桥梁来让a可以使用join方法,也就是用数组方法去调用对象a以前一直反着理解，不知道咋理解正确
+//a对象并没有join方法，所以需要一座桥梁来让a可以使用join方法,也就是用数组方法去调用对象a
 ```
-例：想要以o对象的方法来调用函数f()
+例：想要以o对象的方法来调用函数f(),即现在f()方法相当于绑定在o上了
 ```
 f.call(o)
 f.apply(o)
-//以上方法等价
+//以上方法和下方的等价
 o.m = f;//f方法存储为o对象的方法
 o.m();//执行这个o对象的新方法
 delete o.m;//执行完再删除，就跟借完梯子送回去一个道理
 ```     
 
-## bind()方法
-作用：将函数绑定至某个对象。当函数f()上调用bind()方法并传入个对象o作为参数，这个方法将返回一个新的函数
+## bind( )方法
+作用：将函数绑定至某个对象。当函数f()上调用bind()方法并传入个对象o作为参数，这个方法将返回一个新的函数,这个新的函数将会当做绑定对象的方法来使用
 例：
 ```
-function f(y){return this.x + y;}
-var o = {x:1};
-var a= f.bind(o);
-a(2);
+function f(y){return this.x + y;}//新建一个函数
+var o = {x:1};//新建一个对象
+var a= f.bind(o);//将函数f绑定至o这个对象
+a(2);//这个函数相当于现在是o对象的一个方法  
 ```
+
+## 总结call()apply()和bind()方法
+都是将一个方法绑定到对象上，this指向绑定的这个对象
+都是方法在前，绑定的对象在后
+bind方法会生成一个新的函数，可以直接函数调用，传递的参数和老的函数一样，需要啥传递啥
+
+例：兼容的bind()方法实现
+```
+function bind(f,o){//传入的2个参数分别为绑定的方法和对象
+    if(f.bind) return f.bind(o);//如果存在这个方法直接使用
+    else return function(){//不存在bind方法返回一个函数
+        //这个函数使用间接调用实现将方法绑定到对象,传入arguments因为下方调用这个方法时候会传入参数进去，arguments直接指向这个函数对象,将用传入的参数一并给到新创建函数
+        return f.apply(o,arguments);
+    }
+}
+var n = bind(f,o);//bind()方法返回的是新的函数，所以下方还需要调用
+n(1);//调用这个新的函数，并传入参数
+```
+函数柯里化:即将多参数的函数变成单参数的函数
+例：柯里化函数
+```
+var sum = function(x,y){return x+y};//这是计算和的函数
+var succ = sum.bind(null,10);将函数this指向null，并将第一个参数赋值为10
+succ(1);//返回11,这时候新函数只需要1个参数了
+
+//另一种
+var sum = function(y,z){return this.x+y+z};//依旧计算和函数
+var succ = sum.bind({x:1},1);//将sum方法绑定到对象上，这时候sum中的this指向这个对象并依旧给个参数将第一个赋值为1
+sucd(2);//y参数被赋值为1，this指向{x:1}这个对象，所以返回4
+```
+ES3版本的Function.bind()方法
+```
+if(!Function.prototype.bind){//判断浏览器是否支持这个方法
+    //没有的话给函数原型添加这个方法
+    Function.prototype.bind = function(){
+        //这个this指向Function.prototype即其他调用bind方法的函数指向保存起来，传入的参数也保存取来
+        var self = this,boundArgs = arguments;
+        //es5的bind()方法返回的是新函数,因此添加的方法依旧返回一个新的函数
+        return function(){
+            //将除了第一个传入参数,剩下的参数都保存给args；i变量只是为了遍历方便
+            var args = [],i;
+            //这个循环为了拿到调用这个方法时候传入的参数
+            for(i = 1;i<boundArgs.length;i++) args.push(boundArgs[i]);
+            //这个循环为了拿到返回对象被调用时的参数，即当前这个函数的参数
+            for(i = 0;i<arguments.length;i++) args.push(arguments[i]);
+            //以上两个循环相当于es5bind方法中第一次传递参数，和第二次传递参数并不会被赋值
+
+            //self指向调用函数，o表示调用对象，args表示用户给的参数
+            return self.apply(o,args);
+        }
+    }
+}
+
+function f(x,y){return x+y;}
+//这个a保存的是上面Function.prototype里面返回的函数，参数是上面第一个for循环得来的
+var a = f.bind(null,1);
+//调用这个新函数传入的参数是第二个for循环得来的
+a(1);
+```
+模拟的bind()和真实的bind()方法区别
+1.真正bind()方法返回的是一个函数对象，这个函数对象的length属性是绑定函数的形参减去绑定实参的个数(length不能小于0)
+2.真正bind()方法可以顺带用作构造函数，只是this指向不能改变了,原始的函数就会以构造函数方式来调用。
+...等等(这里后期可以回过头再看一次，两者之间区别未做深入了解)
+
+### toString()方法
+和对象一样，函数也有toString()方法，大多数函数返回函数的完整源码，内置函数返回"[native code]"
+
+### Function()构造函数
+函数除了使用定义语句还是函数直接量还有使用Function()构造函数来定义
+例：
+```
+var f = new Function("x","y","return x+y;")
+
+var f = function(x,y){return x+y;};
+以上2种方式几乎等价
+```
+PS:以Function()构造函数创建的函数总是最顶层函数，嵌套在另一个函数中将不会访问另个函数中的作用域（很少用到）
+
+### 可调用的对象
+所有函数都是可调用的，但所有可调用的对象不一定是函数
+Window.alert();Document.getElementById()  IE8之前的版本
+RegExp对象,这个是可以调用的对象。不能过分依赖
+
+## 函数式编程
