@@ -158,7 +158,12 @@ var extend = (function(){
     };
     return function(o){
         for(var i = 1;i<arguments.length;i++){
-            
+            var source = arguments[i];
+            for(var prop in source) o[prop] = source[prop];
+            for(var j = 0;j<protoprops.length;j++){
+
+                if(source.hasOwnProperty())
+            }
         }
     }
     var protoprops = ["toString","valueOf","constructor","hasOwnProperty","isPrototypeOf","prototypeIsEnumerable","toLocalString"];
