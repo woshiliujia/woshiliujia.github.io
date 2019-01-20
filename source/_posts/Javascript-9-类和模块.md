@@ -139,33 +139,51 @@ Range.prototype.toString = function(){};
 
 ## JavaScript中的Java式的类继承
 JavaScript中定义类的步骤可分为3步。
-1. 定义一个构造函数，并设置初始化对象的实例属性。
+1. 定义一个构造函数，并设置初始化对象的实例属性。
 2. 给构造函数的原型属性prototype对象定义实例的方法。
 3. 给构造函数定义类字段和类属性。
 
 以上三步可以封装成一个方法
 ```
 //用于定义简单类的一个方法
-var extend = (function(){
-    for(var p in {toString:null}){
-        return function(o){
-            for(var i = 1;i<arguments.length;i++){
-                var source = arguments[i];
-                for(var prop in source) o[prop] = source[prop];
+//以下方法属于8-3的例子，传入第一个参数为复制后的对象，其他参数需要为对象
+var extend = (function(){//使用匿名函数返回一个函数
+    //for in循环判断浏览器兼容性
+    for(var p in {toString:null}){//可以循环出不可枚举属性则返回一个函数  非ie9以下
+        return function(o){//此处的o是个对象，传入的其他参数也需要是个对象，如果不是无法赋值到o
+            for(var i = 1;i<arguments.length;i++){//循环传入的实参
+                var source = arguments[i];//把实参赋值给变量source
+                for(var prop in source) o[prop] = source[prop];//因为传入的其他参数是对象，所以当做属性赋值到第一个参数
             }
             return o;
         }
     };
-    return function(o){
-        for(var i = 1;i<arguments.length;i++){
+    return function(o){//如何没有循环出不可枚举属性 //ie9以下进行的特殊处理
+        for(var i = 1;i<arguments.length;i++){//循环可枚举的属性
             var source = arguments[i];
             for(var prop in source) o[prop] = source[prop];
-            for(var j = 0;j<protoprops.length;j++){
-
-                if(source.hasOwnProperty())
+            for(var j = 0;j<protoprops.length;j++){//不可枚举的属性在下方数组中，遍历下方数组
+                prop = protoprops[j];
+                
+                //这段代码使用hasOwnProperty方法判断传入对象是否修改过不克枚举属性，修改则赋值给第一个参数。
+                if(source.hasOwnProperty(prop) o[prop] = source[prop];//这段代码可写成下面格式，没验证  
+                if(source.hasOwnProperty(protoprops[j])) o[protoprops[j]] = source[protoprops[j]];//
             }
         }
+        return o;//返回这个对象
     }
     var protoprops = ["toString","valueOf","constructor","hasOwnProperty","isPrototypeOf","prototypeIsEnumerable","toLocalString"];
-}())
+}());//使用匿名函数，不会影响外部空间的变量。
+
+//以下是个简单的类函数
+function defineClass(
+                    constructor,//用以设置实例属性的函数
+                    methods,//添加实例方法
+                    statics//添加类的属性和字段
+                    )
+{
+    if(methods) extend(constructor.prototype,methods);//给extend()方法传入构造函数的原型对象，将需要添加的实例方法选为第二个参数
+    if(statics) extend(constructor,methods);//构造函数的属性字段直接给其本身
+    return constructor;//返回被赋值的构造函数
+}
 ```
