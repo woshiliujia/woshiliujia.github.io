@@ -166,8 +166,8 @@ var extend = (function(){//使用匿名函数返回一个函数
                 prop = protoprops[j];
                 
                 //这段代码使用hasOwnProperty方法判断传入对象是否修改过不克枚举属性，修改则赋值给第一个参数。
-                if(source.hasOwnProperty(prop) o[prop] = source[prop];//这段代码可写成下面格式，没验证  
-                if(source.hasOwnProperty(protoprops[j])) o[protoprops[j]] = source[protoprops[j]];//
+                if(source.hasOwnProperty(prop)) o[prop] = source[prop];//这段代码可写成下面格式，没验证  
+                //if(source.hasOwnProperty(protoprops[j])) o[protoprops[j]] = source[protoprops[j]];//
             }
         }
         return o;//返回这个对象
@@ -186,4 +186,27 @@ function defineClass(
     if(statics) extend(constructor,methods);//构造函数的属性字段直接给其本身
     return constructor;//返回被赋值的构造函数
 }
+
+//实现range类的另一种方式
+var SimpleRange = defineClass(function(f,t){this.f = f;this.t = t},{
+    includes:function(x){return this.f<=x && x<= this.to;},
+    toString:function(){return this.f+'到'+this.t;}    
+},
+//以下参数我并不知道作用和用法是什么，等看完后面部分回过头再看下
+//以下参数回过头发现是我的参数传递错了，下面属于类本身的方法，不被实例所继承，可以使用函数调用方式
+{
+    upto:function(t){return new SimpleRange(0,t)}
+});
+
+//调用以上定义的SimpleRange类
+var r = new SimpleRange(1,5);
+
+//SimepleRange类本身的方法字段
+var r = SimpleRange.upto(2);//这个本身的类方法返回一个该本身的构造函数，所以继续调用他的类方法
+```
+//例：表示负数的类 Complex.js
+```
+//以下类未使用上面difneClass()函数 (复数是实数和虚数的和)
+
+
 ```
