@@ -206,7 +206,107 @@ var r = SimpleRange.upto(2);//这个本身的类方法返回一个该本身的�
 ```
 //例：表示负数的类 Complex.js
 ```
-//以下类未使用上面difneClass()函数 (复数是实数和虚数的和)
-
-
+略...
 ```
+命名写法：以大写字母命名的成员不能修改，以下划线命名的前缀类的外部是不可见的
+
+## 类的扩充
+JavaScript中基于原型的继承机制是动态的，对象从它的原型继承属性，如何对象创建之后，原型的属性发生变化，也会影响继承这个原型的所有实例对象。这意味着可以给原型对象添加新的方法来扩充类
+
+例：多次调用一个函数输出3次“hello”
+```
+var n = 3;
+n.times(function(n){console.log(n+'hello')});//调用下方给原型新添加的方法
+//下面添加原型方法的必须在上面调用之前添加，否则会报错
+Number.prototype.times = function(f,context){
+//f参数是需要调用的函数，context感觉可有可无，去除这个context参数用this取代一样可行
+    var n = Number(this);
+    for(var i = 0;i<n;i++) f.call(context,i);//此处context只是指代了this，或者为null都可以,i为传入f函数的参数
+}
+
+//去除字符串前后空格trim()方法
+String.prototype.trim = String.prototype.trim || function(){//判断是否有这个方法
+    if(!this) return this;//排除空字符串
+    return this.replace(/^\s+|\s+$/g,'');//使用正则匹配
+}
+```
+不推荐给Object.prototype添加方法，因为在es5之前无法给这些属性设置为不可枚举的属性，会被for/in遍历到 es5中有着更好的Object.defineProperty()。但并不是所有的宿主环境都支持这个
+在很多浏览器中可以给HTMLElement.prototype添加方法 ie中不支持
+
+## 类和类型
+JavaScript有7中的数据类型，null,undefined,布尔，数字，字符串，对象，函数，可以使用typeof来得出这些值类型，但是类的类型都属于'Object';
+
+### instanceof运算符
+instanceof左边是待检测类的对象，右边是定义类的构造函数
+如：o继承自，c.prototype 则 o instanceof c 返回true,如果o继承的对象是继承另一个对象的，另一个对象也是继承c.prototype 结果依旧是true
+构造函数只是类的公共标识，唯一标识是原型，instanceof实际检测的是继承关系
+
+isPrototypeOf()方法可以检测对象的原型链上是否有某个特定的原型对象。
+range.methods.isPrototypeOf(r);//range.methods是原型对象
+
+以上两个方法的缺点：无法通过对象来获得类名，只能检测对象是否属于指定的类
+
+### constructor属性
+因为构造函数是类的公共标识，所以可以直接使用对象的constructor属性
+```
+function typeAndValue(x){
+    if(x == null) return "";//null和undefined没有构造函数
+    switch (x.constructor){
+        case Number: return "Number:"+x;
+        case String: return "String:"+x;
+        //...等等原型类型
+        case Date: return "Date:"+x;//处理内置类型
+        case Complex: return "Complex:"+x;处理自定类型
+    }
+}
+```
+缺点:并非所有对象都包含constructor属性，有的原型被重新赋值后会丢失constructor属性，需要显示赋值
+一个窗口的多个子页面，相同的而又独立的构造函数不是通过一个构造函数
+
+### 构造函数的名称
+通过构造函数的名称去作为类的标识符，而不是通过构造函数本身
+下面例子使用typeof 处理原始值和函数，对于对象要么返回class属性值，要么返回构造函数名字
+```
+/**
+ *以字符串形式返回o的类型
+ *如果o是null返回'null'，o是NaN返回'nan'
+ *如果typeof返回值不是‘object’,则返回这个值
+ *如果o的类不是“Object”则返回这个值
+ *如果o包含构造函，并且这个构造函数有名字，则返回这个名字
+ *其他情况一律返回'Object'
+ **/
+ function type(o){
+     var t,c,n;//type,class,name
+     if(o == null) return 'null'
+     //NaN自身和自身不相等
+     if(o !== o) return 'nan';//NaN !== NaN
+     //type可以识别原始类型的值和函数
+     if((t = typeof o)&& !== 'object') return t; 
+     //内置对象，返回对象类名
+     if(c = classof(o)&& !== 'Object') return c;
+     //如果构造函数的名字存在
+     if(o.constructor && typeof o.constructor === 'function'&&(n = o.constructor.getName())) return n;
+     //其他情况一律返回'Object'
+     return 'Object';
+ }
+
+ function classof(o){//返回对象的类
+    return Object.prototype.toString.call(o).slice(8,-1);
+ }
+ Function.prototype.getName = function(){//获取类名，即函数name
+     if("name" in this) return this.name;
+     return this.name = this.toString().match(/function\s*([^(]*)\(/)[1];
+ }
+```
+这种做法依然不是所有对象都有constructor属性，如果是不带名字的函数定义表达式，也不会有函数名
+getName()方法会返回空字符串
+```
+var A = function(){} //这个构造函数没名字
+var B = function B(){} //这个构造函数有名字B
+```
+### 鸭式辩型
+不注重类型，关注能干的事情
+quacks()方法
+略...
+
+## JavaScript中的面向对象技术
