@@ -310,3 +310,70 @@ quacks()方法
 略...
 
 ## JavaScript中的面向对象技术
+```
+//Set.js 值的任意集合
+function Set(){//这是一个构造函数
+    this.value = {};//新建一个集合用于存放传入的参数
+    this.n = 0;//集合中值的个数
+    this.add.apply(this,arguments);//把所有参数加入集合中,意思是当调用这个类时传入的参数已经加入到集合中了。
+}
+Set.prototype.add = function(){//给这个类添加一个参数加入到集合中的方法
+    for(var i = 0;i<arguments.length;i++){//遍历所有传入参数
+        var val = arguments[i];//保存每个参数
+        var str = Set._v2s(val);//通过私有方法将传入的参数以一定规则转为字符串
+        this.value[str] = val;//将转化后的字符串作为属性将值保存在集合
+        this.n++;//没加入一个参数集合中值的个数自增
+    }
+    return this;//以便于链式调用
+}
+
+Set.prototype.remove = function(){//添加删除方法
+    for(var i = 0;i<arguments.length;i++){//遍历传入的参数
+        var str = Set._v2s(arguments[i]);//将传入参数保存
+        if(this.value.hasOwnProperty(str)){//判断传入参数是否属于集合对象中的  hasOwnProperty()方法主要是判断属性是否属于对象的自有属性
+            delete this.value[str];//找到的话直接删除
+            this.n--;//集合值的个数自减
+        }
+    }
+    return this;//返回这个对象，支持链式调用
+}
+
+Set.prototype.contains = function(val){//判断传入参数是否属于这个集合
+    return this.value.hasOwnProperty(Set._v2s(val))
+}
+Set.prototype.size = function(){//集合大小
+    return this.n;
+}
+
+Set.prototype.foreach = function(f,context){//遍历这个集合并且在指定上下文中对每个值调用f
+    for(var s in this.value){
+        if(this.value.hasOwnProperty){ //过滤继承属性
+            f.call(context,this.value[s]);
+        }
+    }
+}
+Set._v2s = function(val){//Set.js 私有的方法，实例不共享，用以将传入参数以唯一字符串连接，重复的参数会被过滤
+    switch (val){
+        case undefined: return 'u';
+        case null: return 'n';
+        case true: return 't';
+        case false: return 'f';
+        default: switch(typeof val){
+            case 'number': return '#'+val;
+            case 'string': return '"'+val;
+                default:return '@'+objectid(val);
+        }
+    }
+    
+    function objectid(o){//此处如果传入参数是个对象的话，会默认给这个对象加个"|**objectid**|"属性
+        var prop = "|**objectid**|";
+        if(!o.hasOwnProperty(prop)){
+            o[prop] = Set._v2s.next++;
+        }
+        return o[prop];
+    }
+}
+Set._v2s.next = 100;//初始对象的id值
+```
+
+## 一个例子；枚举类型
