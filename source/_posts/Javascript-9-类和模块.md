@@ -301,8 +301,8 @@ function typeAndValue(x){
 这种做法依然不是所有对象都有constructor属性，如果是不带名字的函数定义表达式，也不会有函数名
 getName()方法会返回空字符串
 ```
-var A = function(){} //这个构造函数没名字
-var B = function B(){} //这个构造函数有名字B
+var A = function(){}//这个构造函数没名字
+var B = function B(){}//这个构造函数有名字B
 ```
 ### 鸭式辩型
 不注重类型，关注能干的事情
@@ -349,7 +349,6 @@ Set.prototype.foreach = function(f,context){//遍历这个集合并且在指定�
     for(var s in this.value){
         if(this.value.hasOwnProperty){ //过滤继承属性
             f.call(context,this.value[s]);
-        }
     }
 }
 Set._v2s = function(val){//Set.js 私有的方法，实例不共享，用以将传入参数以唯一字符串连接，重复的参数会被过滤
@@ -375,5 +374,84 @@ Set._v2s = function(val){//Set.js 私有的方法，实例不共享，用以将�
 }
 Set._v2s.next = 100;//初始对象的id值
 ```
-
 ## 一个例子；枚举类型
+创建一个新的枚举类型
+```
+//将传入对象作为原型生成新的对象
+function inherit(p){
+    if(p == null) throw TypeError();
+    if(Object.create) return Object.create(p);
+    var t = typeof p;
+    if(t !== 'function' && t !== 'object') throw TypeError();
+    function f(){}
+    f.prototype = p;
+    return new f();
+}
+
+//工厂函数，返回值是一个构造函数
+function enumeration(namesToValues){
+    
+    //定义个构造函数，并且当做返回值（不能使用这个构造函数来创建新的实例，否则会抛出错误）
+    //即返回的函数不能再次当做构造函数使用
+    var enumeration = function(){throw "Can't Instantiate Enumeration";}
+
+    //设置这个构造函数的原型对象，并添加几个方法
+    var proto = enumeration.prototype = {
+        constructor:enumeration,
+        toString:function(){return this.name;},
+        valueOf:function(){return this.value;},
+        toJson:function(){return this.name;}
+    }
+    enumeration.values = [];//存放枚举对象的数组
+
+    for(name in namesToValues){//遍历传入对象的属性，并创建新类型的实例
+        var e = inherit(proto); //创建一个代表它的对象
+        e.name = name; //给新实例一个名字
+        e.value = namesToValues[name];给这个对象一个值
+        enumeration[name] = e;//将遍历的属性设置为构造函数的属性
+        enumeration.values.push(e);//将这个对象放到枚举对象数组中
+    }
+    //类方法，用来对类的实例进行迭代
+    enumeration.foreach = function(f,c){
+        for(var i = 0;i<this.values.length;i++){
+            f.call(c,this.values[i]);
+        }
+    }
+    return enumeration;//返回这个构造函数
+}
+```
+例：使用枚举类型表示一个玩牌的类
+
+```
+//定义个表示“玩牌”的类
+function Card(suit,rank){
+    this.suit = suit;//每张牌都有花色
+    this.rank = rank;//每张牌都有点数
+}
+//使用枚举类型定义花色和点数
+Card.suit = enumeration({Clubs:1,Diamonds:2,Hearts:3,Spades:4});
+Card.Rank = enumeration({
+    Two:2,Three:3,Four:4,Five:5,Six:6,Seven:7,Eight:8,Nine:9,Ten:10,
+    Jack:11,Queen:12,King:13,Ace:14
+})
+
+Card.prototype.toString = function(){
+    return this.rank.toString() + "of" + this.suit.toString();
+};
+
+Card.prototype.compareTo = function(that){
+    if(this.rank < that.rank) return -1;
+    if(this.rank > that.rank) return 1;
+    return 0;
+}
+
+Card.orderByRank = function(a,b){return a.compareTo(b)};
+
+Card.orderBySuit = function(a,b){
+    if(a.suit > b.suit) return 1;
+    if(a.suit < b.suit) return -1;
+    if(a.rank > b.rank) return 1;
+    if(a.rank < b.rank) return -1;
+    return 0;
+}
+```
