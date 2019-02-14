@@ -428,25 +428,34 @@ function Card(suit,rank){
     this.suit = suit;//每张牌都有花色
     this.rank = rank;//每张牌都有点数
 }
+
 //使用枚举类型定义花色和点数
+
+//4种花色
 Card.suit = enumeration({Clubs:1,Diamonds:2,Hearts:3,Spades:4});
+
+//13张牌
 Card.Rank = enumeration({
     Two:2,Three:3,Four:4,Five:5,Six:6,Seven:7,Eight:8,Nine:9,Ten:10,
     Jack:11,Queen:12,King:13,Ace:14
 })
 
+//描述牌面
 Card.prototype.toString = function(){
     return this.rank.toString() + "of" + this.suit.toString();
 };
 
+//比较两张牌大小，只是按照点数比较，无关花色
 Card.prototype.compareTo = function(that){
     if(this.rank < that.rank) return -1;
     if(this.rank > that.rank) return 1;
     return 0;
 }
 
+//按照点数排序，sort方法传入的方法
 Card.orderByRank = function(a,b){return a.compareTo(b)};
 
+//先按照花色比较，花色一样再按照点数比较
 Card.orderBySuit = function(a,b){
     if(a.suit > b.suit) return 1;
     if(a.suit < b.suit) return -1;
@@ -454,4 +463,39 @@ Card.orderBySuit = function(a,b){
     if(a.rank < b.rank) return -1;
     return 0;
 }
+
+//定义一个表示一副扑克牌的类
+function Deck(){
+    var cards = this.cards = [];//新建一个存放牌的数组
+
+    //enumeration类里面定义了foreach方法，所以可以直接遍历到values，即初始化这个数组获得一副牌
+    Card.suit.foreach(function(s){
+        Card.Rank.foreach(function(r){
+            cards.push(new Card(s,r));//4种花色加上13张牌混合一起52张
+        })
+    })
+}
+
+//定义洗牌的方法
+Deck.prototype.shuffle = function(){
+    var deck = this.cards,len = deck.length;//将一副扑克牌给到deck，len存放牌数组的长度
+    for(var i = len-1;i>0;i--){//遍历数组中的每个元素
+        var r = Math.floor(Math.random()*(i+1)),temp;//随机出一个元素
+        //现将当前循环到的元素给临时变量temp，再将随机出来的给到当前循环到的，最后将临时变量给随机出来的元素
+        temp = deck[i],deck[i] = deck[r],deck[r] = temp;
+    }
+    return this;//返回这个类，方便链式调用
+}
+
+//发牌的方法，返回数组
+Deck.prototype.deal = function(n){
+    if(this.cards.length < n) throw "Out of cards";
+    return this.cards.splice(this.cards.length-n,n);//取出n张牌
+}
+
+//创建一副新的扑克牌，洗牌并发牌
+var deck = (new Deck()).shuffle();
+var hand = deck.deal(13).sort(Card.orderBySuit);
 ```
+
+### 标准转换方法
