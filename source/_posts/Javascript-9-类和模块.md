@@ -469,7 +469,7 @@ function Deck(){
     var cards = this.cards = [];//新建一个存放牌的数组
 
     //enumeration类里面定义了foreach方法，所以可以直接遍历到values，即初始化这个数组获得一副牌
-    Card.suit.foreach(function(s){·
+    Card.suit.foreach(function(s){
         Card.Rank.foreach(function(r){
             cards.push(new Card(s,r));//4种花色加上13张牌混合一起52张
         })
