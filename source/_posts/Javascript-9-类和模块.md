@@ -499,3 +499,57 @@ var hand = deck.deal(13).sort(Card.orderBySuit);
 ```
 
 ### 标准转换方法
+```
+function extend(o,p){//通过此方法可以将p对象的属性和方法复制到o
+    for(prop in p){//遍历p对象的属性
+        o[prop] = p[prop];//复制到o对象
+    }
+    return o;//返回o对象
+}
+```
+可以通过以上方法去设置一个对象的某些属性，如“toString,toLocalString”等
+
+### 比较方法
+JavaScript的相等运算符比较对象时，比较的时引用而不是值。所以比较两个对象是否引用自同一个对象，可以使用相等运算符
+如果定义一个类，希望比较类的实例，应该定义合适的方法来执行比较
+略...
+
+### 方法借用
+JavaScript的方法无非是一些简单的函数，赋值给了对象的属性，可以通过对象的属性来调用它。
+一个函数可以赋值给2个属性，再通过两个放法来调用。
+多个类的方法，可以使用一个单独的函数
+```
+//方法借用的泛型实现 
+var generic = {
+    toString:function(){
+        var s = '[';
+
+        //函数的名字是非标准的，并不是所有环境中都有，因为需要进行判断
+        if(this.constructor && this.constructor.name){
+            s += this.constructor.name+': ';
+        }
+
+        var n = 0;
+        for(var name in this){//遍历循环此对象中的属性
+
+            //跳过继承属性
+            if(!this.hasOwnProperty(name)) continue;
+            var value = this[name];
+            //跳过方法
+            if(typeof value === 'function') continue;
+            if(n++) s += ',';
+            s += name + '=' + value;
+        }
+        return s+']';
+    }
+}
+
+//ps:上面泛型实现修改后会在类的实例体现出来
+```
+
+### 私有状态
+在构造函数内部定义一个函数这个函数返回私有状态
+
+ps：使用闭包来封装状态，一定比不上等价类的运行速度，并且占用更多内存
+
+### 构造函数的重载和工厂方法
