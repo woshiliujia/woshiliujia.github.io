@@ -374,7 +374,7 @@ Set._v2s = function(val){//Set.js 私有的方法，实例不共享，用以将�
 }
 Set._v2s.next = 100;//初始对象的id值
 ```
-## 一个例子；枚举类型
+### 一个例子；枚举类型
 创建一个新的枚举类型
 ```
 //将传入对象作为原型生成新的对象
@@ -553,3 +553,32 @@ var generic = {
 ps：使用闭包来封装状态，一定比不上等价类的运行速度，并且占用更多内存
 
 ### 构造函数的重载和工厂方法
+初始化对象的方法
+
+## 子类
+
+### 定义子类
+```
+//定义一个函数来创建简单的子类
+//需要传入的参数分别为"父类构造函数、新的子类构造函数、实例方法(复制到原型中)、类属性(复制到构造函数中)"
+function defineSubClass(superClass,constructor,methods,statics){
+    //使用inherit来生成新的继承自父类的构造函数
+    constructor.prototype = inherit(superClass);
+    //因为新的构造函数的原型对象被改写，所以需要将构造属性指向新创建的构造函数
+    constructor.prototype.constructor = constructor;
+    //判断是否传入了实例方法
+    if(methods) extend(constructor.prototype,methods);
+    //判断是否传入的实例属性
+    if(statics) extend(constructor,statics)
+    //返回这个新的类
+    return constructor;
+}
+
+//通过父类的构造函数来创建子类
+Function.prototype.extend = function(constructor,methods,statics){
+    //此处this指向父类
+    return defineSubClass(this,constructor,methods,statics);
+}
+```
+
+### 构造函数和方法链
