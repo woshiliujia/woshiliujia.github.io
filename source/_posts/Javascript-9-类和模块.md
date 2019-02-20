@@ -582,3 +582,44 @@ Function.prototype.extend = function(constructor,methods,statics){
 ```
 
 ### 构造函数和方法链
+```
+//在子类中调用父类的构造函数和方法
+
+//NonNullSet是Set的子类，并且他的成员不能是null或者undefined
+function NonNullSet(){
+    //仅链接到父类
+     
+    Set.apply(this,arguments);//此处链接到父类不怎么明白
+}
+
+NonNullSet.prototype = inherit(Set.prototype);//设置NonNullSet为Set的子类
+NonNullSet.prototype.constructor = NonNullSet;//重新设置原型的构造函数为新建的子类
+
+NonNullSet.prototype.add = function(){
+    //检查参数是否是undefined或者null
+    for(var i = 0;i<arguments.length;i++){
+        if(arguments[i] === null) throw new Error('传入参数不能是undefined or null');
+    }
+    return Set.prototype.add.apply(this,arguments); //间接调用Set中add方法
+}
+```
+
+```
+//类工厂和方法链
+//该函数返回Set的子类，并重写该类add()方法用以添加元素进行特殊处理
+function filteredSetSubClass(superClass,filter){//传入两个参数，父类和对元素进行特殊处理的函数
+    var constructor = function(){
+        superClass.apply(this,arguments);//依然是子类先使用普通方式先调用下父类
+    }
+    var proto = constructor.prototype = inherit(superClass.prototype);//子类的原型设置为父类的原型
+    proto.constructor = constructor;//子类的constructor属性设置为子类
+    proto.add = function(){//重写父类添加方法
+        for(var i = 0;i<arguments.length;i++){//遍历每个传入的参数
+            var v = arguments[i];
+            if(!filter(v)) thow ("value"+v+"rejected by filted");//给每个元素调用传入的过滤方法
+        }
+        superClass.prototype.add.apply(this,arguments);//如果满足传入的过滤方法则间接调用原类的方法
+    }
+    return constructor;//返回这个子类
+}
+```
