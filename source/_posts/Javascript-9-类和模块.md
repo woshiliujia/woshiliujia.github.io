@@ -607,7 +607,7 @@ NonNullSet.prototype.add = function(){
 ```
 //类工厂和方法链
 //该函数返回Set的子类，并重写该类add()方法用以添加元素进行特殊处理
-function filteredSetSubClass(superClass,filter){//传入两个参数，父类和对元素进行特殊处理的函数
+function filteredSetSubClass(superClass,filter){//传入两个参数，父类和对元素进行特殊处理的函数  
     var constructor = function(){
         superClass.apply(this,arguments);//依然是子类先使用普通方式先调用下父类
     }
@@ -622,4 +622,35 @@ function filteredSetSubClass(superClass,filter){//传入两个参数，父类和
     }
     return constructor;//返回这个子类
 }
+```
+ps:最后两章缺少示例
+
+## ECMAScript 5 中的类
+es5给特性增加了一些方法支持包括：getter、setter、可写性、可配置性
+
+### 让属性不可枚举
+//定义不可枚举的属性
+```
+(function(){
+    Object.defineProperty(Object.prototype,"objectId",{
+        get:idGetter,
+        enumerable:false,
+        configurable:false
+    })
+    function idGetter(){
+        if(!(idprop in this)){
+            if(!Object.isExtensible(this))
+                throw Error("Can't define if for nonextensible objects")
+            Object.defineProperty(this,idprop,{
+                value:nextid++,
+                writable:false,
+                enumerable:false,
+                configurable:false
+            })
+        }
+        return this[idprop]
+    }
+    var idprop = "|**objectId**|";
+    var nextid = 1;
+}())
 ```
