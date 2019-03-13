@@ -632,14 +632,14 @@ es5给特性增加了一些方法支持包括：getter、setter、可写性、�
 //定义不可枚举的属性
 ```
 (function(){
-    Object.defineProperty(Object.prototype,"objectId",{
-        get:idGetter,
-        enumerable:false,
-        configurable:false
+    Object.defineProperty(Object.prototype,"objectId",{//为Object原型定义objectId
+        get:idGetter,//getter存取器属性，无setter属性
+        enumerable:false,//不克枚举
+        configurable:false//不克配置，即不能删除
     })
-    function idGetter(){
+    function idGetter(){//存取器属性对应的方法
         if(!(idprop in this)){
-            if(!Object.isExtensible(this))
+            if(!Object.isExtensible(this)) //判断是否可扩展
                 throw Error("Can't define if for nonextensible objects")
             Object.defineProperty(this,idprop,{
                 value:nextid++,
@@ -651,6 +651,9 @@ es5给特性增加了一些方法支持包括：getter、setter、可写性、�
         return this[idprop]
     }
     var idprop = "|**objectId**|";
-    var nextid = 1;
+    var nextid = 1;//起始值
 }())
 ```
+
+### 定义不可枚举的类
+除了属性
