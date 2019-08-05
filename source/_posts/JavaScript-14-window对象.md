@@ -99,3 +99,18 @@ alert();
 confirm();//此方法会返回一个布尔值，表示用户点击取消还是确定按钮 let tip = confirm('确认关闭吗');//返回true/false
 prompt();//此方法也可以传入字符串表示提示语 如果点击的是取消返回null否则返回输入内容
 ```
+
+## 错误处理
+Window对象的onerror属性是一个事件处理程序. 
+window.onerror = function(msg,url,line){
+    return true;//火狐浏览器中需要返回true来表示已经处理了错误
+    return false;//其他浏览器返回false来表示处理了错误
+};//msg:错误信息;url:发生错误文档所在位置;line:发生的行数
+
+## 作为Window对象属性的文档元素
+打开/关闭窗口
+```
+window.open(url,_blank,'width=100,height:300,status=yes,resizable=yse',);//
+window.close();//关闭当前窗口
+```
+
