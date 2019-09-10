@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="LZ98hsPMBJ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数组读写数组是对象的特殊形式,只是将对象的属性变成索引并省略了 var o = {} o[1] = &amp;apos;one&amp;apos; //输入是{1:&amp;apos;one&amp;apos;} 数组可以从原型中继承元素。es5中数组可以定义元素的getter和setter方法 数组元素的添加和删除1234567891011&amp;lt;!-- 向数组尾部追加元素 --&amp;gt;var a = [];a.push(&amp;">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript-7.数组">
+<meta property="og:url" content="http://yoursite.com/2018/12/29/JavaScript-7-数组/index.html">
+<meta property="og:site_name" content="桃李不言，下自成蹊">
+<meta property="og:description" content="数组读写数组是对象的特殊形式,只是将对象的属性变成索引并省略了 var o = {} o[1] = &amp;apos;one&amp;apos; //输入是{1:&amp;apos;one&amp;apos;} 数组可以从原型中继承元素。es5中数组可以定义元素的getter和setter方法 数组元素的添加和删除1234567891011&amp;lt;!-- 向数组尾部追加元素 --&amp;gt;var a = [];a.push(&amp;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-10T05:06:27.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript-7.数组">
+<meta name="twitter:description" content="数组读写数组是对象的特殊形式,只是将对象的属性变成索引并省略了 var o = {} o[1] = &amp;apos;one&amp;apos; //输入是{1:&amp;apos;one&amp;apos;} 数组可以从原型中继承元素。es5中数组可以定义元素的getter和setter方法 数组元素的添加和删除1234567891011&amp;lt;!-- 向数组尾部追加元素 --&amp;gt;var a = [];a.push(&amp;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Mr·Jia'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/29/JavaScript-7-数组/">
+
+
+
+
+
+  <title>JavaScript-7.数组 | 桃李不言，下自成蹊</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01f1beaf7697490bd8adfd698d604568";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">桃李不言，下自成蹊</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个没有灵魂的爸爸</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/29/JavaScript-7-数组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr·Jia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="桃李不言，下自成蹊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript-7.数组</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-29T07:47:25+08:00">
+                2018-12-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/29/JavaScript-7-数组/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/29/JavaScript-7-数组/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/12/29/JavaScript-7-数组/" class="leancloud_visitors" data-flag-title="JavaScript-7.数组">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="数组读写"><a href="#数组读写" class="headerlink" title="数组读写"></a>数组读写</h2><p>数组是对象的特殊形式,只是将对象的属性变成索引并省略了</p>
+<pre><code>var o = {}
+o[1] = &apos;one&apos;
+//输入是{1:&apos;one&apos;}
+</code></pre><p>数组可以从原型中继承元素。es5中数组可以定义元素的getter和setter方法</p>
+<h2 id="数组元素的添加和删除"><a href="#数组元素的添加和删除" class="headerlink" title="数组元素的添加和删除"></a>数组元素的添加和删除</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 向数组尾部追加元素 --&gt;</span><br><span class="line">var a = [];</span><br><span class="line">a.push(&apos;last&apos;);等价于 a[length] = &apos;last&apos;;//向数组末尾添加一个元素;</span><br><span class="line"></span><br><span class="line">&lt;!-- 向数组首部添加元素 --&gt;</span><br><span class="line">a.unshift(&apos;first&apos;)</span><br><span class="line"></span><br><span class="line">&lt;!-- 删除数组元素 --&gt;</span><br><span class="line">a.pop();//删除最后一位元素，返回新的长度（与push一组）</span><br><span class="line">a.shift();//删除第一位元素，返回新的长度（与unshift一组）</span><br><span class="line">delete a[0];//此操作会只会将a[0]赋值为undefined,数组长度不会改变</span><br></pre></td></tr></table></figure>
+<h2 id="数组遍历"><a href="#数组遍历" class="headerlink" title="数组遍历"></a>数组遍历</h2><p>数组遍历最常用的就是for循环<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var keys = Object.keys(o);//此方法可以获得对象o的属性名所组成的数组</span><br><span class="line">contiune //跳出当前循环，进行下一次循环</span><br><span class="line">使用for/in循环遍历稀疏数组</span><br></pre></td></tr></table></figure></p>
+<h2 id="数组方法-☆☆☆☆☆"><a href="#数组方法-☆☆☆☆☆" class="headerlink" title="数组方法 ☆☆☆☆☆"></a>数组方法 ☆☆☆☆☆</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">1.Array.join()方法  //将数组元素转化成字符串拼在一起，可传入分隔符，默认是&apos;,&apos;</span><br><span class="line">    join方法的逆向方法是 String.split() //将字符串转化成数组，传入分隔符</span><br><span class="line">    以上方法都是创建新数组，不改变原来数组</span><br><span class="line"></span><br><span class="line">2.Array.reverse()方法 //颠倒数组的顺序，直接改变原数组 </span><br><span class="line">    该方法会修改原数组</span><br><span class="line"></span><br><span class="line">3.Array.sort()方法 //排序数组，并返回排序后数组。没有参数则按照字母表排序，undefined会被排到末尾</span><br><span class="line">可以传入比较函数，第一个函数在前，则需要返回一个小于0的值，如果相等则等于0 反之大于0</span><br><span class="line">    该方法会修改原数组</span><br><span class="line"></span><br><span class="line">4.Array.concat()方法 //连接2个数组，并且是连接2个数组中的每个元素，并不会递归</span><br><span class="line">例：var a = [1,2,3];a.concat([1,[1,[1]]]);这个会返回 [1,2,3,1,[1,[1]]]</span><br><span class="line">    该方法不会修改原数组</span><br><span class="line"></span><br><span class="line">5.Array.slice()方法 //返回指定数组的片段或者子数组 传入2个参数分别代表开始的位置和结束位置</span><br><span class="line">返回数组包含开始的位置，和到不包含结束位置的所有元素</span><br><span class="line">例：var a = [1,2,3,4,5] a.slice(0,2);//返回 [1,2] 到第二个位置但是不包含第二个</span><br><span class="line">如果只有一个参数则表示从开始位置包括开始位置之后的所有元素</span><br><span class="line">例：var a = [1,2,3,4,5] a.alice(1); //返回[2,3,4,5]</span><br><span class="line">如果参数中出现负数则表示数组中最后一位元素的位置 如 -1 代表最后一位元素 -3 代表倒数第三位</span><br><span class="line">例：var a = [1,2,3,4,5] a.slice(-3,-1);//返回[3,4] </span><br><span class="line">ps:此方法始终是从左往右数，如果开始参数是-1 结束参数不为空则这是个空数组</span><br><span class="line">    该方法不会修改原数组</span><br><span class="line"></span><br><span class="line">6.Array.splice()方法 //在数组中插入或者删除元素 </span><br><span class="line">第一个参数指定插入或者删除的起始位置</span><br><span class="line">第二个参数是删除元素的个数 （如果没有第二个参数则从开始到结束位置都被删除）</span><br><span class="line">PS:该方法返回一个由被删除元素组成的数组，没有删除返回空数组。原数组变成删除后的数组</span><br><span class="line">例：var a = [1,2,3,4];a.splice(1,2);//返回[2,3] a现在是[1,4]</span><br><span class="line">后面参数的都表示需要插入的参数，从第一个参数位置之前插入，此方法不会连续递归</span><br><span class="line">例1：var a =[1,2,3,4];a.splice(0,0,-2,-1,0);//a返回[-2,-1,0,1,2,3,4]</span><br><span class="line">例2：var a =[1,2,3,4];a.splice(0,0,-2,-1,[0]);//a返回[-2,-1,[0],1,2,3,4]</span><br><span class="line"></span><br><span class="line">7.Array.toString()/toLocalString()方法 //和不加参数的join()方法返回一样</span><br></pre></td></tr></table></figure>
+<h2 id="ECMAScript-5-中的数组方法-☆☆☆☆☆"><a href="#ECMAScript-5-中的数组方法-☆☆☆☆☆" class="headerlink" title="ECMAScript 5 中的数组方法 ☆☆☆☆☆"></a>ECMAScript 5 中的数组方法 ☆☆☆☆☆</h2><p>概述：大多方法接收的第一个参数是一个函数，并且对数组的每个元素调用一次该函数。<br>如果是稀疏数组，即存在不存在的元素不会调用。<br>该函数使用3个参数分别为：数组元素，数组索引，数组本身（第一个参数为必须的）<br>如果数组方法有第二个参数，则表示调用函数是第二个参数的方法，也就是this指向<br>ECMAScript 5中的方法都不会修改原数组，传递的函数方法可以修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">1.Array.forEach()方法 // 为每个元素调用指定的方法</span><br><span class="line">例：数组中所有元素自加1</span><br><span class="line">var a = [1,2,3];a.forEach((v,i,a)=&gt;&#123;a[i] = v+1;&#125;)</span><br><span class="line">ps:此处数组被修改是因为在传递的方法中修改了原数组</span><br><span class="line"></span><br><span class="line">2.Array.map()方法 //将被调用数组中的每个元素传递给指定的函数，</span><br><span class="line">并且返回一个包含函数返回值的数组</span><br><span class="line">例：var a = [1,2,3];var b = a.map(i=&gt;&#123;return i*3&#125;);</span><br><span class="line">返回[3,6,9];a还是[1,2,3]</span><br><span class="line">PS:map方法需要返回值。返回数组具有相同的数组长度</span><br><span class="line"></span><br><span class="line">3.Array.filter()方法;// 根据filter字面意思是过滤，返回值原数组的一个子集</span><br><span class="line">传递的参数是用来判断的只返回true or false 用来确定是否过滤这个元素</span><br><span class="line">例：var a = [1,2,3,4,5];var b = a.filter(item=&gt;&#123;return item&gt;3&#125;);b:[4,5]</span><br><span class="line"></span><br><span class="line">4.Array.every()/some()方法; //对数组中所有元素执行判断返回true or false</span><br><span class="line">every()方法是所有元素调用判断方法后都返回true则这个数组方法返回true</span><br><span class="line">    如果every()第一个元素返回了false，则后面就不会继续遍历了</span><br><span class="line">some()方法是有一个返回true则这个数组方法返回true</span><br><span class="line">    如果第一个元素返回true，则后面就不会遍历了</span><br><span class="line"></span><br><span class="line">5.Array.reduce()/reduceRight();//对数组元素进行整合生成一个值</span><br><span class="line"></span><br><span class="line">6.Array.indexOf()/lastIndexOf();//搜索数组中是否含有给定值的元素</span><br><span class="line">如果有返回索引，没有返回-1;</span><br><span class="line">其中lastIndexOf是从尾至头搜索的</span><br><span class="line">例：var a = [1,2,3];a.indexOf(1);//返回0;</span><br><span class="line">该方法也可以有第二个参数，可以指定数组中的一个索引，表示从当前位置开始搜索</span><br><span class="line">如果搜索的值在索引之前，也会返回-1</span><br><span class="line">第二个参数也可以是负数，表示相对末尾的偏移量</span><br><span class="line"></span><br><span class="line">因为此方法找到第一个满足条件就会返回索引，不会继续搜索,下面方法可以找到所有的</span><br><span class="line">例：找出数组中所有某个相同元素的索引</span><br><span class="line"> function getAllEle(arr,x)&#123;//arr要搜索的数组，x为要搜索的元素</span><br><span class="line">    var result = [];//存入找到的索引</span><br><span class="line">    var pos = 0;//从第0个位置开始搜索</span><br><span class="line">    var len = arr.length;//传入数组长度</span><br><span class="line">    for(var i = 0;i&lt;len;i++)&#123;//使用for循环，并未使用书上的while循环</span><br><span class="line">        pos = arr.indexOf(x,pos);//开始从第0个位置搜索</span><br><span class="line">        if(pos == -1) break; //没有找到结束循环</span><br><span class="line">        result.push(pos);//找到一个放入到结果数组中</span><br><span class="line">        pos = pos+1;//自增1，从下个开始继续搜索</span><br><span class="line">    &#125;</span><br><span class="line">    return result; //返回结果;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">PS:字符串也有此方法，和此功能类似</span><br></pre></td></tr></table></figure></p>
+<h2 id="数组类型"><a href="#数组类型" class="headerlink" title="数组类型"></a>数组类型</h2><p>ECMAScript 5中提供了Array.isArray()函数来判断对象是否为数组<br>例：Array.isArray({})//返回false</p>
+<h2 id="类数组对象"><a href="#类数组对象" class="headerlink" title="类数组对象"></a>类数组对象</h2><p>类数组对象，间接调用数组方法（Function.call）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;&quot;0&quot;:&quot;a&quot;,&quot;1&quot;:&quot;b&quot;,&quot;2&quot;:&quot;c&quot;,length:3&#125;;//必须要有length属性，不然无法调用</span><br><span class="line">Array.prototype.join.call(a,&apos;+&apos;);</span><br><span class="line">//这里不能直接使用a.join()因为a并没有继承自Array.prototype a上面根本就没有这个方法</span><br><span class="line">ps:这里并未搞懂call方法，下一章会有解释</span><br><span class="line">---看完了下一章，回过头解释下</span><br><span class="line">call()方法里面第一个参数是要调用别人方法的对象，后面跟的参数是别的对象方法所需要的参数</span><br><span class="line"></span><br><span class="line">因为ECMAScript 5中将这些方法直接定义在了Array构造函数中，所以可以直接这样写</span><br><span class="line">Array.join(a,&apos;+&apos;);//可能不是所有浏览器都支持</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">兼容写法</span><br><span class="line">Array.join = Array.join()||function(a,sep)&#123;//a表示传入类数组对象，sep表示分隔符</span><br><span class="line">    return Array.prototype.join(a,sep);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h2 id="作为数组的字符串"><a href="#作为数组的字符串" class="headerlink" title="作为数组的字符串"></a>作为数组的字符串</h2><p>通用的数组方法可以作用于字符串上<br>例：s = ‘JavaScript’;<br>    Array.prototype.join.call(s,’ ‘);//生成新字符串以空格隔开</p>
+<h5 id="PS-字符串是不可变的值，因此当做数组看待时他们是只读的-因此修改数组的方法是无效的，并且出错时候没有提示；"><a href="#PS-字符串是不可变的值，因此当做数组看待时他们是只读的-因此修改数组的方法是无效的，并且出错时候没有提示；" class="headerlink" title="PS:字符串是不可变的值，因此当做数组看待时他们是只读的,因此修改数组的方法是无效的，并且出错时候没有提示；"></a>PS:字符串是不可变的值，因此当做数组看待时他们是只读的,因此修改数组的方法是无效的，并且出错时候没有提示；</h5>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/27/JavaScript-6-对象/" rel="next" title="JavaScript-6.对象">
+                <i class="fa fa-chevron-left"></i> JavaScript-6.对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/09/JavaScript-8-函数/" rel="prev" title="JavaScript-8.函数">
+                JavaScript-8.函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Mr·Jia">
+            
+              <p class="site-author-name" itemprop="name">Mr·Jia</p>
+              <p class="site-description motion-element" itemprop="description">JavaScript</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/woshiliujia" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.zhihu.com/people/wo-bu-dong-ni-88" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eswoshiliujia@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://douban.com/people/woshiliujia" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组读写"><span class="nav-number">1.</span> <span class="nav-text">数组读写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组元素的添加和删除"><span class="nav-number">2.</span> <span class="nav-text">数组元素的添加和删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组遍历"><span class="nav-number">3.</span> <span class="nav-text">数组遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组方法-☆☆☆☆☆"><span class="nav-number">4.</span> <span class="nav-text">数组方法 ☆☆☆☆☆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ECMAScript-5-中的数组方法-☆☆☆☆☆"><span class="nav-number">5.</span> <span class="nav-text">ECMAScript 5 中的数组方法 ☆☆☆☆☆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组类型"><span class="nav-number">6.</span> <span class="nav-text">数组类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类数组对象"><span class="nav-number">7.</span> <span class="nav-text">类数组对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作为数组的字符串"><span class="nav-number">8.</span> <span class="nav-text">作为数组的字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#PS-字符串是不可变的值，因此当做数组看待时他们是只读的-因此修改数组的方法是无效的，并且出错时候没有提示；"><span class="nav-number">8.0.0.1.</span> <span class="nav-text">PS:字符串是不可变的值，因此当做数组看待时他们是只读的,因此修改数组的方法是无效的，并且出错时候没有提示；</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr·Jia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">本站访客数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz',
+        appKey: 'SYDqJdJmzPaq56CKkrI0QKWJ',
+        placeholder: '来说点什么吧！',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz", "SYDqJdJmzPaq56CKkrI0QKWJ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

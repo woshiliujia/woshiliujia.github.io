@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="LZ98hsPMBJ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="客户端JavaScriptWindow对象是所有客户端JavaScript特性和API的主要接入点，他表示浏览器的一个窗口或者窗体，用window来引用window对象定义的一些方法 location、alert、setTimeout等这些属性，不需要显示使用window属性，因为它是全局对象 window对象最重要的一个属性是document，它引用Document对象，表示在窗口中的文档，有一">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript-web浏览器中的JavaScript">
+<meta property="og:url" content="http://yoursite.com/2019/05/29/JavaScript-13-web浏览器中的JavaScript/index.html">
+<meta property="og:site_name" content="桃李不言，下自成蹊">
+<meta property="og:description" content="客户端JavaScriptWindow对象是所有客户端JavaScript特性和API的主要接入点，他表示浏览器的一个窗口或者窗体，用window来引用window对象定义的一些方法 location、alert、setTimeout等这些属性，不需要显示使用window属性，因为它是全局对象 window对象最重要的一个属性是document，它引用Document对象，表示在窗口中的文档，有一">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-10T05:06:27.510Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript-web浏览器中的JavaScript">
+<meta name="twitter:description" content="客户端JavaScriptWindow对象是所有客户端JavaScript特性和API的主要接入点，他表示浏览器的一个窗口或者窗体，用window来引用window对象定义的一些方法 location、alert、setTimeout等这些属性，不需要显示使用window属性，因为它是全局对象 window对象最重要的一个属性是document，它引用Document对象，表示在窗口中的文档，有一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Mr·Jia'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/29/JavaScript-13-web浏览器中的JavaScript/">
+
+
+
+
+
+  <title>JavaScript-web浏览器中的JavaScript | 桃李不言，下自成蹊</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01f1beaf7697490bd8adfd698d604568";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">桃李不言，下自成蹊</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个没有灵魂的爸爸</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/29/JavaScript-13-web浏览器中的JavaScript/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr·Jia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="桃李不言，下自成蹊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript-web浏览器中的JavaScript</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-29T17:47:14+08:00">
+                2019-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/29/JavaScript-13-web浏览器中的JavaScript/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/29/JavaScript-13-web浏览器中的JavaScript/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/05/29/JavaScript-13-web浏览器中的JavaScript/" class="leancloud_visitors" data-flag-title="JavaScript-web浏览器中的JavaScript">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="客户端JavaScript"><a href="#客户端JavaScript" class="headerlink" title="客户端JavaScript"></a>客户端JavaScript</h2><p>Window对象是所有客户端JavaScript特性和API的主要接入点，他表示浏览器的一个窗口或者窗体，用window来引用<br>window对象定义的一些方法 location、alert、setTimeout等这些属性，不需要显示使用window属性，因为它是全局对象</p>
+<p>window对象最重要的一个属性是document，它引用Document对象，表示在窗口中的文档，有一些重要方法 如 getElementById<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var timestamp = document.getElementById(&apos;timestamp&apos;);//查找id=timestamp元素</span><br><span class="line">/**</span><br><span class="line">* getElementById()返回的Element对象也有其他的重要属性和方法；如允许脚本获取它的内容，设置属性值等</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">timestamp.style.backgroundColor=&apos;red&apos;;//设置背景色</span><br><span class="line">timestamp.className = &apos;hightlight&apos;;//设置一个class类名</span><br><span class="line">if(timestamp.firstChid == null)&#123;//如果元素为空，往里面插入当前日期和时间</span><br><span class="line">    timestamp.appendChild(document.creatTextNode(new Date().toString())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="在HTML中嵌入JavaScript"><a href="#在HTML中嵌入JavaScript" class="headerlink" title="在HTML中嵌入JavaScript"></a>在HTML中嵌入JavaScript</h2><p>4种方式<br>使用最多的是src 加载</p>
+<h2 id="JavaScript程序的执行"><a href="#JavaScript程序的执行" class="headerlink" title="JavaScript程序的执行"></a>JavaScript程序的执行</h2><p>JavaScript 程序的执行有2个阶段，一，载入文档内容，并加载脚本的阶段。二，载入文档完成，并且所有脚本加载完成。<br>在所有脚本执行完成就进入第二阶段，这个阶段是异步的，并且由事件驱动。</p>
+<p>事件驱动阶段发生的第一个事件就是 onload 事件 表示文档已经加载完成，可以操作</p>
+<p>核心的JavaScript和客户端的JavaScript都有一个单线程执行模型。脚本和事件处理程序只能同时执行一个。没有并发性。</p>
+<p>###同步异步延时脚本<br>在加载文档时候如何遇到了script会把这部分内容先加载出来，阻塞了页面的渲染。<br>可以使用defer async属性来改变脚本的执行方式<br>defer和async都是告诉浏览器可以继续解析渲染文档，同事执行下载脚本<br>defer使得浏览器延迟脚本的执行<br>async属性使得浏览器可以尽快的执行脚本，而不在下载时阻塞文档渲染解析<br>如果&lt;\script&gt;同时有两个2个属性，如果支持的浏览器会遵循async属性并且忽略defer属性</p>
+<p>注意：延迟脚本会按照文档顺序执行，异步脚本在载入后执行，可能会无序<br>不支持async异步执行脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function loadasync(url)&#123;</span><br><span class="line">    var head = document.getElementByTagName(&apos;head)[0];//找到head元素</span><br><span class="line">    var s = document.createElement(&apos;script&apos;);//创建一个script元素</span><br><span class="line">    s.src = url;//设置script src的属性值</span><br><span class="line">    head.appendChild(s);//讲script元素加入到head标签中</span><br><span class="line">&#125;</span><br><span class="line">//此函数会异步加载脚本</span><br></pre></td></tr></table></figure></p>
+<h3 id="事件驱动的JavaScript"><a href="#事件驱动的JavaScript" class="headerlink" title="事件驱动的JavaScript"></a>事件驱动的JavaScript</h3><p>需要程序响应一个事件叫 事件处理程序  事件监听器  回调<br>有些事件的目标是文档元素，他们会向上进行 冒泡 因此有时候需要处理这种冒泡</p>
+<p>如果需要为一个事件注册多个处理程序函数，需要用到 addEventListenter(‘事件名称’,’方法’,’是否冒泡’) ie9以下（不包括ie9）不支持addEventListenter需要用到的是attachEvent()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">window.addEventListener()</span><br><span class="line">window.attachEvent()</span><br></pre></td></tr></table></figure></p>
+<h3 id="客户端JavaScript线程模型"><a href="#客户端JavaScript线程模型" class="headerlink" title="客户端JavaScript线程模型"></a>客户端JavaScript线程模型</h3><p>JavaScript核心语言并不包含任何线程机制。html5定义了一种新的后台线程’Web Worker’<br>web worker 是为了执行密集任务不冻结用户界面的后台线程，并且运行在web worker线程代码不能访问文档内容，不能和主线程共享状态</p>
+<h3 id="客户端JavaScript时间线"><a href="#客户端JavaScript时间线" class="headerlink" title="客户端JavaScript时间线"></a>客户端JavaScript时间线</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1.web浏览器创建document对象，并开始解析web页面，解析html元素和他们的文本内容后 添加Element对象和Text节点到文档中</span><br><span class="line"></span><br><span class="line">  此阶段document.readystate = &apos;loading&apos;;</span><br><span class="line"></span><br><span class="line">2.当html解析器遇到没有async和defer属性的script元素时，把这些元素添加到文档中，然后执行内部或者外部的脚本。并且在下载或者执行脚本时候浏览器会停止渲染页面，也就是html解析器会停止执行。脚本可以遍历已经执行完毕的dom树</span><br><span class="line"></span><br><span class="line">3.当解析器设置或遇到了async属性的script元素时，它开始下载脚本，并继续解析文档，脚本下载完不会等待加载完毕尽快执行。此时脚本能够访问在它之前的所有元素。</span><br><span class="line"></span><br><span class="line">4.当文档解析完成，document.readystate = &apos;interactive&apos;;</span><br><span class="line"></span><br><span class="line">5.所有defer脚本会按照在文档里面出现的顺序执行，异步脚本也可能在这个时间段执行。延迟脚本能够访问完整的dom树，禁止使用document.write()方法</span><br><span class="line"></span><br><span class="line">6.浏览器在Document对象上触发DOMContentLoaded事件。这标志程序从同步到异步的驱动阶段。此时可能还有异步脚本没有完成</span><br><span class="line"></span><br><span class="line">7.文档已经解析完成，浏览器可能还有其他内容载入（比如图片）当所有内容完成载入，并且所有异步脚本完成载入和执行</span><br><span class="line">  此阶段document.readystate = &apos;complete&apos;,web浏览器触发Window对象上的load事件</span><br><span class="line"></span><br><span class="line">8.调用异步事件，以异步响应用户输入，网络事件，计时器过期等</span><br></pre></td></tr></table></figure>
+<h2 id="兼容性和互用性"><a href="#兼容性和互用性" class="headerlink" title="兼容性和互用性"></a>兼容性和互用性</h2><h3 id="IE里面的条件注释"><a href="#IE里面的条件注释" class="headerlink" title="IE里面的条件注释"></a>IE里面的条件注释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">//html中的条件注释</span><br><span class="line">&lt;!--[if IE 6]&gt;</span><br><span class="line">兼容ie6的内容</span><br><span class="line">&lt;![endif]--&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--[if lte IE 7]&gt;</span><br><span class="line">兼容ie7的内容</span><br><span class="line">&lt;![endif]--&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--[if !IE]&gt;</span><br><span class="line">兼容非ie内容</span><br><span class="line">&lt;![endif]--&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--[if IE]&gt;</span><br><span class="line">兼容所有ie</span><br><span class="line">&lt;![endif]--&gt;</span><br><span class="line"></span><br><span class="line">//IE的JavaScript解释器也支持条件注释，仅仅在ie浏览器中执行</span><br><span class="line">//以下代码仅仅在ie中执行</span><br><span class="line">/*@cc_on</span><br><span class="line">    @if(@_jscript)</span><br><span class="line">    //该代码位于一条js注释内但在ie中执行</span><br><span class="line">    alert(&apos;IN IE&apos;);</span><br><span class="line">    @end</span><br><span class="line">@*/</span><br><span class="line"></span><br><span class="line">//以下代码除了在ie中能够执行，其他浏览器也可以</span><br><span class="line">/*@cc_on</span><br><span class="line">    @if(@_jscript)</span><br><span class="line">    //该代码位于一条js注释内但在ie中执行</span><br><span class="line">    alert(&apos;IN IE&apos;);</span><br><span class="line">    @else*/</span><br><span class="line">    //这里面写的代码除ie外都可以执行</span><br><span class="line">    alert(&quot;not ie&quot;)</span><br><span class="line">/*@end</span><br><span class="line">@*/</span><br></pre></td></tr></table></figure>
+<h2 id="可访问性"><a href="#可访问性" class="headerlink" title="可访问性"></a>可访问性</h2><h2 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h2><p>跨站脚本（xss攻击）<br>跨站脚本是攻击者向目标web站点注入html标签或者脚本。<br>预防：<br>1.对一些标签如script 的两边尖括号进行移除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name = name.replace(/&lt;/g,&apos;%l&amp;;&apos;).replace(/&gt;/g,&apos;&amp;gt&apos;);</span><br><span class="line">//把尖括号进行过滤处理</span><br></pre></td></tr></table></figure></p>
+<p>2.使用iframe加载一些不可信的内容</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/29/JavaScript-12-服务端JavaScript/" rel="next" title="JavaScript-12-服务端JavaScript">
+                <i class="fa fa-chevron-left"></i> JavaScript-12-服务端JavaScript
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/30/JavaScript-14-window对象/" rel="prev" title="JavaScript-14-window对象">
+                JavaScript-14-window对象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Mr·Jia">
+            
+              <p class="site-author-name" itemprop="name">Mr·Jia</p>
+              <p class="site-description motion-element" itemprop="description">JavaScript</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/woshiliujia" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.zhihu.com/people/wo-bu-dong-ni-88" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eswoshiliujia@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://douban.com/people/woshiliujia" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端JavaScript"><span class="nav-number">1.</span> <span class="nav-text">客户端JavaScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在HTML中嵌入JavaScript"><span class="nav-number">2.</span> <span class="nav-text">在HTML中嵌入JavaScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript程序的执行"><span class="nav-number">3.</span> <span class="nav-text">JavaScript程序的执行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件驱动的JavaScript"><span class="nav-number">3.1.</span> <span class="nav-text">事件驱动的JavaScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端JavaScript线程模型"><span class="nav-number">3.2.</span> <span class="nav-text">客户端JavaScript线程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端JavaScript时间线"><span class="nav-number">3.3.</span> <span class="nav-text">客户端JavaScript时间线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#兼容性和互用性"><span class="nav-number">4.</span> <span class="nav-text">兼容性和互用性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IE里面的条件注释"><span class="nav-number">4.1.</span> <span class="nav-text">IE里面的条件注释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可访问性"><span class="nav-number">5.</span> <span class="nav-text">可访问性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全性"><span class="nav-number">6.</span> <span class="nav-text">安全性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr·Jia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">本站访客数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz',
+        appKey: 'SYDqJdJmzPaq56CKkrI0QKWJ',
+        placeholder: '来说点什么吧！',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz", "SYDqJdJmzPaq56CKkrI0QKWJ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

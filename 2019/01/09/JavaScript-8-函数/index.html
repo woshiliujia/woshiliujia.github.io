@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="LZ98hsPMBJ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="函数：是一段Javascript代码，定义一次后可以被多次调用。函数调用时拥有一个值—-本次调用的上下文,即this的值 this的指向和闭包如果函数挂载在一个对象上，作为对象的一个属性，就称这个函数为对象的方法当通过这个对象调用这个函数时,这个对象就是此次调用的上下文,也就是this指向这个对象 用于初始化一个新创建的对象的函数称为构造函数（constructor）  闭包：javascrip">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript-8.函数">
+<meta property="og:url" content="http://yoursite.com/2019/01/09/JavaScript-8-函数/index.html">
+<meta property="og:site_name" content="桃李不言，下自成蹊">
+<meta property="og:description" content="函数：是一段Javascript代码，定义一次后可以被多次调用。函数调用时拥有一个值—-本次调用的上下文,即this的值 this的指向和闭包如果函数挂载在一个对象上，作为对象的一个属性，就称这个函数为对象的方法当通过这个对象调用这个函数时,这个对象就是此次调用的上下文,也就是this指向这个对象 用于初始化一个新创建的对象的函数称为构造函数（constructor）  闭包：javascrip">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-10T05:06:27.515Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript-8.函数">
+<meta name="twitter:description" content="函数：是一段Javascript代码，定义一次后可以被多次调用。函数调用时拥有一个值—-本次调用的上下文,即this的值 this的指向和闭包如果函数挂载在一个对象上，作为对象的一个属性，就称这个函数为对象的方法当通过这个对象调用这个函数时,这个对象就是此次调用的上下文,也就是this指向这个对象 用于初始化一个新创建的对象的函数称为构造函数（constructor）  闭包：javascrip">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Mr·Jia'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/09/JavaScript-8-函数/">
+
+
+
+
+
+  <title>JavaScript-8.函数 | 桃李不言，下自成蹊</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01f1beaf7697490bd8adfd698d604568";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">桃李不言，下自成蹊</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个没有灵魂的爸爸</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/09/JavaScript-8-函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr·Jia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="桃李不言，下自成蹊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript-8.函数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-09T00:05:13+08:00">
+                2019-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/09/JavaScript-8-函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/09/JavaScript-8-函数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/01/09/JavaScript-8-函数/" class="leancloud_visitors" data-flag-title="JavaScript-8.函数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>函数：是一段Javascript代码，定义一次后可以被多次调用。<br>函数调用时拥有一个值—-本次调用的上下文,即this的值</p>
+<h2 id="this的指向和闭包"><a href="#this的指向和闭包" class="headerlink" title="this的指向和闭包"></a>this的指向和闭包</h2><p>如果函数挂载在一个对象上，作为对象的一个属性，就称这个函数为对象的方法<br>当通过这个对象调用这个函数时,这个对象就是此次调用的上下文,也就是this指向这个对象</p>
+<p>用于初始化一个新创建的对象的函数称为构造函数（constructor） </p>
+<p>闭包：javascript函数可以嵌套在其他函数中，这样就可以访问它们被定义时所处的作用域中的任何变量，这就构成了闭包。</p>
+<h2 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h2><h4 id="函数语句式定义"><a href="#函数语句式定义" class="headerlink" title="函数语句式定义"></a>函数语句式定义</h4><p>变量声明被提前，函数名是必须的</p>
+<h4 id="函数表达式定义"><a href="#函数表达式定义" class="headerlink" title="函数表达式定义"></a>函数表达式定义</h4><p>函数名可选<br>如果一个函数定义表达式包含名称,函数的局部作用域将包含一个绑定到函数对象的名称.<br>实际上函数名称将成为函数内部的一个局部变量<br>函数表达式通常适用只用到一次的场景。<br>无法在定义前调用</p>
+<p>return语句会导致函数停止运行，并返回它的表达式给这个函数的调用者,没有return 或者没有相关表达式则返回undefined给调用者<br>没有返回值的函数，有时候称为过程</p>
+<h2 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h2><pre><code>1.作为函数
+2.作为方法
+3.作为构造函数
+4.通过他们的call()和apply()方法间接调用
+</code></pre><h4 id="作为函数调用"><a href="#作为函数调用" class="headerlink" title="作为函数调用"></a>作为函数调用</h4><p>普通的函数调用基本是一个函数对象加上左圆括号加上参数加上右圆括号组成的像”getAllList(x,y)”</p>
+<p>函数调用的返回值：如果因为解释器到达结尾，返回undefined。如果因为解释器执行到return 则返回return后的语句。如果return语句没有值返回undefined</p>
+<p>在es3和非严格模式的es5中以函数调用的函数this指向全局对象，严格模式this是undefined<br>例：判断当前是否是严格模式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var static = (function()&#123;return !this;&#125;());</span><br><span class="line">//严格模式下this的返回值是undefined所以函数返回true</span><br></pre></td></tr></table></figure></p>
+<h4 id="作为方法调用"><a href="#作为方法调用" class="headerlink" title="作为方法调用"></a>作为方法调用</h4><p>方法调用的参数和返回值的处理完全等同于函数调用。他们之间的区别就是调用的上下文不同即“this”的指向不同<br>属性访问表达式由两个部分组成“对象名称+属性名称” 这个对象成了调用的上下文，即“this”指向这个对象<br>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;</span><br><span class="line">    x:1,</span><br><span class="line">    y:2,</span><br><span class="line">    c:function()&#123;</span><br><span class="line">        this.z = this.x+this.y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">a.c();//先执行c()方法</span><br><span class="line">a.z;//输入3</span><br><span class="line">ps:方括号的方式也可以访问 a[&quot;c&quot;]()</span><br></pre></td></tr></table></figure></p>
+<p>任何函数只要当做方法调用都会传入一个隐式的实参，这个实参是一个对象，方法调用的母体就是这个对象</p>
+<p>方法链：当方法的返回值是一个对象的时候，这个对象还可以调用它自己的方法，这种调用序列通称为链后者级联。<br>当方法不需要返回值的时候，最好直接返回“this”因为当前放回调用他的对象就可以继续在后面调用其他方法，这就实现了“链式调用”（此处的方法调用不同意构造函数的链式调用）</p>
+<h5 id="使用this的注意事项"><a href="#使用this的注意事项" class="headerlink" title="使用this的注意事项"></a>使用this的注意事项</h5><p>1.this并不是一个变量，也不是一个属性名它是关键字，javascript不允许给关键字赋值<br>2.this没有作用域的限制，嵌套函数不会从调用他的函数中继承this，如果嵌套函数作为方法调用，this指向调用的对象。如果嵌套函数作为函数调用，这个函数在非严格模式下指向全局对象，严格模式返回undefined。<br>嵌套函数中的函数调用需访问外部函数的this值需要提前将this保存在一个变量，这个变量和函数同在一个作用域内。<br>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var o = &#123;</span><br><span class="line">    a:1,</span><br><span class="line">    b:2,</span><br><span class="line">    c:function()&#123;</span><br><span class="line">        var self = this;//将this保存在self变量中</span><br><span class="line">        console.log(this);//对象o中的方法c()。this指向调用他的对象o</span><br><span class="line">        console.log(this === o);//返回true</span><br><span class="line"></span><br><span class="line">        function test()&#123; //嵌套函数</span><br><span class="line">            console.log(self === o);//返回true self是外部函数的this值</span><br><span class="line">            console.log(this === o);//返回false,this指向全局对象，或者undefined</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.c(); //调用o中的c方法</span><br></pre></td></tr></table></figure></p>
+<h4 id="构造函数调用"><a href="#构造函数调用" class="headerlink" title="构造函数调用"></a>构造函数调用</h4><p>构造函数：如果函数或者方法调用之前带有关键字 new,它就构成了构造函数。<br>如果构造函数调用含有实参，先计算实参再传入函数内<br>如果没有参数可以省略后面的圆括号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var o = new Object();</span><br><span class="line">var o = new Object;</span><br><span class="line">//以上代码是等价的</span><br></pre></td></tr></table></figure></p>
+<p>构造函数调用创建的新的空对象，这个对象继承自构造函数的prototype属性 。构造函数试图初始化这个新创建的对象，并将这个对象作为调用的上下文，即“this”指向这个新创建的对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var o = new Object;</span><br><span class="line">o.m = function()&#123;</span><br><span class="line">    console.log(this === o);</span><br><span class="line">&#125;</span><br><span class="line">new o.m();//输出是false; this指向这个新创建的对象</span><br></pre></td></tr></table></figure></p>
+<p>PS:构造函数通常没有不使用return关键字，他们通常初始化新对象，执行完毕时显示返回这个对象<br>即：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function O()&#123;&#125;;</span><br><span class="line">var a = new O();</span><br><span class="line">//以上代码创建个O函数，使用构造函数初始化a这个新的对象。new O()这个返回的就是O函数本身;</span><br></pre></td></tr></table></figure></p>
+<p>如果构造函数使用了return返回了一个对象，那么调用表达式的值就是返回的这个对象。<br>如果使用了return但没有指定返回对象，则忽略返回值，使用这个新对象作为调用结果</p>
+<h4 id="间接调用"><a href="#间接调用" class="headerlink" title="间接调用"></a>间接调用</h4><p>JavaScript中函数也是对象，所以函数也可以跟对象一样有自己的方法。<br>其中call()和apply()方法可以间接的调用函数（即通过这2个方法对象可以调用其他函数，不是这个对象的方法也是可以调用的）<br>这个2个方法可以显示的指定，调用所需的this值<br>区别：call()方法传递的参数实参列表，即使一个个的。apply()方法传递的参数数组，即参数放到一个数组中传递。</p>
+<h2 id="函数的形参和实参"><a href="#函数的形参和实参" class="headerlink" title="函数的形参和实参"></a>函数的形参和实参</h2><p>实参：调用函数时候所传递的参数<br>形参：创建函数是所需的参数</p>
+<h3 id="可选形参"><a href="#可选形参" class="headerlink" title="可选形参"></a>可选形参</h3><p>1.当调用函数时候传入的实参比创建函数的形参少的时候，按顺序剩下的形参都将为undefined<br>2.给省略未传的参数赋个默认值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function a(o,a)&#123;</span><br><span class="line">    //o参数是一个必传的对象参数</span><br><span class="line">    //a参数是个非必传的数组</span><br><span class="line">    a = a || []</span><br><span class="line">    return a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="可边长的实参列表：实参对象-arguments（这是一个类数组对象，不是真正的数组）"><a href="#可边长的实参列表：实参对象-arguments（这是一个类数组对象，不是真正的数组）" class="headerlink" title="可边长的实参列表：实参对象 arguments（这是一个类数组对象，不是真正的数组）"></a>可边长的实参列表：实参对象 arguments（这是一个类数组对象，不是真正的数组）</h3><p>标识符arguments指向实参对象的引用，这是一个类数组对象。arguments的length属性就表示传入的参数个数。<br>例：运用实参对象找到传入参数的最大值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function getMax(/*...*/)&#123;</span><br><span class="line">    var max = Number.NEGATIVE_INFINITY;//表示JavaScript所能表示比最小负数还小的值</span><br><span class="line">    for(var i = 0;i&lt;arguments.length;i++)&#123;//遍历传入的参数</span><br><span class="line">        if(arguments[i]&gt;max) max = arguments[i];</span><br><span class="line">    &#125;</span><br><span class="line">    return max;//返回最大值</span><br><span class="line">&#125;</span><br><span class="line">//如果没有传入的话这个函数将返回“-Infinity”表示负无穷</span><br><span class="line">//这个函数也叫不定实参函数，因为可以接受任意个参数</span><br></pre></td></tr></table></figure></p>
+<p>在非严格模式下，可以通过arguments的类数组对象去修改传入实参的的值<br>ECMAScript 5中移除了arguments这个特性</p>
+<h4 id="callee和caller属性"><a href="#callee和caller属性" class="headerlink" title="callee和caller属性"></a>callee和caller属性</h4><p>实参对象除了数组元素，还定义了callee和caller属性。ES5严格模式中对这2个属性的读写都会报类型错误.<br>callee属性指代当前正在执行的函数。<br>caller是非标准的，大多数浏览器实现了这个属性，指代调用当前正在执行函数的函数，通过caller属性可以访问调用栈<br>例：递归函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function a(x)&#123;//a函数传入参数为x</span><br><span class="line">    if(a == 1)return 1;//如果x是1，则直接返回1;</span><br><span class="line">    return x*arguments.callee(x-1);//arguments的callee属性指代正在执行的函数即a()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="将对象属性用做实参"><a href="#将对象属性用做实参" class="headerlink" title="将对象属性用做实参"></a>将对象属性用做实参</h3><p>无需知道函数形参的顺序，当函数有很多个形参时候，将参数放到一个对象中去传递无需记得位置<br>例：复制一个数组到另个数组中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//普通写法</span><br><span class="line">function arraycopy(a,b,start,end)&#123;//从a数组复制到b数组,start和end是开始结束位置</span><br><span class="line">    //...逻辑代码</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//不需要记得顺序写法</span><br><span class="line">function easycopy(args)&#123;//args是传入的对象参数</span><br><span class="line">    arraycopy(</span><br><span class="line">        args.a,</span><br><span class="line">        args.b,</span><br><span class="line">        args.start || 0,</span><br><span class="line">        args.end || 0</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">//调用easycopy()</span><br><span class="line">var a = [1,2,3,4,5];var b = [];//从a数组复制到b</span><br><span class="line">easycopy(&#123;a:a,b:b&#125;);//省略开始和结束位置，因为有默认值</span><br></pre></td></tr></table></figure></p>
+<h3 id="实参类型"><a href="#实参类型" class="headerlink" title="实参类型"></a>实参类型</h3><p>…省略</p>
+<h2 id="作为值的函数"><a href="#作为值的函数" class="headerlink" title="作为值的函数"></a>作为值的函数</h2><p>…省略</p>
+<h2 id="作为命名空间的函数"><a href="#作为命名空间的函数" class="headerlink" title="作为命名空间的函数"></a>作为命名空间的函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(function()&#123;&#125;());//匿名函数内部定义的变量不会影响到外部</span><br></pre></td></tr></table></figure>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包：函数对象可以通过作用域链关联起来，函数内部的变量都可以保存在函数作用域内，这种特性成为闭包。</p>
+<h4 id="PS-函数定义时候的作用域链，在执行时候依然有效"><a href="#PS-函数定义时候的作用域链，在执行时候依然有效" class="headerlink" title="PS:函数定义时候的作用域链，在执行时候依然有效"></a>PS:函数定义时候的作用域链，在执行时候依然有效</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a = 0;//定义全局变量</span><br><span class="line">function o()&#123;//定义o函数</span><br><span class="line">    var a = 1;//定义局部变量</span><br><span class="line">    function f()&#123;定义一个函数并返回这个局部变量</span><br><span class="line">        return a;</span><br><span class="line">    &#125;</span><br><span class="line">    return f;//这个函数返回上面的函数</span><br><span class="line">&#125;</span><br><span class="line">o()();//输出1，因为函数作用域链是函数创建的时候产生的，f()定义在o的作用域内部，a一定是局部变量，并被作用域链一直保存下来，所以输出的依然是o中的a;</span><br></pre></td></tr></table></figure>
+<p>防止共享变量，因为会共享其他闭包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function a()&#123;//定义函数</span><br><span class="line">    var b = [];//定义数组存储函数</span><br><span class="line">    for(var i = 0;i&lt;10;i++)&#123;//循环10次创建10个闭包函数</span><br><span class="line">        b[i] = function()&#123;return i&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    //变量i在循环结束时候已经是10了</span><br><span class="line">    return b;</span><br><span class="line">&#125;</span><br><span class="line">var b = a();</span><br><span class="line">b[5]();//因为b[5]这个函数访问a()里面的变量i全部是10 所以b[5]()返回10</span><br></pre></td></tr></table></figure></p>
+<p>注意：this是JavaScript的关键字不是变量，所有在嵌套函数内部需要调用外部的this值需要将this保存至一个变量中，如var self = this;<br>arguments也是一样的道理 var outarguments = arguments;</p>
+<h2 id="函数属性、方法和构造函数"><a href="#函数属性、方法和构造函数" class="headerlink" title="函数属性、方法和构造函数"></a>函数属性、方法和构造函数</h2><p>JavaScript中函数是值，对其使用typeof运算符返回‘function’，函数也是特殊的对象，拥有属性和方法。</p>
+<h3 id="length属性"><a href="#length属性" class="headerlink" title="length属性"></a>length属性</h3><p>arguments.length表示函数所传入的实参个数<br>函数本身的length属性表示函数其他传入的实参数量。<br>例：当传入的实参和定义的形参不等的时候抛出错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function check(arg)&#123;</span><br><span class="line">    var a = arg.length;//定义的实参数量</span><br><span class="line">    var b = arg.callee.length;</span><br><span class="line">    //arguments.callee表示正在执行的函数arguments.callee.length表示传入的实参个数</span><br><span class="line">    if(a!==b)&#123;</span><br><span class="line">        throw Error(&apos;传入参数不对等&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function test(x,y,z)&#123;</span><br><span class="line">    check(arguments);//传入arguments到check函数中</span><br><span class="line">&#125;</span><br><span class="line">test(1,2);//报错。传入参数不够三个</span><br></pre></td></tr></table></figure></p>
+<h3 id="prototype属性"><a href="#prototype属性" class="headerlink" title="prototype属性"></a>prototype属性</h3><p>函数也是对象，所以函数也有原型属性，每一个函数也都包含不同的原型对象。<br>将函数用作构造函数的时候，新创建的对象会从原型对象上继承属性。</p>
+<h3 id="call-方法和apply-方法"><a href="#call-方法和apply-方法" class="headerlink" title="call( )方法和apply( )方法"></a>call( )方法和apply( )方法</h3><p>通俗理解法：我要过一条河，你家有一个梯子能够搭在河上过去，现在我不想自己去造梯子太麻烦了，所有我找你家借这个梯子，但我不认识你家call()和apply()认识，我就找他俩去问你借。</p>
+<p>书面话：call()和apply()方法第一个参数是调用函数的母对象，就跟对象的方法一样第一个参数是对象。有那么点绕<br>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;&quot;0&quot;:&quot;a&quot;,&quot;1&quot;:&quot;b&quot;,&quot;2&quot;:&quot;c&quot;,length:3&#125;</span><br><span class="line">Array.prototype.join.call(a,&apos;+&apos;);</span><br><span class="line">//a对象并没有join方法，所以需要一座桥梁来让a可以使用join方法,也就是用数组方法去调用对象a</span><br></pre></td></tr></table></figure></p>
+<p>例：想要以o对象的方法来调用函数f(),即现在f()方法相当于绑定在o上了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">f.call(o)</span><br><span class="line">f.apply(o)</span><br><span class="line">//以上方法和下方的等价</span><br><span class="line">o.m = f;//f方法存储为o对象的方法</span><br><span class="line">o.m();//执行这个o对象的新方法</span><br><span class="line">delete o.m;//执行完再删除，就跟借完梯子送回去一个道理</span><br><span class="line">```     </span><br><span class="line"></span><br><span class="line">## bind( )方法</span><br><span class="line">作用：将函数绑定至某个对象。当函数f()上调用bind()方法并传入个对象o作为参数，这个方法将返回一个新的函数,这个新的函数将会当做绑定对象的方法来使用</span><br><span class="line">例：</span><br></pre></td></tr></table></figure></p>
+<p>function f(y){return this.x + y;}//新建一个函数<br>var o = {x:1};//新建一个对象<br>var a= f.bind(o);//将函数f绑定至o这个对象<br>a(2);//这个函数相当于现在是o对象的一个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 总结call()apply()和bind()方法</span><br><span class="line">都是将一个方法绑定到对象上，this指向绑定的这个对象</span><br><span class="line">都是方法在前，绑定的对象在后</span><br><span class="line">bind方法会生成一个新的函数，可以直接函数调用，传递的参数和老的函数一样，需要啥传递啥</span><br><span class="line"></span><br><span class="line">例：兼容的bind()方法实现</span><br></pre></td></tr></table></figure></p>
+<p>function bind(f,o){//传入的2个参数分别为绑定的方法和对象<br>    if(f.bind) return f.bind(o);//如果存在这个方法直接使用<br>    else return function(){//不存在bind方法返回一个函数<br>        //这个函数使用间接调用实现将方法绑定到对象,传入arguments因为下方调用这个方法时候会传入参数进去，arguments直接指向这个函数对象,将用传入的参数一并给到新创建函数<br>        return f.apply(o,arguments);<br>    }<br>}<br>var n = bind(f,o);//bind()方法返回的是新的函数，所以下方还需要调用<br>n(1);//调用这个新的函数，并传入参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">函数柯里化:即将多参数的函数变成单参数的函数</span><br><span class="line">例：柯里化函数</span><br></pre></td></tr></table></figure></p>
+<p>var sum = function(x,y){return x+y};//这是计算和的函数<br>var succ = sum.bind(null,10);将函数this指向null，并将第一个参数赋值为10<br>succ(1);//返回11,这时候新函数只需要1个参数了</p>
+<p>//另一种<br>var sum = function(y,z){return this.x+y+z};//依旧计算和函数<br>var succ = sum.bind({x:1},1);//将sum方法绑定到对象上，这时候sum中的this指向这个对象并依旧给个参数将第一个赋值为1<br>sucd(2);//y参数被赋值为1，this指向{x:1}这个对象，所以返回4<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ES3版本的Function.bind()方法</span><br></pre></td></tr></table></figure></p>
+<p>if(!Function.prototype.bind){//判断浏览器是否支持这个方法<br>    //没有的话给函数原型添加这个方法<br>    Function.prototype.bind = function(){<br>        //这个this指向Function.prototype即其他调用bind方法的函数指向保存起来，传入的参数也保存取来<br>        var self = this,boundArgs = arguments;<br>        //es5的bind()方法返回的是新函数,因此添加的方法依旧返回一个新的函数<br>        return function(){<br>            //将除了第一个传入参数,剩下的参数都保存给args；i变量只是为了遍历方便<br>            var args = [],i;<br>            //这个循环为了拿到调用这个方法时候传入的参数<br>            for(i = 1;i&lt;boundArgs.length;i++) args.push(boundArgs[i]);<br>            //这个循环为了拿到返回对象被调用时的参数，即当前这个函数的参数<br>            for(i = 0;i&lt;arguments.length;i++) args.push(arguments[i]);<br>            //以上两个循环相当于es5bind方法中第一次传递参数，和第二次传递参数并不会被赋值</p>
+<pre><code>        //self指向调用函数，o表示调用对象，args表示用户给的参数
+        return self.apply(o,args);
+    }
+}
+</code></pre><p>}</p>
+<p>function f(x,y){return x+y;}<br>//这个a保存的是上面Function.prototype里面返回的函数，参数是上面第一个for循环得来的<br>var a = f.bind(null,1);<br>//调用这个新函数传入的参数是第二个for循环得来的<br>a(1);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">模拟的bind()和真实的bind()方法区别</span><br><span class="line">1.真正bind()方法返回的是一个函数对象，这个函数对象的length属性是绑定函数的形参减去绑定实参的个数(length不能小于0)</span><br><span class="line">2.真正bind()方法可以顺带用作构造函数，只是this指向不能改变了,原始的函数就会以构造函数方式来调用。</span><br><span class="line">...等等(这里后期可以回过头再看一次，两者之间区别未做深入了解)</span><br><span class="line"></span><br><span class="line">### toString()方法</span><br><span class="line">和对象一样，函数也有toString()方法，大多数函数返回函数的完整源码，内置函数返回&quot;[native code]&quot;</span><br><span class="line"></span><br><span class="line">### Function()构造函数</span><br><span class="line">函数除了使用定义语句还是函数直接量还有使用Function()构造函数来定义</span><br><span class="line">例：</span><br></pre></td></tr></table></figure></p>
+<p>var f = new Function(“x”,”y”,”return x+y;”)</p>
+<p>var f = function(x,y){return x+y;};<br>以上2种方式几乎等价<br><code>`</code><br>PS:以Function()构造函数创建的函数总是最顶层函数，嵌套在另一个函数中将不会访问另个函数中的作用域（很少用到）</p>
+<h3 id="可调用的对象"><a href="#可调用的对象" class="headerlink" title="可调用的对象"></a>可调用的对象</h3><p>所有函数都是可调用的，但所有可调用的对象不一定是函数<br>Window.alert();Document.getElementById()  IE8之前的版本<br>RegExp对象,这个是可以调用的对象。不能过分依赖</p>
+<h2 id="函数式编程-☆☆☆☆☆"><a href="#函数式编程-☆☆☆☆☆" class="headerlink" title="函数式编程 ☆☆☆☆☆"></a>函数式编程 ☆☆☆☆☆</h2><p>JavaScript并非函数式编程语言，但可以像操作对象那样来操作函数</p>
+<h3 id="使用函数处理数组"><a href="#使用函数处理数组" class="headerlink" title="使用函数处理数组"></a>使用函数处理数组</h3><p>···此章节很重要略过，看的有点麻木了！！！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/29/JavaScript-7-数组/" rel="next" title="JavaScript-7.数组">
+                <i class="fa fa-chevron-left"></i> JavaScript-7.数组
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/17/Javascript-9-类和模块/" rel="prev" title="Javascript-9.类和模块">
+                Javascript-9.类和模块 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Mr·Jia">
+            
+              <p class="site-author-name" itemprop="name">Mr·Jia</p>
+              <p class="site-description motion-element" itemprop="description">JavaScript</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/woshiliujia" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.zhihu.com/people/wo-bu-dong-ni-88" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eswoshiliujia@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://douban.com/people/woshiliujia" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#this的指向和闭包"><span class="nav-number">1.</span> <span class="nav-text">this的指向和闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的定义"><span class="nav-number">2.</span> <span class="nav-text">函数的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数语句式定义"><span class="nav-number">2.0.1.</span> <span class="nav-text">函数语句式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数表达式定义"><span class="nav-number">2.0.2.</span> <span class="nav-text">函数表达式定义</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#函数调用"><span class="nav-number">3.</span> <span class="nav-text">函数调用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#作为函数调用"><span class="nav-number">3.0.1.</span> <span class="nav-text">作为函数调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作为方法调用"><span class="nav-number">3.0.2.</span> <span class="nav-text">作为方法调用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用this的注意事项"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">使用this的注意事项</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造函数调用"><span class="nav-number">3.0.3.</span> <span class="nav-text">构造函数调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#间接调用"><span class="nav-number">3.0.4.</span> <span class="nav-text">间接调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的形参和实参"><span class="nav-number">4.</span> <span class="nav-text">函数的形参和实参</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可选形参"><span class="nav-number">4.1.</span> <span class="nav-text">可选形参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可边长的实参列表：实参对象-arguments（这是一个类数组对象，不是真正的数组）"><span class="nav-number">4.2.</span> <span class="nav-text">可边长的实参列表：实参对象 arguments（这是一个类数组对象，不是真正的数组）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#callee和caller属性"><span class="nav-number">4.2.1.</span> <span class="nav-text">callee和caller属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将对象属性用做实参"><span class="nav-number">4.3.</span> <span class="nav-text">将对象属性用做实参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实参类型"><span class="nav-number">4.4.</span> <span class="nav-text">实参类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作为值的函数"><span class="nav-number">5.</span> <span class="nav-text">作为值的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作为命名空间的函数"><span class="nav-number">6.</span> <span class="nav-text">作为命名空间的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-number">7.</span> <span class="nav-text">闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PS-函数定义时候的作用域链，在执行时候依然有效"><span class="nav-number">7.0.1.</span> <span class="nav-text">PS:函数定义时候的作用域链，在执行时候依然有效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数属性、方法和构造函数"><span class="nav-number">8.</span> <span class="nav-text">函数属性、方法和构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#length属性"><span class="nav-number">8.1.</span> <span class="nav-text">length属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prototype属性"><span class="nav-number">8.2.</span> <span class="nav-text">prototype属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#call-方法和apply-方法"><span class="nav-number">8.3.</span> <span class="nav-text">call( )方法和apply( )方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可调用的对象"><span class="nav-number">8.4.</span> <span class="nav-text">可调用的对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数式编程-☆☆☆☆☆"><span class="nav-number">9.</span> <span class="nav-text">函数式编程 ☆☆☆☆☆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用函数处理数组"><span class="nav-number">9.1.</span> <span class="nav-text">使用函数处理数组</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr·Jia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">本站访客数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz',
+        appKey: 'SYDqJdJmzPaq56CKkrI0QKWJ',
+        placeholder: '来说点什么吧！',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz", "SYDqJdJmzPaq56CKkrI0QKWJ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="LZ98hsPMBJ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CSS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="CSS选择符对于已经工作好年的前端农民来说，我依旧选择看选择符种类：类型/元素、ID、Class、子选择符、同辈选择符…ID和Class选择符不说了 子选择符与同辈选择符子选择符”&amp;gt;” 只能选择所有的子辈元素不能选择孙元素同辈选择符”+” 只能选择同一父级元素内该元素后面一个元素一般同辈组合”~” 可以选择同一父级元素内该元素所有之后的元素 PS:这些选择符都不能够选择前面的同辈元素（因为给">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2-CSS添加样式">
+<meta property="og:url" content="http://yoursite.com/2019/03/06/2-CSS添加样式/index.html">
+<meta property="og:site_name" content="桃李不言，下自成蹊">
+<meta property="og:description" content="CSS选择符对于已经工作好年的前端农民来说，我依旧选择看选择符种类：类型/元素、ID、Class、子选择符、同辈选择符…ID和Class选择符不说了 子选择符与同辈选择符子选择符”&amp;gt;” 只能选择所有的子辈元素不能选择孙元素同辈选择符”+” 只能选择同一父级元素内该元素后面一个元素一般同辈组合”~” 可以选择同一父级元素内该元素所有之后的元素 PS:这些选择符都不能够选择前面的同辈元素（因为给">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-10T05:06:27.501Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2-CSS添加样式">
+<meta name="twitter:description" content="CSS选择符对于已经工作好年的前端农民来说，我依旧选择看选择符种类：类型/元素、ID、Class、子选择符、同辈选择符…ID和Class选择符不说了 子选择符与同辈选择符子选择符”&amp;gt;” 只能选择所有的子辈元素不能选择孙元素同辈选择符”+” 只能选择同一父级元素内该元素后面一个元素一般同辈组合”~” 可以选择同一父级元素内该元素所有之后的元素 PS:这些选择符都不能够选择前面的同辈元素（因为给">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Mr·Jia'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/06/2-CSS添加样式/">
+
+
+
+
+
+  <title>2-CSS添加样式 | 桃李不言，下自成蹊</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01f1beaf7697490bd8adfd698d604568";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">桃李不言，下自成蹊</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个没有灵魂的爸爸</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/06/2-CSS添加样式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr·Jia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="桃李不言，下自成蹊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2-CSS添加样式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-06T05:33:32+08:00">
+                2019-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/06/2-CSS添加样式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/06/2-CSS添加样式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/06/2-CSS添加样式/" class="leancloud_visitors" data-flag-title="2-CSS添加样式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="CSS选择符"><a href="#CSS选择符" class="headerlink" title="CSS选择符"></a>CSS选择符</h2><p>对于已经工作好年的前端农民来说，我依旧选择看<br>选择符种类：类型/元素、ID、Class、子选择符、同辈选择符…<br>ID和Class选择符不说了</p>
+<h3 id="子选择符与同辈选择符"><a href="#子选择符与同辈选择符" class="headerlink" title="子选择符与同辈选择符"></a>子选择符与同辈选择符</h3><p>子选择符”&gt;” 只能选择所有的子辈元素不能选择孙元素<br>同辈选择符”+” 只能选择同一父级元素内该元素后面一个元素<br>一般同辈组合”~” 可以选择同一父级元素内该元素所有之后的元素</p>
+<p>PS:这些选择符都不能够选择前面的同辈元素（因为给前面的元素添加选择符时，前面元素还没有被渲染出来）</p>
+<h3 id="通用选择符"><a href="#通用选择符" class="headerlink" title="通用选择符"></a>通用选择符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">*&#123;margin:0;padding:0;&#125;//这种方法并不好，因为会影响到button、select等表单元素应该具体指定</span><br><span class="line"></span><br><span class="line">//应该按照下面方法来指定</span><br><span class="line">h1,h2,...</span><br><span class="line">ul,ol,dl,p&#123;</span><br><span class="line">    margin:0;</span><br><span class="line">    padding:0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//通配符也可以与后代结合使用</span><br><span class="line">.list&gt;*&#123;//可以选择list类后面所有的元素</span><br><span class="line">    /*...*/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="属性选择符"><a href="#属性选择符" class="headerlink" title="属性选择符"></a>属性选择符</h3><p>属性选择符时基于元素是否有某个属性，或者属性是否有某个值来选择元素。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//鼠标悬停在下面带有title的元素上浏览器出现提示条 &lt;abbr&gt;元素可以对某个缩写词做出更详细的解释，因此需要区分</span><br><span class="line"></span><br><span class="line">//以下是根据是否存在某个属性来选择的元素</span><br><span class="line">&lt;arrr title=&quot;wwwwwwww&quot;&gt;www&lt;/abbr&gt;</span><br><span class="line">abbr[title]&#123;color:#f00;&#125;//此属性浏览器会默认加上下划线</span><br><span class="line"></span><br><span class="line">//以下是通过特定的属性值来选择元素</span><br><span class="line">input[type=&quot;submit&quot;]&#123;coursor:pointer;&#125; //给所有的提交按钮更改鼠标悬停样式</span><br><span class="line"></span><br><span class="line">//以下属性匹配某个模式，并非特定的值  ^表示开头  $表示结尾 *表示包含 ~这个特殊字符不咋看懂 | 这个特殊字符不好</span><br><span class="line">a[href^=&quot;http:&quot;]//表示选择a元素所有http:开头的元素</span><br><span class="line">img[src$=&apos;.jpg&apos;]//表示选择所有图片src属性结尾是.jpg的元素</span><br><span class="line">a[href*=&quot;/about/&quot;]//表示选择a元素href属性值包含/about/的元素</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">|</span><br><span class="line">//以上2个不多做解释</span><br></pre></td></tr></table></figure></p>
+<h3 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h3><p>选择页面区域不是用元素来表示，这种叫伪元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">::first-letter //选择一段文本的第一个字符</span><br><span class="line">::first-line 选择一段文本的第一行</span><br><span class="line"></span><br><span class="line">::before //内容开头</span><br><span class="line">::after //内容结尾</span><br></pre></td></tr></table></figure></p>
+<p>ps:使用伪元素时不能够插入对交互有影响的内容，会造成css不能正确加载</p>
+<h3 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h3><p>PS：注意区别伪类和伪元素  一个使用”:””::”  伪元素单冒号写法某些浏览器也是兼容的，尽量使用兼容写法”::”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//未访问过链接的样式</span><br><span class="line">a:link&#123;&#125;</span><br><span class="line">//访问过链接的样式</span><br><span class="line">a:visited&#123;&#125;</span><br><span class="line">//鼠标悬停及获取键盘焦点时的样式</span><br><span class="line">a:hover,a:fouce&#123;&#125;</span><br><span class="line">//活动状态时为紫色</span><br><span class="line">a:active&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>以上顺序不可颠倒<br>很多元素都具有:hover 但是触摸屏和键盘输入方式不一定有这个状态，因此不能在重要交互地方使用该类型</p>
+<h4 id="目标与反选"><a href="#目标与反选" class="headerlink" title="目标与反选"></a>目标与反选</h4><p>:target 与他匹配的元素有一个ID属性，而且该属性出现在url末尾的’#’号后面，可以使用:target选择到该标记<br>.comment:target{}</p>
+<p>反选<br>:not() 选择符<br>里面可以放其他元素自身除外</p>
+<h3 id="结构化伪类"><a href="#结构化伪类" class="headerlink" title="结构化伪类"></a>结构化伪类</h3><p>css3新增了一些新的伪类 常用的nth-child选择符 可接受odd(奇数)even(偶数)  还可以使用表示n+1这种 n从0开始 知道匹配没有元素<br>n也可以为负值，可以修改自身和前面的元素<br>n为负值时候是选取不到值的，只有当表示&gt;=0时候才能选中比如(-n+3) 这个表示只能选前三个，因为当n为4的时候这个表达式的值为-1 选取不到了</p>
+<p>nth-last-child() 这个伪类是从最后一个元素开始计算<br>ps:在ie8之前的浏览器不支持这些结构化伪类</p>
+<h3 id="表单伪类"><a href="#表单伪类" class="headerlink" title="表单伪类"></a>表单伪类</h3><p>html5新增表单输入框的几个属性<br>:require //表示必填表单<br>:optional //表示非必填表单伪类<br>input type同样也有些属性值如email<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">input[type=&apos;email&apos;]&#123;&#125;</span><br><span class="line">input[type=&apos;email&apos;]:vaild&#123;&#125; //表单输入正确</span><br><span class="line"></span><br><span class="line">input[type=&apos;email&apos;]:invaild&#123;&#125; //表单输入错误</span><br><span class="line"></span><br><span class="line">input[type=&quot;number&quot;]:in-range/out-of-range..</span><br></pre></td></tr></table></figure></p>
+<p>ps:这些新增的html5表单伪类并不支持ie10以下</p>
+<h2 id="层叠"><a href="#层叠" class="headerlink" title="层叠"></a>层叠</h2><p>指多条选择规则选择同一个元素时，每个层级的级别不一样<br>从高到底分别是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 标注为!important的用户样式</span><br><span class="line">2. 标注为!important的作者样式</span><br><span class="line">3. 作者样式</span><br><span class="line">4. 用户样式</span><br><span class="line">5. 浏览器（用户代码）的默认样式</span><br></pre></td></tr></table></figure></p>
+<p>在以上基础上，规则再按选择写的先后顺序，后写的覆盖写先的</p>
+<h3 id="特殊性"><a href="#特殊性" class="headerlink" title="特殊性"></a>特殊性</h3><p>也就是选择符的权重问题</p>
+<h3 id="利用层叠次序"><a href="#利用层叠次序" class="headerlink" title="利用层叠次序"></a>利用层叠次序</h3><p>css定义的先后位置很重要，如果在相同的权重下</p>
+<h3 id="控制特殊性"><a href="#控制特殊性" class="headerlink" title="控制特殊性"></a>控制特殊性</h3><p>尽量不适用id选择器，去掉对上下文的引用。尽可能使样式可以复用</p>
+<h3 id="特殊性与调试"><a href="#特殊性与调试" class="headerlink" title="特殊性与调试"></a>特殊性与调试</h3><p>谷歌浏览器可以搞定</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>继承的的属性值没有任何特性，连通配符权重都比这个高，比如给body设置color其他没有设置color的元素都会继承于此</p>
+<h2 id="为文档应用样式"><a href="#为文档应用样式" class="headerlink" title="为文档应用样式"></a>为文档应用样式</h2><h3 id="link-与-style-元素"><a href="#link-与-style-元素" class="headerlink" title="link 与 style 元素"></a>link 与 style 元素</h3><p>导入的三种方式head里面直接定义style标签、link引入、@import引入方式  不推荐最后一种</p>
+<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p>css不需要延迟加载，样式放在head中因为浏览器渲染需要html与css</p>
+<h4 id="减少http请求"><a href="#减少http请求" class="headerlink" title="减少http请求"></a>减少http请求</h4><p>线上网页尽可能控制css在1到2个，不要引入一个link在其中使用@import 这需要发送额外的请求</p>
+<h4 id="压缩和缓存内容"><a href="#压缩和缓存内容" class="headerlink" title="压缩和缓存内容"></a>压缩和缓存内容</h4><p>gzip压缩线上资源<br>可以让web服务器帮助设定css的缓存时间，可以通过http首部告诉浏览器缓存时间<br>合理的压缩和合理的缓存是提升网站性能最重要的2件事</p>
+<h4 id="不让浏览器渲染阻塞JavaScript"><a href="#不让浏览器渲染阻塞JavaScript" class="headerlink" title="不让浏览器渲染阻塞JavaScript"></a>不让浏览器渲染阻塞JavaScript</h4><p>主流做法：在body结束标签之前引入js文件 这样不会在渲染页面时候先让js文件阻塞了进程</p>
+<p>现代做法：给script标签加上async/defer 异步加载脚本 不阻断html解析<br>async：属性会异步加载脚本，但是会在加载完毕时立刻解析脚本，阻断html解析<br>defer：属性也会异步加载脚本，不过会等到html解析完毕后执行加载的脚本<br>PS：ie10及其更早的版本不支持上述2个属性，所以选择用主流方法更合适</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.避免层叠样式的特殊性，即尽可能不要使用id选择器和不要使样式过多层叠</span><br><span class="line">2.影响网页性能的方式要注意</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag"># CSS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/05/1-CSS基础知识/" rel="next" title="1-CSS基础知识">
+                <i class="fa fa-chevron-left"></i> 1-CSS基础知识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/07/3-可见格式化模型/" rel="prev" title="3-可见格式化模型">
+                3-可见格式化模型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Mr·Jia">
+            
+              <p class="site-author-name" itemprop="name">Mr·Jia</p>
+              <p class="site-description motion-element" itemprop="description">JavaScript</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/woshiliujia" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.zhihu.com/people/wo-bu-dong-ni-88" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eswoshiliujia@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://douban.com/people/woshiliujia" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS选择符"><span class="nav-number">1.</span> <span class="nav-text">CSS选择符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#子选择符与同辈选择符"><span class="nav-number">1.1.</span> <span class="nav-text">子选择符与同辈选择符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通用选择符"><span class="nav-number">1.2.</span> <span class="nav-text">通用选择符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性选择符"><span class="nav-number">1.3.</span> <span class="nav-text">属性选择符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪元素"><span class="nav-number">1.4.</span> <span class="nav-text">伪元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪类"><span class="nav-number">1.5.</span> <span class="nav-text">伪类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目标与反选"><span class="nav-number">1.5.1.</span> <span class="nav-text">目标与反选</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构化伪类"><span class="nav-number">1.6.</span> <span class="nav-text">结构化伪类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表单伪类"><span class="nav-number">1.7.</span> <span class="nav-text">表单伪类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#层叠"><span class="nav-number">2.</span> <span class="nav-text">层叠</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊性"><span class="nav-number">2.1.</span> <span class="nav-text">特殊性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用层叠次序"><span class="nav-number">2.2.</span> <span class="nav-text">利用层叠次序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制特殊性"><span class="nav-number">2.3.</span> <span class="nav-text">控制特殊性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊性与调试"><span class="nav-number">2.4.</span> <span class="nav-text">特殊性与调试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-number">3.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为文档应用样式"><span class="nav-number">4.</span> <span class="nav-text">为文档应用样式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#link-与-style-元素"><span class="nav-number">4.1.</span> <span class="nav-text">link 与 style 元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能"><span class="nav-number">4.2.</span> <span class="nav-text">性能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#减少http请求"><span class="nav-number">4.2.1.</span> <span class="nav-text">减少http请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#压缩和缓存内容"><span class="nav-number">4.2.2.</span> <span class="nav-text">压缩和缓存内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不让浏览器渲染阻塞JavaScript"><span class="nav-number">4.2.3.</span> <span class="nav-text">不让浏览器渲染阻塞JavaScript</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr·Jia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">本站访客数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz',
+        appKey: 'SYDqJdJmzPaq56CKkrI0QKWJ',
+        placeholder: '来说点什么吧！',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz", "SYDqJdJmzPaq56CKkrI0QKWJ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

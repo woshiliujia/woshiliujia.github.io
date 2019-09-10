@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="LZ98hsPMBJ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="计时器 setTimeout() setInterval()  实现一个函数在指定之后的时间运行。不同的是setTimeout只执行一次，setInterval在指定的毫秒数里面重复调用  都可以返回一个值可以传递给clearTimeout()用于取消函数执行 都属于全局方法 如果这两个方法第一个参数传入字符串，那么字符串会在间隔时间求值 ‘eval()’ 浏览器定位和导航 window对象的lo">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript-14-window对象">
+<meta property="og:url" content="http://yoursite.com/2019/05/30/JavaScript-14-window对象/index.html">
+<meta property="og:site_name" content="桃李不言，下自成蹊">
+<meta property="og:description" content="计时器 setTimeout() setInterval()  实现一个函数在指定之后的时间运行。不同的是setTimeout只执行一次，setInterval在指定的毫秒数里面重复调用  都可以返回一个值可以传递给clearTimeout()用于取消函数执行 都属于全局方法 如果这两个方法第一个参数传入字符串，那么字符串会在间隔时间求值 ‘eval()’ 浏览器定位和导航 window对象的lo">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-10T05:06:27.511Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript-14-window对象">
+<meta name="twitter:description" content="计时器 setTimeout() setInterval()  实现一个函数在指定之后的时间运行。不同的是setTimeout只执行一次，setInterval在指定的毫秒数里面重复调用  都可以返回一个值可以传递给clearTimeout()用于取消函数执行 都属于全局方法 如果这两个方法第一个参数传入字符串，那么字符串会在间隔时间求值 ‘eval()’ 浏览器定位和导航 window对象的lo">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Mr·Jia'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/30/JavaScript-14-window对象/">
+
+
+
+
+
+  <title>JavaScript-14-window对象 | 桃李不言，下自成蹊</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01f1beaf7697490bd8adfd698d604568";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">桃李不言，下自成蹊</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个没有灵魂的爸爸</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/30/JavaScript-14-window对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr·Jia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="桃李不言，下自成蹊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript-14-window对象</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-30T22:49:02+08:00">
+                2019-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/30/JavaScript-14-window对象/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/30/JavaScript-14-window对象/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/05/30/JavaScript-14-window对象/" class="leancloud_visitors" data-flag-title="JavaScript-14-window对象">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="计时器"><a href="#计时器" class="headerlink" title="计时器"></a>计时器</h2><p> setTimeout()<br> setInterval()<br>  实现一个函数在指定之后的时间运行。不同的是setTimeout只执行一次，setInterval在指定的毫秒数里面重复调用<br>  都可以返回一个值可以传递给clearTimeout()用于取消函数执行<br> 都属于全局方法<br> 如果这两个方法第一个参数传入字符串，那么字符串会在间隔时间求值 ‘eval()’</p>
+<h2 id="浏览器定位和导航"><a href="#浏览器定位和导航" class="headerlink" title="浏览器定位和导航"></a>浏览器定位和导航</h2><p> window对象的location属性引用的是Location对象，表示该窗口中当前显示文档的URL，并且定义了方法使窗口载入新的文档</p>
+<p> Document对象的location属于也引用到Location对象；<br> window.location === document.location;<br> document.URL 在Location对象发生更新后属性不会改变</p>
+<h3 id="解析url"><a href="#解析url" class="headerlink" title="解析url"></a>解析url</h3><p> location 对象的其他属性 常用的有 hash、search分别表示url中的片段表示和?后面的内容<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//提取url中搜索字符串参数</span><br><span class="line">function urlArgs()&#123;</span><br><span class="line">    var arg = &#123;&#125;;</span><br><span class="line">    var query = location.search.substring(1);//查询到字符串并且去除&apos;?&apos;号</span><br><span class="line">    var paris = query.split(&apos;&amp;&apos;);//根据&apos;&amp;&apos;符号将查询字符串分隔开</span><br><span class="line">    for(let i=0;i&lt;paris.length;i++)&#123;</span><br><span class="line">        var pos = paris[i].indexOf(&apos;=&apos;);//查找有没有那种name=value</span><br><span class="line">        if(pos == -1) continue;//如果字符串查找值为-1 表示没有找到匹配的字符串 跳过</span><br><span class="line">        var name = paris[i].substring(0,pos);//pos找到的是第一次 = 号的位置，substring没有改变原字符串，返回新的字符串，并且不包括指定的第二个位置 所以提取name</span><br><span class="line">        var value = paris[i].substring(pos+1);//提取value，从 = 号后一位开始，直到结束</span><br><span class="line">        value = decodeURIComponent(value);//对value进行解码，url上的中文获取会乱码，需要进行这一步解码</span><br><span class="line">        arg[name] = value; //存储为arg的属性</span><br><span class="line">        return arg;//返回arg对象为字符串中的参数</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="载入新的文档"><a href="#载入新的文档" class="headerlink" title="载入新的文档"></a>载入新的文档</h3><p>location.assign()//此方法可以使窗口载入并显示指定的url文档，只能修改search部分</p>
+<p>location.replace()//此方法结果和上面类似，只是会删除当前文档的历史，无法返回</p>
+<p>location.reload();//重载页面即刷新页面</p>
+<p>浏览器跳转新页面的方法<br>location = ‘<a href="http://www.baidu.com&#39;;//使得浏览器跳转到百度" target="_blank" rel="noopener">www.baidu.com&#39;;//使得浏览器跳转到百度</a><br>location = ‘/index’;//是浏览器跳转到当前目录下的index目录<br>location = ‘#top’;//使得浏览器滚动到当前页面的某个位置 ，如果设置的片段标识不存在，则会滚动到顶部</p>
+<p>Location对象的URL分解属性是可写的，重新赋值会改变当前URL的位置，会导致浏览器载入新的文档，如果改变的是hash属性则在文档中滚动，不会跳转新页面<br>location.search = ‘?page=1&amp;pagesize=3’;//载入下个页面</p>
+<h2 id="浏览历史"><a href="#浏览历史" class="headerlink" title="浏览历史"></a>浏览历史</h2><p>window对象的history属性引用的是该窗口History对象。<br>History对象的length属性表示浏览历史列表的元素数量，处于安全原因脚本不能访问已保存的历史url<br>History对象的back()和forward()方法与浏览器后退前进的按钮一样。<br>第三个方法go()方法接收一个整数参数表示前进或者后退几页</p>
+<h2 id="浏览器和屏幕信息"><a href="#浏览器和屏幕信息" class="headerlink" title="浏览器和屏幕信息"></a>浏览器和屏幕信息</h2><p>window对象的navigator和screen属性分别表示浏览器和屏幕信息</p>
+<h3 id="Navigator对象"><a href="#Navigator对象" class="headerlink" title="Navigator对象"></a>Navigator对象</h3><p>此对象中包括<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">appName:web浏览器全称，IE中&apos;Miscrosoft Internet Explorer&apos; FireFox和其他浏览器通常取值&apos;Netscape&apos;</span><br><span class="line"></span><br><span class="line">appVersion:此属性通常以数字开始，字符串前面数字通常为&apos;4.0/5.0&apos;表示第四代或者第五代兼容浏览器。后面字符没有标准无法作为判断依据</span><br><span class="line"></span><br><span class="line">userAgent:浏览器在发送http请求时，USE-AGENT 字段所携带的值。</span><br><span class="line"></span><br><span class="line">platform:在其上运行的操作系统的字符串</span><br><span class="line"></span><br><span class="line">//以下是一些杂项或者为标准化的方法属性</span><br><span class="line">onLine:此属性值为Boolen表示浏览器是否联网。</span><br><span class="line">geoloaction:用于确定用户地理位置的接口</span><br><span class="line">javaEnable:非标准方法,当浏览器可以运行java小程序返回true 谷歌浏览器没有此属性</span><br><span class="line">cookieEnable:非标准方法，当浏览器可以永久保存cookie时，返回true</span><br></pre></td></tr></table></figure></p>
+<h3 id="Screen对象"><a href="#Screen对象" class="headerlink" title="Screen对象"></a>Screen对象</h3><p>screen属性引用的是Screen对象<br>提供的信息包括以下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">width/heigt:以像素为单位的窗口大小</span><br><span class="line">availWidth/availHeight:指的是实际可用的显示大小，排除桌面任务栏这类的占用空间</span><br><span class="line"></span><br><span class="line">//可用以上属性确定web应用是否运行在一个小的屏幕上</span><br></pre></td></tr></table></figure></p>
+<h2 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h2><p>window提供了3个向用户提供简单的对话框<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alert();</span><br><span class="line"></span><br><span class="line">//以下2个方法会阻止程序的运行，很少使用</span><br><span class="line">confirm();//此方法会返回一个布尔值，表示用户点击取消还是确定按钮 let tip = confirm(&apos;确认关闭吗&apos;);//返回true/false</span><br><span class="line">prompt();//此方法也可以传入字符串表示提示语 如果点击的是取消返回null否则返回输入内容</span><br></pre></td></tr></table></figure></p>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><p>Window对象的onerror属性是一个事件处理程序.<br>window.onerror = function(msg,url,line){<br>    return true;//火狐浏览器中需要返回true来表示已经处理了错误<br>    return false;//其他浏览器返回false来表示处理了错误<br>};//msg:错误信息;url:发生错误文档所在位置;line:发生的行数</p>
+<h2 id="作为Window对象属性的文档元素"><a href="#作为Window对象属性的文档元素" class="headerlink" title="作为Window对象属性的文档元素"></a>作为Window对象属性的文档元素</h2><p>打开/关闭窗口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">window.open(url,_blank,&apos;width=100,height:300,status=yes,resizable=yse&apos;,);//</span><br><span class="line">window.close();//关闭当前窗口</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/29/JavaScript-13-web浏览器中的JavaScript/" rel="next" title="JavaScript-web浏览器中的JavaScript">
+                <i class="fa fa-chevron-left"></i> JavaScript-web浏览器中的JavaScript
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/05/JavaScript-15-脚本化文档/" rel="prev" title="JavaScript-15-脚本化文档">
+                JavaScript-15-脚本化文档 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Mr·Jia">
+            
+              <p class="site-author-name" itemprop="name">Mr·Jia</p>
+              <p class="site-description motion-element" itemprop="description">JavaScript</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/woshiliujia" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.zhihu.com/people/wo-bu-dong-ni-88" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eswoshiliujia@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://douban.com/people/woshiliujia" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#计时器"><span class="nav-number">1.</span> <span class="nav-text">计时器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器定位和导航"><span class="nav-number">2.</span> <span class="nav-text">浏览器定位和导航</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解析url"><span class="nav-number">2.1.</span> <span class="nav-text">解析url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#载入新的文档"><span class="nav-number">2.2.</span> <span class="nav-text">载入新的文档</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览历史"><span class="nav-number">3.</span> <span class="nav-text">浏览历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器和屏幕信息"><span class="nav-number">4.</span> <span class="nav-text">浏览器和屏幕信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Navigator对象"><span class="nav-number">4.1.</span> <span class="nav-text">Navigator对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Screen对象"><span class="nav-number">4.2.</span> <span class="nav-text">Screen对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对话框"><span class="nav-number">5.</span> <span class="nav-text">对话框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误处理"><span class="nav-number">6.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作为Window对象属性的文档元素"><span class="nav-number">7.</span> <span class="nav-text">作为Window对象属性的文档元素</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr·Jia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">本站访客数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz',
+        appKey: 'SYDqJdJmzPaq56CKkrI0QKWJ',
+        placeholder: '来说点什么吧！',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz", "SYDqJdJmzPaq56CKkrI0QKWJ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

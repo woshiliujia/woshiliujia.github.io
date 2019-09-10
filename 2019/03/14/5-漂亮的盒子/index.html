@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="LZ98hsPMBJ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CSS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="背景颜色 简写属性只是将其他的值设置为了默认，并且会覆盖之前定义的其他属性 颜色值与不透明度 16进制表示法 rgb()表示法/rgba() hsl()表示法/hsla()//使用rgba或者hsla表示法与设置opacity表示法不同的是，rgba表示法只是让背景色透明了，而opacity是让整个元素透明了  背景图片背景图片与内容图片如果网页失掉图片对其本身并没有太大影响那么就可以使用背景图片">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5-漂亮的盒子">
+<meta property="og:url" content="http://yoursite.com/2019/03/14/5-漂亮的盒子/index.html">
+<meta property="og:site_name" content="桃李不言，下自成蹊">
+<meta property="og:description" content="背景颜色 简写属性只是将其他的值设置为了默认，并且会覆盖之前定义的其他属性 颜色值与不透明度 16进制表示法 rgb()表示法/rgba() hsl()表示法/hsla()//使用rgba或者hsla表示法与设置opacity表示法不同的是，rgba表示法只是让背景色透明了，而opacity是让整个元素透明了  背景图片背景图片与内容图片如果网页失掉图片对其本身并没有太大影响那么就可以使用背景图片">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-10T05:06:27.503Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5-漂亮的盒子">
+<meta name="twitter:description" content="背景颜色 简写属性只是将其他的值设置为了默认，并且会覆盖之前定义的其他属性 颜色值与不透明度 16进制表示法 rgb()表示法/rgba() hsl()表示法/hsla()//使用rgba或者hsla表示法与设置opacity表示法不同的是，rgba表示法只是让背景色透明了，而opacity是让整个元素透明了  背景图片背景图片与内容图片如果网页失掉图片对其本身并没有太大影响那么就可以使用背景图片">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Mr·Jia'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/14/5-漂亮的盒子/">
+
+
+
+
+
+  <title>5-漂亮的盒子 | 桃李不言，下自成蹊</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01f1beaf7697490bd8adfd698d604568";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">桃李不言，下自成蹊</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个没有灵魂的爸爸</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/14/5-漂亮的盒子/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr·Jia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="桃李不言，下自成蹊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">5-漂亮的盒子</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-14T06:02:07+08:00">
+                2019-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/14/5-漂亮的盒子/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/14/5-漂亮的盒子/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/14/5-漂亮的盒子/" class="leancloud_visitors" data-flag-title="5-漂亮的盒子">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="背景颜色"><a href="#背景颜色" class="headerlink" title="背景颜色"></a>背景颜色</h2><p> 简写属性只是将其他的值设置为了默认，并且会覆盖之前定义的其他属性</p>
+<h3 id="颜色值与不透明度"><a href="#颜色值与不透明度" class="headerlink" title="颜色值与不透明度"></a>颜色值与不透明度</h3><ol>
+<li>16进制表示法</li>
+<li>rgb()表示法/rgba()</li>
+<li>hsl()表示法/hsla()<br>//使用rgba或者hsla表示法与设置opacity表示法不同的是，rgba表示法只是让背景色透明了，而opacity是让整个元素透明了</li>
+</ol>
+<h2 id="背景图片"><a href="#背景图片" class="headerlink" title="背景图片"></a>背景图片</h2><h3 id="背景图片与内容图片"><a href="#背景图片与内容图片" class="headerlink" title="背景图片与内容图片"></a>背景图片与内容图片</h3><p>如果网页失掉图片对其本身并没有太大影响那么就可以使用背景图片</p>
+<h3 id="背景图示例"><a href="#背景图示例" class="headerlink" title="背景图示例"></a>背景图示例</h3><ol>
+<li>在添加背景的图的时候最好再设置下背景色，以防止背景图加载不出来</li>
+</ol>
+<h3 id="加载图片"><a href="#加载图片" class="headerlink" title="加载图片"></a>加载图片</h3><p>ps：background-image:url(/img/…) 如果图片路径是以“/”开头 那么浏览器会在相对于此css文件所在文件的顶级目录下寻找img子目录 没有“/”表示相对路径</p>
+<p>背景图路径也支持base 64位格式的图片路径，不过会增加样式表体积，可以减少htpp请求</p>
+<h3 id="图片格式"><a href="#图片格式" class="headerlink" title="图片格式"></a>图片格式</h3><p>svg 是一种矢量图 无论放大缩小都不会丢失细节 png格式支持透明度设置</p>
+<h2 id="背景图片语法"><a href="#背景图片语法" class="headerlink" title="背景图片语法"></a>背景图片语法</h2><p>background-position //主要控制图片位置 属性值既可以是关键字也可以是像素em或者百分比 当为像素或者百分比时 图片会相对于元素的左上角进行定位</p>
+<p>css3新增了可以使背景图定位距离左右或者上下的位置background-position:right 1em top 50%;  表示背景图距离元素右边1em 上边50%的位置 ie8及更早版本不支持此种设置</p>
+<p>calc() 函数<br>这个函数可以计算元素、字体大小等 可以+-*/都可以 可以传入多个值<br>ps:使用时需要注意的是需要在“+”号和“-”号两侧加空格  ie8及其更早版本不支持</p>
+<h3 id="背景裁剪与原点"><a href="#背景裁剪与原点" class="headerlink" title="背景裁剪与原点"></a>背景裁剪与原点</h3><p>如果将边框设置为半透明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">border: 10px solid rgba(220,220,160,0.5);</span><br><span class="line">padding: 10px;</span><br><span class="line">background-clip: padding-box; //背景在内边距以内，超出部分被裁掉</span><br><span class="line">background-clip:content-box; //背景图在边框以内，超出部分被裁掉</span><br><span class="line">background-clip:border-box; //背景图在边框下面。超出部分在边框下 默认值</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background-origin://此属性是开始定位背景图的参照点</span><br><span class="line">有三个值和上面一样，分别表示内边距左上角起点，内容起点，和边框起点</span><br></pre></td></tr></table></figure>
+<p>PS:以上2种属性ie8还没有支持</p>
+<h3 id="背景附着"><a href="#背景附着" class="headerlink" title="背景附着"></a>背景附着</h3><p>background-attachment:fixed/local/scroll;默认值是scroll 移动端不支持fixed 不过这个效果确实很酷</p>
+<h3 id="背景大小"><a href="#背景大小" class="headerlink" title="背景大小"></a>背景大小</h3><p>background-size://此属性可以重新设置图片大小，或者跟随元素盒子缩放<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">background-size:100% auto;//此属性是保持宽度比例，而高度自适应或者使用另外个值 contain 保证图片尽可能大，并且不会被切掉</span><br><span class="line"></span><br><span class="line">background-size:cover;//此属性值是保证图片不会被切，且铺满整个元素 且不变形</span><br></pre></td></tr></table></figure></p>
+<h3 id="背景属性简写"><a href="#背景属性简写" class="headerlink" title="背景属性简写"></a>背景属性简写</h3><p>最好还是不简写了，可以明确代码方便后期修改</p>
+<h2 id="多重背景"><a href="#多重背景" class="headerlink" title="多重背景"></a>多重背景</h2><p>css3 提供了设置多张图片作为背景<br>使用多张背景图以逗号为分割，其他设置也是逗号分隔<br>浏览器对此支持度不高</p>
+<h2 id="边框与圆角"><a href="#边框与圆角" class="headerlink" title="边框与圆角"></a>边框与圆角</h2><p>ps：除了明确指定box-sizing 属性，否则边框宽度会影响盒子的尺寸</p>
+<h3 id="边框半径：圆角"><a href="#边框半径：圆角" class="headerlink" title="边框半径：圆角"></a>边框半径：圆角</h3><p>ps:只要ie8及其以下的版本和欧鹏mini版本不持支圆角属性，但是这个属性并不影响使用</p>
+<h4 id="边框半径简写"><a href="#边框半径简写" class="headerlink" title="边框半径简写"></a>边框半径简写</h4><p>border-top-left-radius:1em;//此设置的为上左</p>
+<h3 id="创建正圆和胶囊形状"><a href="#创建正圆和胶囊形状" class="headerlink" title="创建正圆和胶囊形状"></a>创建正圆和胶囊形状</h3><p>创建半圆圆角时，可故意创建一个比所需半径大的任意圆角值</p>
+<h3 id="边框图片"><a href="#边框图片" class="headerlink" title="边框图片"></a>边框图片</h3><h2 id="盒阴影"><a href="#盒阴影" class="headerlink" title="盒阴影"></a>盒阴影</h2><p>box-shadow与text-shadow的语法一致，分别是偏移x，y轴的距离 第三个值表示模糊半径，最后是颜色</p>
+<h3 id="扩展半径：调整阴影大小"><a href="#扩展半径：调整阴影大小" class="headerlink" title="扩展半径：调整阴影大小"></a>扩展半径：调整阴影大小</h3><p>可以在模糊半径后面继续增加一个值，表示扩展半径，用于扩展阴影的大小，默认是0，即跟所属元素一般大，增大这个值阴影增大，负值即缩小阴影</p>
+<h3 id="内阴影"><a href="#内阴影" class="headerlink" title="内阴影"></a>内阴影</h3><p>inset关键字，可以设置内阴影。即把元素当成投影表面，创造背景被镂空的感觉。<br>box-shadow:inset 0 -.5em .5em rgba(0,0,0,0.3)</p>
+<h3 id="多阴影"><a href="#多阴影" class="headerlink" title="多阴影"></a>多阴影</h3><p>跟多背景设置一样，可以通过把模糊半径设置为0，可以不影响布局设置边框</p>
+<h2 id="渐变"><a href="#渐变" class="headerlink" title="渐变"></a>渐变</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag"># CSS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/12/关于css方面的细节/" rel="next" title="关于css方面的细节">
+                <i class="fa fa-chevron-left"></i> 关于css方面的细节
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/20/6-内容布局/" rel="prev" title="6-内容布局">
+                6-内容布局 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Mr·Jia">
+            
+              <p class="site-author-name" itemprop="name">Mr·Jia</p>
+              <p class="site-description motion-element" itemprop="description">JavaScript</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/woshiliujia" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.zhihu.com/people/wo-bu-dong-ni-88" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eswoshiliujia@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://douban.com/people/woshiliujia" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景颜色"><span class="nav-number">1.</span> <span class="nav-text">背景颜色</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#颜色值与不透明度"><span class="nav-number">1.1.</span> <span class="nav-text">颜色值与不透明度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景图片"><span class="nav-number">2.</span> <span class="nav-text">背景图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景图片与内容图片"><span class="nav-number">2.1.</span> <span class="nav-text">背景图片与内容图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背景图示例"><span class="nav-number">2.2.</span> <span class="nav-text">背景图示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载图片"><span class="nav-number">2.3.</span> <span class="nav-text">加载图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片格式"><span class="nav-number">2.4.</span> <span class="nav-text">图片格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景图片语法"><span class="nav-number">3.</span> <span class="nav-text">背景图片语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景裁剪与原点"><span class="nav-number">3.1.</span> <span class="nav-text">背景裁剪与原点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背景附着"><span class="nav-number">3.2.</span> <span class="nav-text">背景附着</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背景大小"><span class="nav-number">3.3.</span> <span class="nav-text">背景大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背景属性简写"><span class="nav-number">3.4.</span> <span class="nav-text">背景属性简写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多重背景"><span class="nav-number">4.</span> <span class="nav-text">多重背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#边框与圆角"><span class="nav-number">5.</span> <span class="nav-text">边框与圆角</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#边框半径：圆角"><span class="nav-number">5.1.</span> <span class="nav-text">边框半径：圆角</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#边框半径简写"><span class="nav-number">5.1.1.</span> <span class="nav-text">边框半径简写</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建正圆和胶囊形状"><span class="nav-number">5.2.</span> <span class="nav-text">创建正圆和胶囊形状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#边框图片"><span class="nav-number">5.3.</span> <span class="nav-text">边框图片</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#盒阴影"><span class="nav-number">6.</span> <span class="nav-text">盒阴影</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展半径：调整阴影大小"><span class="nav-number">6.1.</span> <span class="nav-text">扩展半径：调整阴影大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内阴影"><span class="nav-number">6.2.</span> <span class="nav-text">内阴影</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多阴影"><span class="nav-number">6.3.</span> <span class="nav-text">多阴影</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐变"><span class="nav-number">7.</span> <span class="nav-text">渐变</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr·Jia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">本站访客数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz',
+        appKey: 'SYDqJdJmzPaq56CKkrI0QKWJ',
+        placeholder: '来说点什么吧！',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz", "SYDqJdJmzPaq56CKkrI0QKWJ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

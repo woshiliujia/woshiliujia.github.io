@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="LZ98hsPMBJ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="类和原型类的所有实例对象都从同一个原型对象上继承属性。因此原型对象时类的核心。 例：一个简单的JavaScript类  使用的是工厂方法123456789101112131415161718192021222324252627282930313233343536function inherit(p)&amp;#123;//此方法传入个对象，并返回一个新对象，这个新对象继承自传入的对象    if(p ==">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript-9.类和模块">
+<meta property="og:url" content="http://yoursite.com/2019/01/17/Javascript-9-类和模块/index.html">
+<meta property="og:site_name" content="桃李不言，下自成蹊">
+<meta property="og:description" content="类和原型类的所有实例对象都从同一个原型对象上继承属性。因此原型对象时类的核心。 例：一个简单的JavaScript类  使用的是工厂方法123456789101112131415161718192021222324252627282930313233343536function inherit(p)&amp;#123;//此方法传入个对象，并返回一个新对象，这个新对象继承自传入的对象    if(p ==">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-10T05:06:27.516Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript-9.类和模块">
+<meta name="twitter:description" content="类和原型类的所有实例对象都从同一个原型对象上继承属性。因此原型对象时类的核心。 例：一个简单的JavaScript类  使用的是工厂方法123456789101112131415161718192021222324252627282930313233343536function inherit(p)&amp;#123;//此方法传入个对象，并返回一个新对象，这个新对象继承自传入的对象    if(p ==">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Mr·Jia'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/17/Javascript-9-类和模块/">
+
+
+
+
+
+  <title>Javascript-9.类和模块 | 桃李不言，下自成蹊</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01f1beaf7697490bd8adfd698d604568";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">桃李不言，下自成蹊</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个没有灵魂的爸爸</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/17/Javascript-9-类和模块/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr·Jia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="桃李不言，下自成蹊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Javascript-9.类和模块</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T22:12:46+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/17/Javascript-9-类和模块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/17/Javascript-9-类和模块/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/01/17/Javascript-9-类和模块/" class="leancloud_visitors" data-flag-title="Javascript-9.类和模块">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="类和原型"><a href="#类和原型" class="headerlink" title="类和原型"></a>类和原型</h2><p>类的所有实例对象都从同一个原型对象上继承属性。因此原型对象时类的核心。</p>
+<p>例：一个简单的JavaScript类  使用的是工厂方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">function inherit(p)&#123;//此方法传入个对象，并返回一个新对象，这个新对象继承自传入的对象</span><br><span class="line">    if(p == null) throw TypeError();</span><br><span class="line">    if(Object.create) return Object.create(p);</span><br><span class="line">    var t = typeof p;</span><br><span class="line">    if(t !== &apos;function&apos; &amp;&amp; t !== &apos;object&apos;) throw TypeError();</span><br><span class="line">    function f()&#123;&#125;;</span><br><span class="line">    f.prototype = p;</span><br><span class="line">    return new f();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//实现一个range.js 用于表示值的范围的类  下面这种方法并不常用</span><br><span class="line">function range(from,to)&#123;</span><br><span class="line">    //使用inherit()方法生成新的对象，并且这个对象继承自己定义的原型对象</span><br><span class="line">    var r = inherit(range.methods);</span><br><span class="line"></span><br><span class="line">    //存储新的对象开始和结束位置</span><br><span class="line">    r.from = from;</span><br><span class="line">    r.to = to;</span><br><span class="line">    //返回这个新的对象</span><br><span class="line">    return r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//这个原型对象自己的方法,这些方法会被每个实例所继承</span><br><span class="line">range.methods = &#123;</span><br><span class="line">    includes:function(x)&#123;</span><br><span class="line">        return this.from &lt;= x &amp;&amp; x &lt;= this.to;</span><br><span class="line">    &#125;,</span><br><span class="line">    toString:function()&#123;</span><br><span class="line">        return &quot;范围从&quot;+this.from+&quot;到&quot;+this.to;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//使用新的对象实现的例子</span><br><span class="line">var r = range(1,3); //创建一个范围对象</span><br><span class="line">r.includes(2);//调用这个新对象并传入参数</span><br><span class="line">r.toString();</span><br></pre></td></tr></table></figure></p>
+<h2 id="类和构造函数"><a href="#类和构造函数" class="headerlink" title="类和构造函数"></a>类和构造函数</h2><p>构造函数是用来初始化新创建的对象使用的，使用new调用构造函数会创建一个新的函数，并且这个新的函数调用的上下文就是这个新创建的对象，即this指向这个新创建的函数。<br>调用构造函数的一个重要特征就是构造函数的原型会直接被用作新创建的函数的原型即prototype属性<br>所以所有通过构造函数创建的对象都继承自一个对象,因此他们都是同一个类的原型<br>例：对上面方法的优化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">//创建构造函数</span><br><span class="line">function Range(from,to)&#123;</span><br><span class="line">    //new关键字调用构造函数里面的调用上下文就是当前对象，this指向这个新创建的对象</span><br><span class="line">    this.from = from;</span><br><span class="line">    this.to = to;</span><br><span class="line">&#125;</span><br><span class="line">//所有范围对象都继承这个对象</span><br><span class="line">Range.prototype = &#123;</span><br><span class="line">    includes:function(x)&#123;</span><br><span class="line">        return this.from &lt;= x &amp;&amp; x&lt;= this.to;</span><br><span class="line">    &#125;,</span><br><span class="line">    toString:function()&#123;</span><br><span class="line">        return this.from+&apos;,&apos;+this.to;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//之前我的错误理解和错误写法</span><br><span class="line">//var range = new Range(); //此处已经表示创建并初始化对象了</span><br><span class="line">//var r = range(2,3);r.include(2);不知道我这个搞的什么玩意</span><br><span class="line"></span><br><span class="line">//调用这个构造函数，并将参数传递进去</span><br><span class="line">var r = new Range(1,3);//此处权威指南的中文版上有错误，英文原本正确的</span><br><span class="line">r.includes(2);</span><br><span class="line">r.toString();</span><br></pre></td></tr></table></figure></p>
+<p>PS:</p>
+<ol>
+<li>构造函数约定首字母大写</li>
+<li>构造函数通过new关键字调用的，并且this指向这个新创建的函数</li>
+<li>构造函数不必返回新的对象，通过new关键字调用构造函数本来就是个新的</li>
+<li>原型对象必须是prototype</li>
+<li>构造函数就是用来构造新对象的，所以调用构造函数直接传递参数，如果将构造函数用做普通函数不会正常工作，因为没有返回值，所以调用得到的结果是undefined</li>
+</ol>
+<h3 id="构造函数和类的标识"><a href="#构造函数和类的标识" class="headerlink" title="构造函数和类的标识"></a>构造函数和类的标识</h3><p>原型对象时类的唯一标识，当且仅当两个对象继承自同一个原型对象时，才属于一个类的实例，而初始化对象状态的构造函数不能当做类的标识。如果两个构造函数的prototype属性指向同一个原型对象，那么这么两个构造函数创建的实例属于同一个类。</p>
+<p>构造函数是类的外在表现，构造函数的名字通常用作类名。<br>例：检查一个实例是否由属于某个类会用instanceof<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function Range()&#123;&#125;;</span><br><span class="line">var r = new Range();</span><br><span class="line">r instanceof Range; //返回true</span><br><span class="line"></span><br><span class="line">//继续定义两个构造函数，不过这两个构造函数的原型对象都指向于同一个对象</span><br><span class="line">//定义两个构造函数</span><br><span class="line">function Range1()&#123;&#125;</span><br><span class="line">function Range2()&#123;&#125;</span><br><span class="line">var b = &#123;&#125;;//定义一个对象，让上面2个构造函数的原型属性都指向于这个对象</span><br><span class="line">var r1 = Range1();//调用构造函数</span><br><span class="line"></span><br><span class="line">//通过instanceof检查实例是否是上面构造函数初始化而来，实际上检查的是Range1.prototype和Range2.prototype</span><br><span class="line">r1 instanceof Range1//返回true</span><br><span class="line">r1 instanceof Range2//返回true</span><br></pre></td></tr></table></figure></p>
+<h3 id="constructor属性"><a href="#constructor属性" class="headerlink" title="constructor属性"></a>constructor属性</h3><p>任何JavaScript函数都能用作构造函数，并且调用构造函数需要用一个prototype属性。因此每个JavaScript函数都自动拥有一个prototype属性除Function.bind()方法之外。<br>并且prototype属性值是一个对象，这个对象包含唯一一个不可枚举的属性constructor。constructor属性值是一个函数对象。<br>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var F = function()&#123;&#125;;//定义个函数对象F</span><br><span class="line">var p = F.prorotype;//将F的原型对象赋值给p</span><br><span class="line">var c = F.prototype.constructor;//将F的原型对象的constructor属性赋值给c</span><br><span class="line">c === F;//返回true  说明原型对象的constructor属性值指向定义构造函数</span><br></pre></td></tr></table></figure></p>
+<p>由于构造函数的原型中预先就有constructor属性，并且这个属性指向于构造函数，由于构造函数是类的公共标识，因此constructor属性为新创建的对象提供了类<br>例：由于构造函数的实例基础继承的构造函数的原型,因此实例对象直接继承构造函数的原型对象，获得了构造函数constructor属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var F = function()&#123;&#125;</span><br><span class="line">var f = new F();</span><br><span class="line">f.constructor === F; //返回true，constructor属性指代这个类;</span><br></pre></td></tr></table></figure></p>
+<h4 id="如果将构造函数的原型对象重新定义后，这个新的原型对象就不会含有constructor属性。因为通过这个构造函数构造出来的对象也不会含有constructor属性，所以可以显示给原型添加一个构造属性"><a href="#如果将构造函数的原型对象重新定义后，这个新的原型对象就不会含有constructor属性。因为通过这个构造函数构造出来的对象也不会含有constructor属性，所以可以显示给原型添加一个构造属性" class="headerlink" title="如果将构造函数的原型对象重新定义后，这个新的原型对象就不会含有constructor属性。因为通过这个构造函数构造出来的对象也不会含有constructor属性，所以可以显示给原型添加一个构造属性"></a>如果将构造函数的原型对象重新定义后，这个新的原型对象就不会含有constructor属性。因为通过这个构造函数构造出来的对象也不会含有constructor属性，所以可以显示给原型添加一个构造属性</h4><p>例:给重新赋值后的原型对象显示赋值constructor属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//按照上面Range构造函数的例子</span><br><span class="line">Range.prototype = &#123;</span><br><span class="line">    construcroe:Range,</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>另外一个种方式：不给原来的原型对象重新赋值，直接使用对象字面量的方式以此给原型对象添加方法.如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Range.prototype.toString = function()&#123;&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="JavaScript中的Java式的类继承"><a href="#JavaScript中的Java式的类继承" class="headerlink" title="JavaScript中的Java式的类继承"></a>JavaScript中的Java式的类继承</h2><p>JavaScript中定义类的步骤可分为3步。</p>
+<ol>
+<li>定义一个构造函数，并设置初始化对象的实例属性。</li>
+<li>给构造函数的原型属性prototype对象定义实例的方法。</li>
+<li>给构造函数定义类字段和类属性。</li>
+</ol>
+<p>以上三步可以封装成一个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">//用于定义简单类的一个方法</span><br><span class="line">//以下方法属于8-3的例子，传入第一个参数为复制后的对象，其他参数需要为对象</span><br><span class="line">var extend = (function()&#123;//使用匿名函数返回一个函数</span><br><span class="line">    //for in循环判断浏览器兼容性</span><br><span class="line">    for(var p in &#123;toString:null&#125;)&#123;//可以循环出不可枚举属性则返回一个函数  非ie9以下</span><br><span class="line">        return function(o)&#123;//此处的o是个对象，传入的其他参数也需要是个对象，如果不是无法赋值到o</span><br><span class="line">            for(var i = 1;i&lt;arguments.length;i++)&#123;//循环传入的实参</span><br><span class="line">                var source = arguments[i];//把实参赋值给变量source</span><br><span class="line">                for(var prop in source) o[prop] = source[prop];//因为传入的其他参数是对象，所以当做属性赋值到第一个参数</span><br><span class="line">            &#125;</span><br><span class="line">            return o;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    return function(o)&#123;//如何没有循环出不可枚举属性 //ie9以下进行的特殊处理</span><br><span class="line">        for(var i = 1;i&lt;arguments.length;i++)&#123;//循环可枚举的属性</span><br><span class="line">            var source = arguments[i];</span><br><span class="line">            for(var prop in source) o[prop] = source[prop];</span><br><span class="line">            for(var j = 0;j&lt;protoprops.length;j++)&#123;//不可枚举的属性在下方数组中，遍历下方数组</span><br><span class="line">                prop = protoprops[j];</span><br><span class="line">                </span><br><span class="line">                //这段代码使用hasOwnProperty方法判断传入对象是否修改过不克枚举属性，修改则赋值给第一个参数。</span><br><span class="line">                if(source.hasOwnProperty(prop)) o[prop] = source[prop];//这段代码可写成下面格式，没验证  </span><br><span class="line">                //if(source.hasOwnProperty(protoprops[j])) o[protoprops[j]] = source[protoprops[j]];//</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return o;//返回这个对象</span><br><span class="line">    &#125;</span><br><span class="line">    var protoprops = [&quot;toString&quot;,&quot;valueOf&quot;,&quot;constructor&quot;,&quot;hasOwnProperty&quot;,&quot;isPrototypeOf&quot;,&quot;prototypeIsEnumerable&quot;,&quot;toLocalString&quot;];</span><br><span class="line">&#125;());//使用匿名函数，不会影响外部空间的变量。</span><br><span class="line"></span><br><span class="line">//以下是个简单的类函数</span><br><span class="line">function defineClass(</span><br><span class="line">                    constructor,//用以设置实例属性的函数</span><br><span class="line">                    methods,//添加实例方法</span><br><span class="line">                    statics//添加类的属性和字段</span><br><span class="line">                    )</span><br><span class="line">&#123;</span><br><span class="line">    if(methods) extend(constructor.prototype,methods);//给extend()方法传入构造函数的原型对象，将需要添加的实例方法选为第二个参数</span><br><span class="line">    if(statics) extend(constructor,methods);//构造函数的属性字段直接给其本身</span><br><span class="line">    return constructor;//返回被赋值的构造函数</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//实现range类的另一种方式</span><br><span class="line">var SimpleRange = defineClass(function(f,t)&#123;this.f = f;this.t = t&#125;,&#123;</span><br><span class="line">    includes:function(x)&#123;return this.f&lt;=x &amp;&amp; x&lt;= this.to;&#125;,</span><br><span class="line">    toString:function()&#123;return this.f+&apos;到&apos;+this.t;&#125;    </span><br><span class="line">&#125;,</span><br><span class="line">//以下参数我并不知道作用和用法是什么，等看完后面部分回过头再看下</span><br><span class="line">//以下参数回过头发现是我的参数传递错了，下面属于类本身的方法，不被实例所继承，可以使用函数调用方式</span><br><span class="line">&#123;</span><br><span class="line">    upto:function(t)&#123;return new SimpleRange(0,t)&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//调用以上定义的SimpleRange类</span><br><span class="line">var r = new SimpleRange(1,5);</span><br><span class="line"></span><br><span class="line">//SimepleRange类本身的方法字段</span><br><span class="line">var r = SimpleRange.upto(2);//这个本身的类方法返回一个该本身的构造函数，所以继续调用他的类方法</span><br></pre></td></tr></table></figure></p>
+<p>//例：表示负数的类 Complex.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">略...</span><br></pre></td></tr></table></figure></p>
+<p>命名写法：以大写字母命名的成员不能修改，以下划线命名的前缀类的外部是不可见的</p>
+<h2 id="类的扩充"><a href="#类的扩充" class="headerlink" title="类的扩充"></a>类的扩充</h2><p>JavaScript中基于原型的继承机制是动态的，对象从它的原型继承属性，如何对象创建之后，原型的属性发生变化，也会影响继承这个原型的所有实例对象。这意味着可以给原型对象添加新的方法来扩充类</p>
+<p>例：多次调用一个函数输出3次“hello”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var n = 3;</span><br><span class="line">n.times(function(n)&#123;console.log(n+&apos;hello&apos;)&#125;);//调用下方给原型新添加的方法</span><br><span class="line">//下面添加原型方法的必须在上面调用之前添加，否则会报错</span><br><span class="line">Number.prototype.times = function(f,context)&#123;</span><br><span class="line">//f参数是需要调用的函数，context感觉可有可无，去除这个context参数用this取代一样可行</span><br><span class="line">    var n = Number(this);</span><br><span class="line">    for(var i = 0;i&lt;n;i++) f.call(context,i);//此处context只是指代了this，或者为null都可以,i为传入f函数的参数</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//去除字符串前后空格trim()方法</span><br><span class="line">String.prototype.trim = String.prototype.trim || function()&#123;//判断是否有这个方法</span><br><span class="line">    if(!this) return this;//排除空字符串</span><br><span class="line">    return this.replace(/^\s+|\s+$/g,&apos;&apos;);//使用正则匹配</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>不推荐给Object.prototype添加方法，因为在es5之前无法给这些属性设置为不可枚举的属性，会被for/in遍历到 es5中有着更好的Object.defineProperty()。但并不是所有的宿主环境都支持这个<br>在很多浏览器中可以给HTMLElement.prototype添加方法 ie中不支持</p>
+<h2 id="类和类型"><a href="#类和类型" class="headerlink" title="类和类型"></a>类和类型</h2><p>JavaScript有7中的数据类型，null,undefined,布尔，数字，字符串，对象，函数，可以使用typeof来得出这些值类型，但是类的类型都属于’Object’;</p>
+<h3 id="instanceof运算符"><a href="#instanceof运算符" class="headerlink" title="instanceof运算符"></a>instanceof运算符</h3><p>instanceof左边是待检测类的对象，右边是定义类的构造函数<br>如：o继承自，c.prototype 则 o instanceof c 返回true,如果o继承的对象是继承另一个对象的，另一个对象也是继承c.prototype 结果依旧是true<br>构造函数只是类的公共标识，唯一标识是原型，instanceof实际检测的是继承关系</p>
+<p>isPrototypeOf()方法可以检测对象的原型链上是否有某个特定的原型对象。<br>range.methods.isPrototypeOf(r);//range.methods是原型对象</p>
+<p>以上两个方法的缺点：无法通过对象来获得类名，只能检测对象是否属于指定的类</p>
+<h3 id="constructor属性-1"><a href="#constructor属性-1" class="headerlink" title="constructor属性"></a>constructor属性</h3><p>因为构造函数是类的公共标识，所以可以直接使用对象的constructor属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function typeAndValue(x)&#123;</span><br><span class="line">    if(x == null) return &quot;&quot;;//null和undefined没有构造函数</span><br><span class="line">    switch (x.constructor)&#123;</span><br><span class="line">        case Number: return &quot;Number:&quot;+x;</span><br><span class="line">        case String: return &quot;String:&quot;+x;</span><br><span class="line">        //...等等原型类型</span><br><span class="line">        case Date: return &quot;Date:&quot;+x;//处理内置类型</span><br><span class="line">        case Complex: return &quot;Complex:&quot;+x;处理自定类型</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>缺点:并非所有对象都包含constructor属性，有的原型被重新赋值后会丢失constructor属性，需要显示赋值<br>一个窗口的多个子页面，相同的而又独立的构造函数不是通过一个构造函数</p>
+<h3 id="构造函数的名称"><a href="#构造函数的名称" class="headerlink" title="构造函数的名称"></a>构造函数的名称</h3><p>通过构造函数的名称去作为类的标识符，而不是通过构造函数本身<br>下面例子使用typeof 处理原始值和函数，对于对象要么返回class属性值，要么返回构造函数名字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *以字符串形式返回o的类型</span><br><span class="line"> *如果o是null返回&apos;null&apos;，o是NaN返回&apos;nan&apos;</span><br><span class="line"> *如果typeof返回值不是‘object’,则返回这个值</span><br><span class="line"> *如果o的类不是“Object”则返回这个值</span><br><span class="line"> *如果o包含构造函，并且这个构造函数有名字，则返回这个名字</span><br><span class="line"> *其他情况一律返回&apos;Object&apos;</span><br><span class="line"> **/</span><br><span class="line"> function type(o)&#123;</span><br><span class="line">     var t,c,n;//type,class,name</span><br><span class="line">     if(o == null) return &apos;null&apos;</span><br><span class="line">     //NaN自身和自身不相等</span><br><span class="line">     if(o !== o) return &apos;nan&apos;;//NaN !== NaN</span><br><span class="line">     //type可以识别原始类型的值和函数</span><br><span class="line">     if((t = typeof o)&amp;&amp; !== &apos;object&apos;) return t; </span><br><span class="line">     //内置对象，返回对象类名</span><br><span class="line">     if(c = classof(o)&amp;&amp; !== &apos;Object&apos;) return c;</span><br><span class="line">     //如果构造函数的名字存在</span><br><span class="line">     if(o.constructor &amp;&amp; typeof o.constructor === &apos;function&apos;&amp;&amp;(n = o.constructor.getName())) return n;</span><br><span class="line">     //其他情况一律返回&apos;Object&apos;</span><br><span class="line">     return &apos;Object&apos;;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> function classof(o)&#123;//返回对象的类</span><br><span class="line">    return Object.prototype.toString.call(o).slice(8,-1);</span><br><span class="line"> &#125;</span><br><span class="line"> Function.prototype.getName = function()&#123;//获取类名，即函数name</span><br><span class="line">     if(&quot;name&quot; in this) return this.name;</span><br><span class="line">     return this.name = this.toString().match(/function\s*([^(]*)\(/)[1];</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这种做法依然不是所有对象都有constructor属性，如果是不带名字的函数定义表达式，也不会有函数名<br>getName()方法会返回空字符串<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var A = function()&#123;&#125;//这个构造函数没名字</span><br><span class="line">var B = function B()&#123;&#125;//这个构造函数有名字B</span><br></pre></td></tr></table></figure></p>
+<h3 id="鸭式辩型"><a href="#鸭式辩型" class="headerlink" title="鸭式辩型"></a>鸭式辩型</h3><p>不注重类型，关注能干的事情<br>quacks()方法<br>略…</p>
+<h2 id="JavaScript中的面向对象技术"><a href="#JavaScript中的面向对象技术" class="headerlink" title="JavaScript中的面向对象技术"></a>JavaScript中的面向对象技术</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">//Set.js 值的任意集合</span><br><span class="line">function Set()&#123;//这是一个构造函数</span><br><span class="line">    this.value = &#123;&#125;;//新建一个集合用于存放传入的参数</span><br><span class="line">    this.n = 0;//集合中值的个数</span><br><span class="line">    this.add.apply(this,arguments);//把所有参数加入集合中,意思是当调用这个类时传入的参数已经加入到集合中了。</span><br><span class="line">&#125;</span><br><span class="line">Set.prototype.add = function()&#123;//给这个类添加一个参数加入到集合中的方法</span><br><span class="line">    for(var i = 0;i&lt;arguments.length;i++)&#123;//遍历所有传入参数</span><br><span class="line">        var val = arguments[i];//保存每个参数</span><br><span class="line">        var str = Set._v2s(val);//通过私有方法将传入的参数以一定规则转为字符串</span><br><span class="line">        this.value[str] = val;//将转化后的字符串作为属性将值保存在集合</span><br><span class="line">        this.n++;//没加入一个参数集合中值的个数自增</span><br><span class="line">    &#125;</span><br><span class="line">    return this;//以便于链式调用</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Set.prototype.remove = function()&#123;//添加删除方法</span><br><span class="line">    for(var i = 0;i&lt;arguments.length;i++)&#123;//遍历传入的参数</span><br><span class="line">        var str = Set._v2s(arguments[i]);//将传入参数保存</span><br><span class="line">        if(this.value.hasOwnProperty(str))&#123;//判断传入参数是否属于集合对象中的  hasOwnProperty()方法主要是判断属性是否属于对象的自有属性</span><br><span class="line">            delete this.value[str];//找到的话直接删除</span><br><span class="line">            this.n--;//集合值的个数自减</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return this;//返回这个对象，支持链式调用</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Set.prototype.contains = function(val)&#123;//判断传入参数是否属于这个集合</span><br><span class="line">    return this.value.hasOwnProperty(Set._v2s(val))</span><br><span class="line">&#125;</span><br><span class="line">Set.prototype.size = function()&#123;//集合大小</span><br><span class="line">    return this.n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Set.prototype.foreach = function(f,context)&#123;//遍历这个集合并且在指定上下文中对每个值调用f</span><br><span class="line">    for(var s in this.value)&#123;</span><br><span class="line">        if(this.value.hasOwnProperty)&#123; //过滤继承属性</span><br><span class="line">            f.call(context,this.value[s]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Set._v2s = function(val)&#123;//Set.js 私有的方法，实例不共享，用以将传入参数以唯一字符串连接，重复的参数会被过滤</span><br><span class="line">    switch (val)&#123;</span><br><span class="line">        case undefined: return &apos;u&apos;;</span><br><span class="line">        case null: return &apos;n&apos;;</span><br><span class="line">        case true: return &apos;t&apos;;</span><br><span class="line">        case false: return &apos;f&apos;;</span><br><span class="line">        default: switch(typeof val)&#123;</span><br><span class="line">            case &apos;number&apos;: return &apos;#&apos;+val;</span><br><span class="line">            case &apos;string&apos;: return &apos;&quot;&apos;+val;</span><br><span class="line">                default:return &apos;@&apos;+objectid(val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    function objectid(o)&#123;//此处如果传入参数是个对象的话，会默认给这个对象加个&quot;|**objectid**|&quot;属性</span><br><span class="line">        var prop = &quot;|**objectid**|&quot;;</span><br><span class="line">        if(!o.hasOwnProperty(prop))&#123;</span><br><span class="line">            o[prop] = Set._v2s.next++;</span><br><span class="line">        &#125;</span><br><span class="line">        return o[prop];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Set._v2s.next = 100;//初始对象的id值</span><br></pre></td></tr></table></figure>
+<h3 id="一个例子；枚举类型"><a href="#一个例子；枚举类型" class="headerlink" title="一个例子；枚举类型"></a>一个例子；枚举类型</h3><p>创建一个新的枚举类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">//将传入对象作为原型生成新的对象</span><br><span class="line">function inherit(p)&#123;</span><br><span class="line">    if(p == null) throw TypeError();</span><br><span class="line">    if(Object.create) return Object.create(p);</span><br><span class="line">    var t = typeof p;</span><br><span class="line">    if(t !== &apos;function&apos; &amp;&amp; t !== &apos;object&apos;) throw TypeError();</span><br><span class="line">    function f()&#123;&#125;</span><br><span class="line">    f.prototype = p;</span><br><span class="line">    return new f();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//工厂函数，返回值是一个构造函数</span><br><span class="line">function enumeration(namesToValues)&#123;</span><br><span class="line">    </span><br><span class="line">    //定义个构造函数，并且当做返回值（不能使用这个构造函数来创建新的实例，否则会抛出错误）</span><br><span class="line">    //即返回的函数不能再次当做构造函数使用</span><br><span class="line">    var enumeration = function()&#123;throw &quot;Can&apos;t Instantiate Enumeration&quot;;&#125;</span><br><span class="line"></span><br><span class="line">    //设置这个构造函数的原型对象，并添加几个方法</span><br><span class="line">    var proto = enumeration.prototype = &#123;</span><br><span class="line">        constructor:enumeration,</span><br><span class="line">        toString:function()&#123;return this.name;&#125;,</span><br><span class="line">        valueOf:function()&#123;return this.value;&#125;,</span><br><span class="line">        toJson:function()&#123;return this.name;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    enumeration.values = [];//存放枚举对象的数组</span><br><span class="line"></span><br><span class="line">    for(name in namesToValues)&#123;//遍历传入对象的属性，并创建新类型的实例</span><br><span class="line">        var e = inherit(proto); //创建一个代表它的对象</span><br><span class="line">        e.name = name; //给新实例一个名字</span><br><span class="line">        e.value = namesToValues[name];给这个对象一个值</span><br><span class="line">        enumeration[name] = e;//将遍历的属性设置为构造函数的属性</span><br><span class="line">        enumeration.values.push(e);//将这个对象放到枚举对象数组中</span><br><span class="line">    &#125;</span><br><span class="line">    //类方法，用来对类的实例进行迭代</span><br><span class="line">    enumeration.foreach = function(f,c)&#123;</span><br><span class="line">        for(var i = 0;i&lt;this.values.length;i++)&#123;</span><br><span class="line">            f.call(c,this.values[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return enumeration;//返回这个构造函数</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>例：使用枚举类型表示一个玩牌的类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">//定义个表示“玩牌”的类</span><br><span class="line">function Card(suit,rank)&#123;</span><br><span class="line">    this.suit = suit;//每张牌都有花色</span><br><span class="line">    this.rank = rank;//每张牌都有点数</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//使用枚举类型定义花色和点数</span><br><span class="line"></span><br><span class="line">//4种花色</span><br><span class="line">Card.suit = enumeration(&#123;Clubs:1,Diamonds:2,Hearts:3,Spades:4&#125;);</span><br><span class="line"></span><br><span class="line">//13张牌</span><br><span class="line">Card.Rank = enumeration(&#123;</span><br><span class="line">    Two:2,Three:3,Four:4,Five:5,Six:6,Seven:7,Eight:8,Nine:9,Ten:10,</span><br><span class="line">    Jack:11,Queen:12,King:13,Ace:14</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">//描述牌面</span><br><span class="line">Card.prototype.toString = function()&#123;</span><br><span class="line">    return this.rank.toString() + &quot;of&quot; + this.suit.toString();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//比较两张牌大小，只是按照点数比较，无关花色</span><br><span class="line">Card.prototype.compareTo = function(that)&#123;</span><br><span class="line">    if(this.rank &lt; that.rank) return -1;</span><br><span class="line">    if(this.rank &gt; that.rank) return 1;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//按照点数排序，sort方法传入的方法</span><br><span class="line">Card.orderByRank = function(a,b)&#123;return a.compareTo(b)&#125;;</span><br><span class="line"></span><br><span class="line">//先按照花色比较，花色一样再按照点数比较</span><br><span class="line">Card.orderBySuit = function(a,b)&#123;</span><br><span class="line">    if(a.suit &gt; b.suit) return 1;</span><br><span class="line">    if(a.suit &lt; b.suit) return -1;</span><br><span class="line">    if(a.rank &gt; b.rank) return 1;</span><br><span class="line">    if(a.rank &lt; b.rank) return -1;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//定义一个表示一副扑克牌的类</span><br><span class="line">function Deck()&#123;</span><br><span class="line">    var cards = this.cards = [];//新建一个存放牌的数组</span><br><span class="line"></span><br><span class="line">    //enumeration类里面定义了foreach方法，所以可以直接遍历到values，即初始化这个数组获得一副牌</span><br><span class="line">    Card.suit.foreach(function(s)&#123;</span><br><span class="line">        Card.Rank.foreach(function(r)&#123;</span><br><span class="line">            cards.push(new Card(s,r));//4种花色加上13张牌混合一起52张</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//定义洗牌的方法</span><br><span class="line">Deck.prototype.shuffle = function()&#123;</span><br><span class="line">    var deck = this.cards,len = deck.length;//将一副扑克牌给到deck，len存放牌数组的长度</span><br><span class="line">    for(var i = len-1;i&gt;0;i--)&#123;//遍历数组中的每个元素</span><br><span class="line">        var r = Math.floor(Math.random()*(i+1)),temp;//随机出一个元素</span><br><span class="line">        //现将当前循环到的元素给临时变量temp，再将随机出来的给到当前循环到的，最后将临时变量给随机出来的元素</span><br><span class="line">        temp = deck[i],deck[i] = deck[r],deck[r] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    return this;//返回这个类，方便链式调用</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//发牌的方法，返回数组</span><br><span class="line">Deck.prototype.deal = function(n)&#123;</span><br><span class="line">    if(this.cards.length &lt; n) throw &quot;Out of cards&quot;;</span><br><span class="line">    return this.cards.splice(this.cards.length-n,n);//取出n张牌</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//创建一副新的扑克牌，洗牌并发牌</span><br><span class="line">var deck = (new Deck()).shuffle();</span><br><span class="line">var hand = deck.deal(13).sort(Card.orderBySuit);</span><br></pre></td></tr></table></figure>
+<h3 id="标准转换方法"><a href="#标准转换方法" class="headerlink" title="标准转换方法"></a>标准转换方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function extend(o,p)&#123;//通过此方法可以将p对象的属性和方法复制到o</span><br><span class="line">    for(prop in p)&#123;//遍历p对象的属性</span><br><span class="line">        o[prop] = p[prop];//复制到o对象</span><br><span class="line">    &#125;</span><br><span class="line">    return o;//返回o对象</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以通过以上方法去设置一个对象的某些属性，如“toString,toLocalString”等</p>
+<h3 id="比较方法"><a href="#比较方法" class="headerlink" title="比较方法"></a>比较方法</h3><p>JavaScript的相等运算符比较对象时，比较的时引用而不是值。所以比较两个对象是否引用自同一个对象，可以使用相等运算符<br>如果定义一个类，希望比较类的实例，应该定义合适的方法来执行比较<br>略…</p>
+<h3 id="方法借用"><a href="#方法借用" class="headerlink" title="方法借用"></a>方法借用</h3><p>JavaScript的方法无非是一些简单的函数，赋值给了对象的属性，可以通过对象的属性来调用它。<br>一个函数可以赋值给2个属性，再通过两个放法来调用。<br>多个类的方法，可以使用一个单独的函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//方法借用的泛型实现 </span><br><span class="line">var generic = &#123;</span><br><span class="line">    toString:function()&#123;</span><br><span class="line">        var s = &apos;[&apos;;</span><br><span class="line"></span><br><span class="line">        //函数的名字是非标准的，并不是所有环境中都有，因为需要进行判断</span><br><span class="line">        if(this.constructor &amp;&amp; this.constructor.name)&#123;</span><br><span class="line">            s += this.constructor.name+&apos;: &apos;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        var n = 0;</span><br><span class="line">        for(var name in this)&#123;//遍历循环此对象中的属性</span><br><span class="line"></span><br><span class="line">            //跳过继承属性</span><br><span class="line">            if(!this.hasOwnProperty(name)) continue;</span><br><span class="line">            var value = this[name];</span><br><span class="line">            //跳过方法</span><br><span class="line">            if(typeof value === &apos;function&apos;) continue;</span><br><span class="line">            if(n++) s += &apos;,&apos;;</span><br><span class="line">            s += name + &apos;=&apos; + value;</span><br><span class="line">        &#125;</span><br><span class="line">        return s+&apos;]&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//ps:上面泛型实现修改后会在类的实例体现出来</span><br></pre></td></tr></table></figure></p>
+<h3 id="私有状态"><a href="#私有状态" class="headerlink" title="私有状态"></a>私有状态</h3><p>在构造函数内部定义一个函数这个函数返回私有状态</p>
+<p>ps：使用闭包来封装状态，一定比不上等价类的运行速度，并且占用更多内存</p>
+<h3 id="构造函数的重载和工厂方法"><a href="#构造函数的重载和工厂方法" class="headerlink" title="构造函数的重载和工厂方法"></a>构造函数的重载和工厂方法</h3><p>初始化对象的方法</p>
+<h2 id="子类"><a href="#子类" class="headerlink" title="子类"></a>子类</h2><h3 id="定义子类"><a href="#定义子类" class="headerlink" title="定义子类"></a>定义子类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//定义一个函数来创建简单的子类</span><br><span class="line">//需要传入的参数分别为&quot;父类构造函数、新的子类构造函数、实例方法(复制到原型中)、类属性(复制到构造函数中)&quot;</span><br><span class="line">function defineSubClass(superClass,constructor,methods,statics)&#123;</span><br><span class="line">    //使用inherit来生成新的继承自父类的构造函数</span><br><span class="line">    constructor.prototype = inherit(superClass);</span><br><span class="line">    //因为新的构造函数的原型对象被改写，所以需要将构造属性指向新创建的构造函数</span><br><span class="line">    constructor.prototype.constructor = constructor;</span><br><span class="line">    //判断是否传入了实例方法</span><br><span class="line">    if(methods) extend(constructor.prototype,methods);</span><br><span class="line">    //判断是否传入的实例属性</span><br><span class="line">    if(statics) extend(constructor,statics)</span><br><span class="line">    //返回这个新的类</span><br><span class="line">    return constructor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//通过父类的构造函数来创建子类</span><br><span class="line">Function.prototype.extend = function(constructor,methods,statics)&#123;</span><br><span class="line">    //此处this指向父类</span><br><span class="line">    return defineSubClass(this,constructor,methods,statics);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="构造函数和方法链"><a href="#构造函数和方法链" class="headerlink" title="构造函数和方法链"></a>构造函数和方法链</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//在子类中调用父类的构造函数和方法</span><br><span class="line"></span><br><span class="line">//NonNullSet是Set的子类，并且他的成员不能是null或者undefined</span><br><span class="line">function NonNullSet()&#123;</span><br><span class="line">    //仅链接到父类</span><br><span class="line">     </span><br><span class="line">    Set.apply(this,arguments);//此处链接到父类不怎么明白</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">NonNullSet.prototype = inherit(Set.prototype);//设置NonNullSet为Set的子类</span><br><span class="line">NonNullSet.prototype.constructor = NonNullSet;//重新设置原型的构造函数为新建的子类</span><br><span class="line"></span><br><span class="line">NonNullSet.prototype.add = function()&#123;</span><br><span class="line">    //检查参数是否是undefined或者null</span><br><span class="line">    for(var i = 0;i&lt;arguments.length;i++)&#123;</span><br><span class="line">        if(arguments[i] === null) throw new Error(&apos;传入参数不能是undefined or null&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">    return Set.prototype.add.apply(this,arguments); //间接调用Set中add方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//类工厂和方法链</span><br><span class="line">//该函数返回Set的子类，并重写该类add()方法用以添加元素进行特殊处理</span><br><span class="line">function filteredSetSubClass(superClass,filter)&#123;//传入两个参数，父类和对元素进行特殊处理的函数  </span><br><span class="line">    var constructor = function()&#123;</span><br><span class="line">        superClass.apply(this,arguments);//依然是子类先使用普通方式先调用下父类</span><br><span class="line">    &#125;</span><br><span class="line">    var proto = constructor.prototype = inherit(superClass.prototype);//子类的原型设置为父类的原型</span><br><span class="line">    proto.constructor = constructor;//子类的constructor属性设置为子类</span><br><span class="line">    proto.add = function()&#123;//重写父类添加方法</span><br><span class="line">        for(var i = 0;i&lt;arguments.length;i++)&#123;//遍历每个传入的参数</span><br><span class="line">            var v = arguments[i];</span><br><span class="line">            if(!filter(v)) thow (&quot;value&quot;+v+&quot;rejected by filted&quot;);//给每个元素调用传入的过滤方法</span><br><span class="line">        &#125;</span><br><span class="line">        superClass.prototype.add.apply(this,arguments);//如果满足传入的过滤方法则间接调用原类的方法</span><br><span class="line">    &#125;</span><br><span class="line">    return constructor;//返回这个子类</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ps:最后两章缺少示例</p>
+<h2 id="ECMAScript-5-中的类"><a href="#ECMAScript-5-中的类" class="headerlink" title="ECMAScript 5 中的类"></a>ECMAScript 5 中的类</h2><p>es5给特性增加了一些方法支持包括：getter、setter、可写性、可配置性</p>
+<h3 id="让属性不可枚举"><a href="#让属性不可枚举" class="headerlink" title="让属性不可枚举"></a>让属性不可枚举</h3><p>//定义不可枚举的属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line">    Object.defineProperty(Object.prototype,&quot;objectId&quot;,&#123;//为Object原型定义objectId</span><br><span class="line">        get:idGetter,//getter存取器属性，无setter属性</span><br><span class="line">        enumerable:false,//不克枚举</span><br><span class="line">        configurable:false//不克配置，即不能删除</span><br><span class="line">    &#125;)</span><br><span class="line">    function idGetter()&#123;//存取器属性对应的方法</span><br><span class="line">        if(!(idprop in this))&#123;</span><br><span class="line">            if(!Object.isExtensible(this)) //判断是否可扩展</span><br><span class="line">                throw Error(&quot;Can&apos;t define if for nonextensible objects&quot;)</span><br><span class="line">            Object.defineProperty(this,idprop,&#123;</span><br><span class="line">                value:nextid++,</span><br><span class="line">                writable:false,</span><br><span class="line">                enumerable:false,</span><br><span class="line">                configurable:false</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        return this[idprop]</span><br><span class="line">    &#125;</span><br><span class="line">    var idprop = &quot;|**objectId**|&quot;;</span><br><span class="line">    var nextid = 1;//起始值</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure></p>
+<h3 id="定义不可枚举的类"><a href="#定义不可枚举的类" class="headerlink" title="定义不可枚举的类"></a>定义不可枚举的类</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/09/JavaScript-8-函数/" rel="next" title="JavaScript-8.函数">
+                <i class="fa fa-chevron-left"></i> JavaScript-8.函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/01/小程序开发笔记/" rel="prev" title="小程序开发笔记">
+                小程序开发笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Mr·Jia">
+            
+              <p class="site-author-name" itemprop="name">Mr·Jia</p>
+              <p class="site-description motion-element" itemprop="description">JavaScript</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/woshiliujia" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.zhihu.com/people/wo-bu-dong-ni-88" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eswoshiliujia@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://douban.com/people/woshiliujia" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类和原型"><span class="nav-number">1.</span> <span class="nav-text">类和原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类和构造函数"><span class="nav-number">2.</span> <span class="nav-text">类和构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数和类的标识"><span class="nav-number">2.1.</span> <span class="nav-text">构造函数和类的标识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor属性"><span class="nav-number">2.2.</span> <span class="nav-text">constructor属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如果将构造函数的原型对象重新定义后，这个新的原型对象就不会含有constructor属性。因为通过这个构造函数构造出来的对象也不会含有constructor属性，所以可以显示给原型添加一个构造属性"><span class="nav-number">2.2.1.</span> <span class="nav-text">如果将构造函数的原型对象重新定义后，这个新的原型对象就不会含有constructor属性。因为通过这个构造函数构造出来的对象也不会含有constructor属性，所以可以显示给原型添加一个构造属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript中的Java式的类继承"><span class="nav-number">3.</span> <span class="nav-text">JavaScript中的Java式的类继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类的扩充"><span class="nav-number">4.</span> <span class="nav-text">类的扩充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类和类型"><span class="nav-number">5.</span> <span class="nav-text">类和类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof运算符"><span class="nav-number">5.1.</span> <span class="nav-text">instanceof运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor属性-1"><span class="nav-number">5.2.</span> <span class="nav-text">constructor属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数的名称"><span class="nav-number">5.3.</span> <span class="nav-text">构造函数的名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#鸭式辩型"><span class="nav-number">5.4.</span> <span class="nav-text">鸭式辩型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript中的面向对象技术"><span class="nav-number">6.</span> <span class="nav-text">JavaScript中的面向对象技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个例子；枚举类型"><span class="nav-number">6.1.</span> <span class="nav-text">一个例子；枚举类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准转换方法"><span class="nav-number">6.2.</span> <span class="nav-text">标准转换方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较方法"><span class="nav-number">6.3.</span> <span class="nav-text">比较方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法借用"><span class="nav-number">6.4.</span> <span class="nav-text">方法借用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私有状态"><span class="nav-number">6.5.</span> <span class="nav-text">私有状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数的重载和工厂方法"><span class="nav-number">6.6.</span> <span class="nav-text">构造函数的重载和工厂方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子类"><span class="nav-number">7.</span> <span class="nav-text">子类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义子类"><span class="nav-number">7.1.</span> <span class="nav-text">定义子类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数和方法链"><span class="nav-number">7.2.</span> <span class="nav-text">构造函数和方法链</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ECMAScript-5-中的类"><span class="nav-number">8.</span> <span class="nav-text">ECMAScript 5 中的类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#让属性不可枚举"><span class="nav-number">8.1.</span> <span class="nav-text">让属性不可枚举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义不可枚举的类"><span class="nav-number">8.2.</span> <span class="nav-text">定义不可枚举的类</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr·Jia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">本站访客数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz',
+        appKey: 'SYDqJdJmzPaq56CKkrI0QKWJ',
+        placeholder: '来说点什么吧！',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz", "SYDqJdJmzPaq56CKkrI0QKWJ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

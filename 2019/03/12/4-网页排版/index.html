@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="LZ98hsPMBJ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CSS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="CSS的基本排版技术文本颜色文本颜色为最基本的样式之一，也是最容易被忽视的。默认情况浏览器会将其渲染成黑色，白底黑字的对比度极高，但是被过度强调了。可以使用以下文本颜色1234567p&amp;#123;    color:#3b4348;&amp;#125;a&amp;#123;    color:#235ea7;&amp;#125;//虽然改变了颜色，但是相对于白底黑子真的舒服多了，链接也比直接的蓝色看的舒服,大家可以试一下">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4-网页排版">
+<meta property="og:url" content="http://yoursite.com/2019/03/12/4-网页排版/index.html">
+<meta property="og:site_name" content="桃李不言，下自成蹊">
+<meta property="og:description" content="CSS的基本排版技术文本颜色文本颜色为最基本的样式之一，也是最容易被忽视的。默认情况浏览器会将其渲染成黑色，白底黑字的对比度极高，但是被过度强调了。可以使用以下文本颜色1234567p&amp;#123;    color:#3b4348;&amp;#125;a&amp;#123;    color:#235ea7;&amp;#125;//虽然改变了颜色，但是相对于白底黑子真的舒服多了，链接也比直接的蓝色看的舒服,大家可以试一下">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-10T05:06:27.502Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="4-网页排版">
+<meta name="twitter:description" content="CSS的基本排版技术文本颜色文本颜色为最基本的样式之一，也是最容易被忽视的。默认情况浏览器会将其渲染成黑色，白底黑字的对比度极高，但是被过度强调了。可以使用以下文本颜色1234567p&amp;#123;    color:#3b4348;&amp;#125;a&amp;#123;    color:#235ea7;&amp;#125;//虽然改变了颜色，但是相对于白底黑子真的舒服多了，链接也比直接的蓝色看的舒服,大家可以试一下">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Mr·Jia'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/12/4-网页排版/">
+
+
+
+
+
+  <title>4-网页排版 | 桃李不言，下自成蹊</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?01f1beaf7697490bd8adfd698d604568";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">桃李不言，下自成蹊</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个没有灵魂的爸爸</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/12/4-网页排版/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr·Jia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="桃李不言，下自成蹊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">4-网页排版</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-12T05:09:48+08:00">
+                2019-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/12/4-网页排版/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/12/4-网页排版/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/12/4-网页排版/" class="leancloud_visitors" data-flag-title="4-网页排版">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="CSS的基本排版技术"><a href="#CSS的基本排版技术" class="headerlink" title="CSS的基本排版技术"></a>CSS的基本排版技术</h2><h3 id="文本颜色"><a href="#文本颜色" class="headerlink" title="文本颜色"></a>文本颜色</h3><p>文本颜色为最基本的样式之一，也是最容易被忽视的。默认情况浏览器会将其渲染成黑色，白底黑字的对比度极高，但是被过度强调了。<br>可以使用以下文本颜色<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">p&#123;</span><br><span class="line">    color:#3b4348;</span><br><span class="line">&#125;</span><br><span class="line">a&#123;</span><br><span class="line">    color:#235ea7;</span><br><span class="line">&#125;</span><br><span class="line">//虽然改变了颜色，但是相对于白底黑子真的舒服多了，链接也比直接的蓝色看的舒服,大家可以试一下</span><br></pre></td></tr></table></figure></p>
+<h3 id="字体族群"><a href="#字体族群" class="headerlink" title="字体族群"></a>字体族群</h3><p>字体族 (font-family) 优先级按照从左到右的排列<br>关于此我们主要看ui</p>
+<h3 id="字型大小与行高"><a href="#字型大小与行高" class="headerlink" title="字型大小与行高"></a>字型大小与行高</h3><p>几乎所有浏览器的默认大小都为16像素<br>em的单位是基于继承得到的<br>rem是基于根元素html的font-size得到的</p>
+<p>为了兼容老旧浏览器可以在基于rem声明前声明一个像素单位 如果未对根元素html元素font-size属性修改，那么当前rem值就是像素值/16</p>
+<h4 id="基于比例缩放字型大小"><a href="#基于比例缩放字型大小" class="headerlink" title="基于比例缩放字型大小"></a>基于比例缩放字型大小</h4><p>凭感觉设置字型大小，最终还是要维持一定的比例关系，即一级比一级大1.3333倍</p>
+<h3 id="行间距、对齐及行盒子的构造"><a href="#行间距、对齐及行盒子的构造" class="headerlink" title="行间距、对齐及行盒子的构造"></a>行间距、对齐及行盒子的构造</h3><h4 id="设置行高"><a href="#设置行高" class="headerlink" title="设置行高"></a>设置行高</h4><p>一般来说行高取值为字体大小的1.2-1.5倍。行与行之间既不能太密也不能太疏。<br>一般来说如果给line-height设置了单位，body所有子元素都会继承line-height的计算值。反之如果没有设置单位，那么子元素继承的是一个系数，永远与自己的font-size成比例</p>
+<h4 id="垂直对齐"><a href="#垂直对齐" class="headerlink" title="垂直对齐"></a>垂直对齐</h4><p>除了line-height，行内盒子也会受到vertical-align属性的影响。默认值为baseline（基线）<br>vertical-align除了常用的top、middle、bottom除外还有sup等，会使得文本偏离基线，并且会撑大行盒子的高度</p>
+<h3 id="文本粗细"><a href="#文本粗细" class="headerlink" title="文本粗细"></a>文本粗细</h3><p>font-weight 默认值为400 bold对应700;</p>
+<p>###字体样式<br>font-style 只要值有italic（斜体）默认normal 另外的oblique很少用</p>
+<h3 id="大小写变换和小型大写变体"><a href="#大小写变换和小型大写变体" class="headerlink" title="大小写变换和小型大写变体"></a>大小写变换和小型大写变体</h3><p>css可以控制英文字母大小写，属性是 text-transform:uppercase/lowercase/capitalize/none; 分别表示全部大小写首字母大写和默认</p>
+<h3 id="控制字母和单词间距"><a href="#控制字母和单词间距" class="headerlink" title="控制字母和单词间距"></a>控制字母和单词间距</h3><p>word-spacing属性是控制词间距很少用</p>
+<p>letter-spacing属性是控制字符间距</p>
+<h2 id="版心宽度、律动、毛边"><a href="#版心宽度、律动、毛边" class="headerlink" title="版心宽度、律动、毛边"></a>版心宽度、律动、毛边</h2><p>###文本缩进与对齐<br>text-indent:1.25em;设置缩进<br>text-align:center/justify..设置对齐<br>毛边及时以左对齐或者右对齐为了阅读方便，另外一边会有些不对齐，justify可以改善这点，但是会造成阅读障碍 也会造成“串流”</p>
+<h3 id="连字符"><a href="#连字符" class="headerlink" title="连字符"></a>连字符</h3><p>手工插入连字符并不现实<br>所以使用hyphens属性让浏览器帮助插入<br>因为浏览器支持并不完全，所以需要加上前缀<br>想要使用此功能需要保证2点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;html lang=&quot;en&quot;&gt; //html元素中设置语言代码</span><br><span class="line">p&#123;hyphens:auto;&#125;//通过此属性设置值为auto 关闭此属性值为manual</span><br></pre></td></tr></table></figure></p>
+<h3 id="多栏文本"><a href="#多栏文本" class="headerlink" title="多栏文本"></a>多栏文本</h3><p>使用colunms属性可以给文本定义个最大宽度，之后定义每一栏的宽度最后设置栏与栏之间的间隔<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">article&#123;</span><br><span class="line">    clounms:20em;//表示每栏的大小 是colunm-width和colunm-count的简写形式</span><br><span class="line">    colunm-width：20em;//在保证每栏20em的大小同时自动设置栏数</span><br><span class="line">    clounms:3;//此种形式表示不管每栏宽度多少都要设置成3栏</span><br><span class="line">    colunm-count:3;//此属性同上</span><br><span class="line">    max-width:70em;//表示总共的宽度，根据这个宽度可以得出可以分出几栏</span><br><span class="line">    colunms-gap:1.5em;//表示栏之间的间隔</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="后备宽度"><a href="#后备宽度" class="headerlink" title="后备宽度"></a>后备宽度</h4><p>为了在不支持多栏布局的浏览器中确保长度不会超过限度可以在段落元素上应用max-width 这样虽然旧版浏览器不能分栏，依旧可以保持可读性</p>
+<h4 id="跨栏"><a href="#跨栏" class="headerlink" title="跨栏"></a>跨栏</h4><p>有时候头部标题，或者底部一段文字不希望多栏布局，可以选择关闭<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">h1&#123;</span><br><span class="line">    column-span:all;</span><br><span class="line">    //或者</span><br><span class="line">    columne-span:none;//此种方式浏览器试了下好像不行</span><br><span class="line">&#125;</span><br><span class="line">//如果给文本流中间的一个元素横跨所有栏，那么文本会按照垂直切分后的几栏流动，即会横向流动</span><br></pre></td></tr></table></figure></p>
+<p>ps：存在问题，ie9及更早的浏览器不支持此分栏属性。<br>    需要合适的开发商前缀<br>    浏览器实现此布局方式不一样，主要在于边距折叠，和边框渲染</p>
+<h3 id="垂直律动与基线网格"><a href="#垂直律动与基线网格" class="headerlink" title="垂直律动与基线网格"></a>垂直律动与基线网格</h3><h2 id="Web字体"><a href="#Web字体" class="headerlink" title="Web字体"></a>Web字体</h2><h4 id="font-face-规则"><a href="#font-face-规则" class="headerlink" title="@font-face 规则"></a>@font-face 规则</h4><p>页面中加载web字体即像阿里云iconfont那样的字体时候关键是@font-face规则，他可以指定服务器地址，以及如何引用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@font-face&#123;</span><br><span class="line">    font-family:Vollkorn;//此处表示使用什么字体阿里云的是iconfont</span><br><span class="line">    font-weight:bold;//表示什么情况下使用该字体</span><br><span class="line">    src:url(...) format(&apos;woff&apos;);//表示加载字体的url地址</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="字体文件格式"><a href="#字体文件格式" class="headerlink" title="字体文件格式"></a>字体文件格式</h4><p>阿里云里面已经为我们设置了这些，兼容市面上浏览器的方式</p>
+<h3 id="Web字体、浏览器与性能"><a href="#Web字体、浏览器与性能" class="headerlink" title="Web字体、浏览器与性能"></a>Web字体、浏览器与性能</h3><p>带来的麻烦：浏览器需要下载额外的字体，这会增加用户等待的时间，所以需要注意不要加载过多的字体确保适当的缓存首部避免不必要的网络开销</p>
+<p>虽然有2种方式可以去处理这个<br>    1.ie和谷歌都是在没加载出来不予显示<br>    2.浏览器先用后备字体，但切换时候会造成闪动<br>所以选用JavaScript加载字体</p>
+<h3 id="使用JavaScript加载字体"><a href="#使用JavaScript加载字体" class="headerlink" title="使用JavaScript加载字体"></a>使用JavaScript加载字体</h3><h2 id="高级排版特性"><a href="#高级排版特性" class="headerlink" title="高级排版特性"></a>高级排版特性</h2><h2 id="文本特效"><a href="#文本特效" class="headerlink" title="文本特效"></a>文本特效</h2><h3 id="合理使用阴影"><a href="#合理使用阴影" class="headerlink" title="合理使用阴影"></a>合理使用阴影</h3><p>text-shadow属性后面有4个值分别是 相对于x轴的偏移距离、相对于y轴的便宜距离（可以是负值也就是上下左右都能偏）、模糊距离（0代表不模糊）、颜色值<br>此外还可以给文本添加多组阴影逗号分隔，先定义的在上，后定义在下</p>
+<p>这个需要多试试<br>不要过分使用，此功能对浏览器开销比较大</p>
+<h3 id="使用JavaScript提升排版品质"><a href="#使用JavaScript提升排版品质" class="headerlink" title="使用JavaScript提升排版品质"></a>使用JavaScript提升排版品质</h3><p>因为有时候我们只能通过 :first-letter 伪元素来选中第一个字母，但是css没有办法选中其他的字母所以可以用jq插件<br>这些插件有 lettering.js/fitText.js/BitText.js/Widowtamer</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag"># CSS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/07/3-可见格式化模型/" rel="next" title="3-可见格式化模型">
+                <i class="fa fa-chevron-left"></i> 3-可见格式化模型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/12/关于css方面的细节/" rel="prev" title="关于css方面的细节">
+                关于css方面的细节 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Mr·Jia">
+            
+              <p class="site-author-name" itemprop="name">Mr·Jia</p>
+              <p class="site-description motion-element" itemprop="description">JavaScript</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/woshiliujia" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.zhihu.com/people/wo-bu-dong-ni-88" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eswoshiliujia@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://douban.com/people/woshiliujia" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS的基本排版技术"><span class="nav-number">1.</span> <span class="nav-text">CSS的基本排版技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文本颜色"><span class="nav-number">1.1.</span> <span class="nav-text">文本颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体族群"><span class="nav-number">1.2.</span> <span class="nav-text">字体族群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字型大小与行高"><span class="nav-number">1.3.</span> <span class="nav-text">字型大小与行高</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于比例缩放字型大小"><span class="nav-number">1.3.1.</span> <span class="nav-text">基于比例缩放字型大小</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行间距、对齐及行盒子的构造"><span class="nav-number">1.4.</span> <span class="nav-text">行间距、对齐及行盒子的构造</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置行高"><span class="nav-number">1.4.1.</span> <span class="nav-text">设置行高</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#垂直对齐"><span class="nav-number">1.4.2.</span> <span class="nav-text">垂直对齐</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本粗细"><span class="nav-number">1.5.</span> <span class="nav-text">文本粗细</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大小写变换和小型大写变体"><span class="nav-number">1.6.</span> <span class="nav-text">大小写变换和小型大写变体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制字母和单词间距"><span class="nav-number">1.7.</span> <span class="nav-text">控制字母和单词间距</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版心宽度、律动、毛边"><span class="nav-number">2.</span> <span class="nav-text">版心宽度、律动、毛边</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#连字符"><span class="nav-number">2.1.</span> <span class="nav-text">连字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多栏文本"><span class="nav-number">2.2.</span> <span class="nav-text">多栏文本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#后备宽度"><span class="nav-number">2.2.1.</span> <span class="nav-text">后备宽度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跨栏"><span class="nav-number">2.2.2.</span> <span class="nav-text">跨栏</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垂直律动与基线网格"><span class="nav-number">2.3.</span> <span class="nav-text">垂直律动与基线网格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web字体"><span class="nav-number">3.</span> <span class="nav-text">Web字体</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#font-face-规则"><span class="nav-number">3.0.1.</span> <span class="nav-text">@font-face 规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字体文件格式"><span class="nav-number">3.0.2.</span> <span class="nav-text">字体文件格式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web字体、浏览器与性能"><span class="nav-number">3.1.</span> <span class="nav-text">Web字体、浏览器与性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用JavaScript加载字体"><span class="nav-number">3.2.</span> <span class="nav-text">使用JavaScript加载字体</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#高级排版特性"><span class="nav-number">4.</span> <span class="nav-text">高级排版特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本特效"><span class="nav-number">5.</span> <span class="nav-text">文本特效</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#合理使用阴影"><span class="nav-number">5.1.</span> <span class="nav-text">合理使用阴影</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用JavaScript提升排版品质"><span class="nav-number">5.2.</span> <span class="nav-text">使用JavaScript提升排版品质</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr·Jia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">本站访客数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz',
+        appKey: 'SYDqJdJmzPaq56CKkrI0QKWJ',
+        placeholder: '来说点什么吧！',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("UaHD8VjLNgKIqUUOXd6u0DWL-gzGzoHsz", "SYDqJdJmzPaq56CKkrI0QKWJ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
