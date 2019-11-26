@@ -101,3 +101,127 @@ class CustomHtml {
     }
 }
 ```
+
+## 需计算的成员名
+类方法与类的访问器属性也能使用跟对象字面量一样的访问器属性
+```
+let methodsName = 'sayName';
+class PersonClass {
+    constructor(name){
+        this.name = name;
+    }
+    [methodsName](){
+        console.log(this.name);
+    }
+    
+    get [methodsName](){
+        //....
+    }
+}
+```
+
+## 生成器方法
+
+## 静态成员
+类的静态成员是直接在构造器中定义的方法
+ES5中
+```
+function PersonType(name){ //定义构造函数
+    this.name = name;
+}
+PersonType.prototype.sayName(){//定义实例上的方法
+    console.log(this.name);
+}
+
+PersonType.create = function(name){//定义类的静态方法
+    return new PresonType(name);
+}
+
+var person = PersonType.create('nico');
+
+```
+
+ES6中定义静态方法
+```
+class PersonType{
+    constructor(name){
+        this.name = name;
+    }
+    
+    static create(name){
+        return new PersonType(name);
+    }
+    sayName(){
+        console.log(this.name);
+    }
+}
+var person = PersonType.create('nico');
+```
+
+PS:类的静态方法在ES6中 前面多个 static 关键字  并且类的静态方法不能通过实例访问，只能通过类自身来直接访问
+
+## 使用派生类进行继承
+```
+class RectRange{
+    constructor(width,height){
+        this.width = width;
+        this.height = height;
+    }
+    getArea(){
+        return this.width*this.height;
+    }
+}
+
+class Squre extends RectRange{
+    constructor(length){
+        
+        //此处super指向RectRange类 如果不适用super，super会被自动调用，并且提供所有的参数
+        super(length,length);
+    }
+}
+```
+
+```
+//默认情况
+class Squre extends RectRang{
+
+}
+
+//默认情况super方法会自动调用，因此显示指定传给基类的参数比较好
+class Squre extends RectRang{
+    constructor(...arg){
+        super(...arg);
+    }
+}
+```
+
+PS:
+1. 只能在派生类中使用super(),若没有在派生类即extends关键字没有的类中使用会抛错
+2. 在构造器中必须访问this之前调用super()
+3. 避免调用super()的唯一方法 ，是从类构造器中返回一个对象
+
+### 屏蔽类方法
+派生类中的方法总是会屏蔽基类的同名方法。
+
+### 继承静态成员
+如果基类包含静态成员，那么这些静态类在派生类中也是可以使用的。
+例:
+```
+class RectRange{
+    static create(length,width){
+        return new RectRange(length,width)
+    }
+}
+
+class Squre extends RectRange{
+    constructor(length){
+        super(length,length)
+    }
+}
+
+//RectRange 中的静态成员在Squre中调用和基类中一样的
+```
+### 从表达式中派生类
+ES6中派生类最强大的能力或许就是能够从表达式中派生类。只要这个表达式能够返回一个具有Constructor属性已经原型的函数，就可以对其使用extends
+
+### 继承内置对象
